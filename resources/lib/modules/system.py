@@ -204,12 +204,12 @@ class system:
             self.keyboard_layouts = False
             self.rpi_keyboard_layouts = False
             
-            self.update_url_release = 'http://releases.openelec.tv'            
-            self.update_url_devel = 'http://snapshots.openelec.tv'
-            self.update_url_v2 = 'http://update.openelec.tv/updates.php'
-            self.download_url_v2 = 'http://%s.openelec.tv/%s'
+            self.update_url_release = 'http://sourceforge.net/projects/rasplex/files/autoupdate/rasplex'            
+            self.update_url_devel = 'http://sourceforge.net/projects/rasplex/files/autoupdate/rasplexdev'
+            self.update_url_v2 = '' #'http://update.openelec.tv/updates.php'
+            self.download_url_v2 = '' #'http://%s.openelec.tv/%s'
             
-            self.temp_folder = os.environ['HOME'] + '/.xbmc/temp/'
+            self.temp_folder = os.environ['HOME'] + '/.plexht/temp/'
             self.update_folder = '/storage/.update/'
             self.last_update_check = 0
             self.xbmc_reset_file = '/storage/.cache/reset_xbmc'
@@ -220,7 +220,7 @@ class system:
 
             self.rpi_keyboard_info = '/usr/lib/keymaps'
             
-            self.backup_dirs = ['/storage/.xbmc', '/storage/.config',
+            self.backup_dirs = ['/storage/.plexht', '/storage/.config',
                                 '/storage/.cache']
                                 
             self.backup_folder = '/storage/backup/'
@@ -743,7 +743,7 @@ class system:
             self.oe.dbg_log('system::manual_check_update',
                             'enter_function', 0)
 
-            self.check_updates_v2(True)
+            self.check_updates(True)
 
             self.oe.dbg_log('system::manual_check_update',
                             'exit_function', 0)
@@ -883,6 +883,169 @@ class system:
 
             self.oe.dbg_log('system::get_lcd_drivers', 'ERROR: ('
                             + repr(e) + ')')
+
+
+    def check_updates(self, force=False):
+        try:
+    
+            self.oe.dbg_log('system::check_updates', 'enter_function',
+                            0)
+    
+            if hasattr(self, "update_in_progress"):
+                self.oe.dbg_log('system::check_updates', 'Update in progress (exit)', 0)
+                return
+              
+            value = self.oe.read_setting('system', 'AutoUpdate')
+            if not value is None:
+                if self.config['update']['settings']['AutoUpdate'
+                        ]['value'] != value:
+                    self.last_update_check = 0
+    
+                self.config['update']['settings']['AutoUpdate']['value'
+                        ] = value
+    
+            if time.time() < self.last_update_check + 21600 \
+                and not force:
+                return
+    
+            self.oe.dbg_log('system::check_updates', 'enter_function', 0)
+    
+            self.last_update_check = time.time()
+    
+            auto_update = False
+            manual_update = False
+    
+            distri = self.oe.load_file('/etc/distribution')
+            arch = self.oe.load_file('/etc/arch')
+            version = self.oe.load_file('/etc/version')
+            update = ''
+    
+            if version.startswith('devel'):
+    
+                version = version.rsplit('-', 1)
+                current_version = version[len(version) - 1].replace('r'
+                        , '')
+    
+                release = distri + '-' + arch
+                self.update_url = self.update_url_devel
+                latest = self.oe.load_url(self.update_url + '/latest')
+    
+                for line in latest.splitlines():
+                    if release.lower() in line.lower():
+                        update = line.strip()
+                        break
+    
+                if update == '':
+                    self.oe.dbg_log('system::check_updates',
+                                    'no update found', 1)
+                    return
+    
+                line = line.rsplit('-', 1)
+                latest_version = line[len(line) - 1].replace('r', '')
+    
+                if int(latest_version) > int(current_version):
+                    auto_update = True
+                    manual_update = True
+            else:
+    
+                version = version.rsplit('-', 1)
+                current_version = version[len(version) - 1].split('.')
+    
+                current_major = int(current_version[0])
+                current_minor = int(current_version[1])
+                current_patch = int(current_version[2])
+    
+                release = distri + '-' + arch
+                self.update_url = self.update_url_release
+                latest = self.oe.load_url(self.update_url + '/latest')
+    
+                for line in latest.splitlines():
+                    if release.lower() in line.lower():
+                        update = line.strip()
+                        break
+    
+                if update == '':
+                    self.oe.dbg_log('system::check_updates',
+                                    'no update found', 1)
+                    return
+    
+                line = line.rsplit('-', 1)
+                latest_version = line[len(line) - 1].split('.')
+    
+                latest_major = int(latest_version[0])
+                latest_minor = int(latest_version[1])
+                latest_patch = int(latest_version[2])
+    
+                if current_major == latest_major and current_minor \
+                    == latest_minor and current_patch < latest_patch:
+                    auto_update = True
+    
+                if current_major == latest_major and current_minor \
+                    < latest_minor and latest_minor < 90:
+                    auto_update = True
+    
+                if current_major == latest_major and current_minor \
+                    < latest_minor and latest_minor > 90 \
+                    and current_minor > 90:
+                    auto_update = True
+    
+                if current_minor > 90 and latest_minor < 90 \
+                    and current_major == latest_major - 1:
+                    auto_update = True
+    
+                if current_major == latest_major - 1 and latest_minor \
+                    < 90 and auto_update == False:
+                    manual_update = True
+    
+                current_version = '.'.join(current_version)
+                latest_version = '.'.join(latest_version)
+    
+            if auto_update == True or manual_update == True:
+                if self.config['update']['settings']['AutoUpdate']['value'] == 'auto' or \
+                   self.config['update']['settings']['AutoUpdate']['value'] == 'manual':
+                    if self.config['update']['settings']['UpdateNotify'
+                            ]['value'] == '1':
+                        xbmc.executebuiltin('Notification('
+                                + self.oe._(32363) + ', '
+                                + self.oe._(32364) + ')')
+            else:
+    
+                self.oe.dbg_log('system::check_updates',
+                                'no update found', 0)
+                self.oe.dbg_log('system::check_updates', 'latest :'
+                                + str(latest_version), 0)
+                self.oe.dbg_log('system::check_updates', 'current:'
+                                + str(current_version), 0)
+    
+            if (self.config['update']['settings']['AutoUpdate']['value'
+                ] == 'auto' or force) and auto_update == True:
+    
+                self.update_file = '-'.join(line) + '.tar.bz2'
+    
+                self.oe.dbg_log('system::check_updates',
+                                'update available ' + self.update_file,
+                                1)
+    
+                if not self.config['update']['settings']['AutoUpdate'
+                        ]['value'] == 'auto':
+                    xbmcDialog = xbmcgui.Dialog()
+                    answer = xbmcDialog.yesno('OpenELEC Update',
+                            self.oe._(32188) + ':  ' + current_version,
+                            self.oe._(32187) + ':  ' + latest_version,
+                            self.oe._(32180))
+                    if answer == 1:
+                        self.do_autoupdate()
+                else:
+    
+                    self.update_in_progress = True
+                    self.do_autoupdate(None, True)
+    
+            self.oe.dbg_log('system::check_updates', 'exit_function', 0)
+        except Exception, e:
+    
+            self.oe.dbg_log('system::check_updates', 'ERROR: ('
+                            + repr(e) + ')')
+
 
     def check_updates_v2(self, force=False):
         try:
@@ -1372,7 +1535,7 @@ class updateThread(threading.Thread):
             while self.stopped == False:
 
                 if not xbmc.Player(xbmc.PLAYER_CORE_AUTO).isPlaying():
-                    self.oe.dictModules['system'].check_updates_v2()
+                    self.oe.dictModules['system'].check_updates()
 
                 self.wait_evt.wait(21600)
                 self.wait_evt.clear()

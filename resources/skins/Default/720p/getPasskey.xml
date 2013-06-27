@@ -49,7 +49,7 @@
 					<width>350</width>
 					<height>30</height>							
 					<font>font24_title</font>
-					<textcolor>blue</textcolor>
+					<textcolor>FFFF1C77</textcolor>
 					<label></label>
 					<align>center</align>
         	<visible>true</visible>
@@ -60,7 +60,7 @@
 					<width>350</width>
 					<height>30</height>							
 					<font>font24_title</font>
-					<textcolor>blue</textcolor>
+					<textcolor>FFFF1C77</textcolor>
 					<label></label>
 					<align>center</align>
         	<visible>true</visible>

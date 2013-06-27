@@ -228,7 +228,7 @@
 						<width>400</width>
 						<height>16</height>
 						<font>font12</font>
-						<textcolor>blue</textcolor>
+						<textcolor>FFFF9522</textcolor>
 						<align>left</align>
 						<aligny>center</aligny>
 						<label>$LOCALIZE[SCRIPT606]</label>
@@ -250,7 +250,7 @@
 						<width>400</width>
 						<height>16</height>
 						<font>font12</font>
-						<textcolor>blue</textcolor>
+						<textcolor>FFFF9522</textcolor>
 						<align>left</align>
 						<aligny>center</aligny>
 						<label>$LOCALIZE[SCRIPT607]</label>
@@ -272,7 +272,7 @@
 						<width>400</width>
 						<height>16</height>
 						<font>font12</font>
-						<textcolor>blue</textcolor>
+						<textcolor>FFFF9522</textcolor>
 						<align>left</align>
 						<aligny>center</aligny>
 						<label>$LOCALIZE[SCRIPT608]</label>
@@ -389,7 +389,7 @@
 								<width>400</width>
 								<height>40</height>
 								<font>font13_title</font>
-								<textcolor>blue</textcolor>
+								<textcolor>FFFF9522</textcolor>
 								<info>ListItem.Label</info>
 					      <visible>true</visible>
 							</control>
@@ -480,7 +480,7 @@
 								<width>400</width>
 								<height>40</height>
 								<font>font13_title</font>
-								<textcolor>blue</textcolor>
+								<textcolor>FFFF9522</textcolor>
 								<info>ListItem.Label</info>
 					      <visible>true</visible>
 							</control>
@@ -577,7 +577,7 @@
 							<width>390</width>
 							<height>30</height>							
 							<font>font24_title</font>
-							<textcolor>blue</textcolor>
+							<textcolor>FFFF9522</textcolor>
 							<info>ListItem.Label</info>
             	<visible>true</visible>
 						</control>
@@ -588,7 +588,7 @@
 							<width>200</width>
 							<height>20</height>									
 							<font>font12</font>
-							<textcolor>blue</textcolor>
+							<textcolor>FFFF9522</textcolor>
 							<label>$LOCALIZE[SCRIPT601]: [COLOR=white]$INFO[ListItem.Property(Interface)][/COLOR]</label>
           		<visible>!IsEmpty(ListItem.Property(Interface))</visible>
 						</control>
@@ -599,7 +599,7 @@
 							<width>250</width>
 							<height>20</height>									
 							<font>font12</font>
-							<textcolor>blue</textcolor>
+							<textcolor>FFFF9522</textcolor>
 							<label>$LOCALIZE[SCRIPT602]: [COLOR=white]$INFO[ListItem.Property(Address)][/COLOR]</label>
 							<visible>StringCompare(ListItem.Property(State), online) | StringCompare(ListItem.Property(State), ready)</visible>
 						</control>
@@ -610,7 +610,7 @@
 							<width>200</width>
 							<height>20</height>									
 							<font>font12</font>
-							<textcolor>blue</textcolor>
+							<textcolor>FFFF9522</textcolor>
               <label>$LOCALIZE[SCRIPT603]: [COLOR=white]$INFO[ListItem.Property(Method)][/COLOR]</label>
 						</control>
 						<!-- State -->
@@ -620,7 +620,7 @@
 							<width>200</width>
 							<height>20</height>									
 							<font>font12</font>
-							<textcolor>blue</textcolor>
+							<textcolor>FFFF9522</textcolor>
               <label>$LOCALIZE[SCRIPT604]: [COLOR=white]$INFO[ListItem.Property(State)][/COLOR]</label>
 						</control>
 						<!-- Signal strength -->
@@ -733,7 +733,7 @@
 							<width>390</width>
 							<height>30</height>									
 							<font>font24_title</font>
-							<textcolor>blue</textcolor>
+							<textcolor>FFFF9522</textcolor>
 							<info>ListItem.Label</info>
 			        <visible>true</visible>
 						</control>
@@ -744,7 +744,7 @@
 							<width>200</width>
 							<height>20</height>									
 							<font>font12</font>
-							<textcolor>blue</textcolor>
+							<textcolor>FFFF9522</textcolor>
 							<label>$LOCALIZE[SCRIPT601]: [COLOR=white]$INFO[ListItem.Property(Interface)][/COLOR]</label>
           		<visible>!IsEmpty(ListItem.Property(Interface))</visible>
 						</control>
@@ -755,7 +755,7 @@
 							<width>250</width>
 							<height>20</height>									
 							<font>font12</font>
-							<textcolor>blue</textcolor>
+							<textcolor>FFFF9522</textcolor>
 							<visible>StringCompare(ListItem.Property(State), online) | StringCompare(ListItem.Property(State), ready)</visible>
 							<label>$LOCALIZE[SCRIPT602]: [COLOR=white]$INFO[ListItem.Property(Address)][/COLOR]</label>
 						</control>
@@ -766,7 +766,7 @@
 							<width>200</width>
 							<height>20</height>									
 							<font>font12</font>
-							<textcolor>blue</textcolor>
+							<textcolor>FFFF9522</textcolor>
               <label>$LOCALIZE[SCRIPT603]: [COLOR=white]$INFO[ListItem.Property(Method)][/COLOR]</label>
 						</control>
 						<!-- State -->
@@ -776,7 +776,7 @@
 							<width>200</width>
 							<height>20</height>									
 							<font>font12</font>
-							<textcolor>blue</textcolor>
+							<textcolor>FFFF9522</textcolor>
               <label>$LOCALIZE[SCRIPT604]: [COLOR=white]$INFO[ListItem.Property(State)][/COLOR]</label>
 						</control>
 						<!-- Signal strength -->
@@ -989,7 +989,7 @@
 							<width>390</width>
 							<height>30</height>							
 							<font>font24_title</font>
-							<textcolor>blue</textcolor>
+							<textcolor>FFFF9522</textcolor>
 							<info>ListItem.Label</info>
 							<visible>true</visible>
 						</control>
@@ -1000,7 +1000,7 @@
 							<width>350</width>
 							<height>20</height>									
 							<font>font12</font>
-							<textcolor>blue</textcolor>
+							<textcolor>FFFF9522</textcolor>
 							<label>$LOCALIZE[SCRIPT605]: [COLOR=white]$INFO[ListItem.Property(Address)][/COLOR]</label>
 						</control>
 						<!-- Connected State -->
@@ -1010,7 +1010,7 @@
 							<width>350</width>
 							<height>20</height>									
 							<font>font12</font>
-							<textcolor>blue</textcolor>
+							<textcolor>FFFF9522</textcolor>
 							<label>$INFO[ListItem.Property(ConnectedState)]</label>
 						</control>					
 						<!-- Paired Symbol (bottom right) -->
@@ -1182,7 +1182,7 @@
 							<width>390</width>
 							<height>30</height>							
 							<font>font24_title</font>
-							<textcolor>blue</textcolor>
+							<textcolor>FFFF9522</textcolor>
 							<info>ListItem.Label</info>
 							<visible>true</visible>
 						</control>
@@ -1193,7 +1193,7 @@
 							<width>350</width>
 							<height>20</height>									
 							<font>font12</font>
-							<textcolor>blue</textcolor>
+							<textcolor>FFFF9522</textcolor>
 							<label>$LOCALIZE[SCRIPT605]: [COLOR=white]$INFO[ListItem.Property(Address)][/COLOR]</label>
 						</control>
 						<!-- Connected State -->
@@ -1203,7 +1203,7 @@
 							<width>350</width>
 							<height>20</height>									
 							<font>font12</font>
-							<textcolor>blue</textcolor>
+							<textcolor>FFFF9522</textcolor>
 							<label>$INFO[ListItem.Property(ConnectedState)]</label>
 						</control>					
 						<!-- Paired Symbol (bottom right) -->

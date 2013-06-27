@@ -53,7 +53,7 @@ class services:
                         'samba_autostart': {
                             'order': 1,
                             'name': 32204,
-                            'value': '1',
+                            'value': '0',
                             'action': 'initialize_samba',
                             'typ': 'bool',
                             'InfoText': 738,
@@ -97,7 +97,7 @@ class services:
                     'settings': {'ssh_autostart': {
                         'order': 1,
                         'name': 32205,
-                        'value': '0',
+                        'value': '1',
                         'action': 'initialize_ssh',
                         'typ': 'bool',
                         'InfoText': 742,
