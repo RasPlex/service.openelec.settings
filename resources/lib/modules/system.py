@@ -107,7 +107,7 @@ class system:
                     'not_supported': [],
                     'settings': {'AutoUpdate': {
                         'name': 32014,
-                        'value': 'manual',
+                        'value': 'auto',
                         'action': 'set_auto_update',
                         'typ': 'multivalue',
                         'values': ['manual', 'auto'],
