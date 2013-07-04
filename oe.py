@@ -212,7 +212,7 @@ def download_file(source, destination, silent=False):
 
         if silent == False:
             download_dlg = xbmcgui.DialogProgress()
-            download_dlg.create('OpenELEC', _(32181).encode('utf-8'), ' ', ' ')
+            download_dlg.create('RasPlex', _(32181).encode('utf-8'), ' ', ' ')
 
         response = urllib2.urlopen(source)
         total_size = int(response.info().getheader('Content-Length'
@@ -292,7 +292,7 @@ def extract_file(
 
             if silent == False:
                 extract_dlg = xbmcgui.DialogProgress()
-                extract_dlg.create('OpenELEC ', _(32186).encode('utf-8'), ' ', ' ')
+                extract_dlg.create('RasPlex ', _(32186).encode('utf-8'), ' ', ' ')
                 extract_dlg.update(0)
 
             compressed = tarfile.open(filename)
@@ -395,7 +395,7 @@ def copy_file(source, destination, silent=False):
 
         if silent == False:
             copy_dlg = xbmcgui.DialogProgress()
-            copy_dlg.create('OpenELEC', _(32181).encode('utf-8'), ' ', ' ')
+            copy_dlg.create('RasPlex', _(32181).encode('utf-8'), ' ', ' ')
 
         total_size = os.path.getsize(source)
 
@@ -816,7 +816,7 @@ def split_dialog_text(text):
 def reboot_counter(seconds=10, title=' '):
   
     reboot_dlg = xbmcgui.DialogProgress()
-    reboot_dlg.create('OpenELEC %s' % title, ' '
+    reboot_dlg.create('RasPlex %s' % title, ' '
                         , ' ', ' ')
     reboot_dlg.update(0)
     wait_time = seconds

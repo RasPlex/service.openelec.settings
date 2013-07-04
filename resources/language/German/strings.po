@@ -17,8 +17,8 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgctxt "#600"
-msgid "[COLOR FF757677]Open[/COLOR][COLOR FF8ABEE2]ELEC[/COLOR] Settings"
-msgstr "[COLOR FF757677]Open[/COLOR][COLOR FF8ABEE2]ELEC[/COLOR] Einstellungen"
+msgid "[COLOR FFFF1C77]Ras[/COLOR][COLOR FFFF9522]Plex[/COLOR] Settings"
+msgstr "[COLOR FFFF1C77]Ras[/COLOR][COLOR FFFF9522]Plex[/COLOR] Einstellungen"
 
 msgctxt "#601"
 msgid "Interface"
@@ -62,7 +62,7 @@ msgstr "[B]Support:[/B][CR]Web: http://www.openelec.tv[CR]Forum: http://www.open
 
 msgctxt "#611"
 msgid "The OpenELEC project runs on goodwill, love, and your donations. If you would like to contribute to the project you can donate using PayPal, Flattr or Bitcoin. Making a donation is easy and takes only a couple of minutes. http://openelec.tv/donate"
-msgstr "Wenn Sie sich am [COLOR FF757677]Open[/COLOR][COLOR FF8ABEE2]ELEC[/COLOR] Projekt beteiligen moechten, koennen Sie uns mit einer Spende ueber PayPal, Flattr oder Bitcoin helfen. Spenden ist einfach und dauert nur wenige Minuten. http://openelec.tv/donate"
+msgstr "Wenn Sie sich am [COLOR FFFF1C77]Ras[/COLOR][COLOR FFFF9522]Plex[/COLOR] Projekt beteiligen moechten, koennen Sie uns mit einer Spende ueber PayPal, Flattr oder Bitcoin helfen. Spenden ist einfach und dauert nur wenige Minuten. http://openelec.tv/donate"
 
 msgctxt "#700"
 msgid "Configure a hostname, keyboard type, perform a reset, update, or backups and restores"
@@ -726,7 +726,7 @@ msgstr "SSID"
 
 msgctxt "#32199"
 msgid "If you would like to contribute to the OpenELEC project you can make a donation using [CR]PayPal, Flattr or Bitcoin. Donating is easy and takes only a few minutes."
-msgstr "Wenn Sie sich am [COLOR FF757677]Open[/COLOR][COLOR FF8ABEE2]ELEC[/COLOR] Projekt beteiligen moechten, koennen Sie uns mit einer Spende ueber PayPal, Flattr oder Bitcoin helfen. Spenden ist einfach und dauert nur wenige Minuten. http://openelec.tv/donate"
+msgstr "Wenn Sie sich am [COLOR FFFF1C77]Ras[/COLOR][COLOR FFFF9522]Plex[/COLOR] Projekt beteiligen moechten, koennen Sie uns mit einer Spende ueber PayPal, Flattr oder Bitcoin helfen. Spenden ist einfach und dauert nur wenige Minuten. http://openelec.tv/donate"
 
 msgctxt "#32200"
 msgid "Samba"
@@ -793,32 +793,32 @@ msgid "Invalid Email Address"
 msgstr "Ungueltige eMAil Adresse"
 
 msgctxt "#32300"
-msgid "Welcome to [COLOR FF757677]Open[/COLOR][COLOR FF8ABEE2]ELEC[/COLOR]"
-msgstr "Willkomen bei [COLOR FF757677]Open[/COLOR][COLOR FF8ABEE2]ELEC[/COLOR]"
+msgid "Welcome to [COLOR FFFF1C77]Ras[/COLOR][COLOR FFFF9522]Plex[/COLOR]"
+msgstr "Willkomen bei [COLOR FFFF1C77]Ras[/COLOR][COLOR FFFF9522]Plex[/COLOR]"
 
 msgctxt "#32301"
 msgid "Welcome"
 msgstr "Willkommen"
 
 msgctxt "#32302"
-msgid "This wizard will guide you through the process of setting up your new [COLOR FF757677]Open[/COLOR][COLOR FF8ABEE2]ELEC[/COLOR] installation - setting you location, timzeone and connecting you to the internet.[CR][CR]These settings can be changed later by navigating to Programs > [COLOR FF757677]Open[/COLOR][COLOR FF8ABEE2]ELEC[/COLOR] Settings.[CR][CR]To begin your [COLOR FF757677]Open[/COLOR][COLOR FF8ABEE2]ELEC[/COLOR] experience, select your regional settings and your keyboard layout, then click Next."
-msgstr "Die folgenden Dialoge sollen Ihnen helfen, einige Grundeinstellungen wie die Landeseinstellungen eine Zeitzone oder die Verbindung zum Internet, fuer Ihre neue [COLOR FF757677]Open[/COLOR][COLOR FF8ABEE2]ELEC[/COLOR] Installation festzulegen.[CR][CR]Diese Einstellungen koennen später unter Programme > [COLOR FF757677]Open[/COLOR][COLOR FF8ABEE2]ELEC[/COLOR] Configuration angepasst werden.[CR][CR]Beginnen wir damit die Regionalen Einstellungen und das Tastaturschema fuer Ihr [COLOR FF757677]Open[/COLOR][COLOR FF8ABEE2]ELEC[/COLOR] Entertainment Center anzupassen.\n "
+msgid "This wizard will guide you through the process of setting up your new [COLOR FFFF1C77]Ras[/COLOR][COLOR FFFF9522]Plex[/COLOR] installation - setting you location, timzeone and connecting you to the internet.[CR][CR]These settings can be changed later by navigating to Programs > [COLOR FFFF1C77]Ras[/COLOR][COLOR FFFF9522]Plex[/COLOR] Settings.[CR][CR]To begin your [COLOR FFFF1C77]Ras[/COLOR][COLOR FFFF9522]Plex[/COLOR] experience, select your regional settings and your keyboard layout, then click Next."
+msgstr "Die folgenden Dialoge sollen Ihnen helfen, einige Grundeinstellungen wie die Landeseinstellungen eine Zeitzone oder die Verbindung zum Internet, fuer Ihre neue [COLOR FFFF1C77]Ras[/COLOR][COLOR FFFF9522]Plex[/COLOR] Installation festzulegen.[CR][CR]Diese Einstellungen koennen später unter Programme > [COLOR FFFF1C77]Ras[/COLOR][COLOR FFFF9522]Plex[/COLOR] Configuration angepasst werden.[CR][CR]Beginnen wir damit die Regionalen Einstellungen und das Tastaturschema fuer Ihr [COLOR FFFF1C77]Ras[/COLOR][COLOR FFFF9522]Plex[/COLOR] Entertainment Center anzupassen.\n "
 
 msgctxt "#32303"
 msgid "Next"
 msgstr "Nächster"
 
 msgctxt "#32304"
-msgid "To be identified easily on the network, your new [COLOR FF757677]Open[/COLOR][COLOR FF8ABEE2]ELEC[/COLOR] machine needs a name.[CR][CR]Try to choose something meaningful - like the room it's in - so you'll know what it is when you see it on the network.[CR][CR]This name is used when configuring network services, like file sharing using samba."
-msgstr "Damit Ihr [COLOR FF757677]Open[/COLOR][COLOR FF8ABEE2]ELEC[/COLOR] System schnell und einfach in einem Netzwerk gefunden werden kann, benoetigt es einen Gerätenamen.[CR][CR]Wählen Sie einen aussagekräftigen Namen wie z.B. den Raum in dem das Gerät steht. So wissen sie sofort um was es sich handelt, wenn Sie es im Netzwerk sehen.[CR][CR]Dieser Name ist ebenfalls wichtig, wenn Sie weitere Netzwerkdienste wie Samba Dateifreigaben verwenden moechten.\n "
+msgid "To be identified easily on the network, your new [COLOR FFFF1C77]Ras[/COLOR][COLOR FFFF9522]Plex[/COLOR] machine needs a name.[CR][CR]Try to choose something meaningful - like the room it's in - so you'll know what it is when you see it on the network.[CR][CR]This name is used when configuring network services, like file sharing using samba."
+msgstr "Damit Ihr [COLOR FFFF1C77]Ras[/COLOR][COLOR FFFF9522]Plex[/COLOR] System schnell und einfach in einem Netzwerk gefunden werden kann, benoetigt es einen Gerätenamen.[CR][CR]Wählen Sie einen aussagekräftigen Namen wie z.B. den Raum in dem das Gerät steht. So wissen sie sofort um was es sich handelt, wenn Sie es im Netzwerk sehen.[CR][CR]Dieser Name ist ebenfalls wichtig, wenn Sie weitere Netzwerkdienste wie Samba Dateifreigaben verwenden moechten.\n "
 
 msgctxt "#32305"
 msgid "Networking"
 msgstr "Netzwerk"
 
 msgctxt "#32306"
-msgid "In order to download backdrops, banners and thumbnails for your movies and TV shows and to stream online content from sites like YouTube, [COLOR FF757677]Open[/COLOR][COLOR FF8ABEE2]ELEC[/COLOR] needs to be connected the Internet.[CR][CR]An Internet connection is also required for [COLOR FF757677]Open[/COLOR][COLOR FF8ABEE2]ELEC[/COLOR] to automatically update itself."
-msgstr "Um Hintergrundbilder, Banner und Film bzw. Serieninformationen herunterzuladen oder Onlineangebote wie YouTube nutzen zu koennen, benoetigt [COLOR FF757677]Open[/COLOR][COLOR FF8ABEE2]ELEC[/COLOR] eine Internetverbindung.[CR][CR]Diese Verbindung wir ebenfalls benoetigt damit Ihr [COLOR FF757677]Open[/COLOR][COLOR FF8ABEE2]ELEC[/COLOR] automatische aktualisiert werden kann.         \n "
+msgid "In order to download backdrops, banners and thumbnails for your movies and TV shows and to stream online content from sites like YouTube, [COLOR FFFF1C77]Ras[/COLOR][COLOR FFFF9522]Plex[/COLOR] needs to be connected the Internet.[CR][CR]An Internet connection is also required for [COLOR FFFF1C77]Ras[/COLOR][COLOR FFFF9522]Plex[/COLOR] to automatically update itself."
+msgstr "Um Hintergrundbilder, Banner und Film bzw. Serieninformationen herunterzuladen oder Onlineangebote wie YouTube nutzen zu koennen, benoetigt [COLOR FFFF1C77]Ras[/COLOR][COLOR FFFF9522]Plex[/COLOR] eine Internetverbindung.[CR][CR]Diese Verbindung wir ebenfalls benoetigt damit Ihr [COLOR FFFF1C77]Ras[/COLOR][COLOR FFFF9522]Plex[/COLOR] automatische aktualisiert werden kann.         \n "
 
 msgctxt "#32307"
 msgid "Select your Regional Settings:"
@@ -841,11 +841,11 @@ msgid "Sharing and Remote Access"
 msgstr "Datei und Fernzugriffe"
 
 msgctxt "#32312"
-msgid "[COLOR FF757677]Open[/COLOR][COLOR FF8ABEE2]ELEC[/COLOR] also supports SSH for remote access. This is for advanced users who wish to interact with [COLOR FF757677]Open[/COLOR][COLOR FF8ABEE2]ELEC[/COLOR]'s underlying operating system. The default user is [COLOR blue]root[/COLOR] and the default password is [COLOR blue]openelec.[/COLOR]"
-msgstr "Um administrative Zugriffe auf die Konsole Ihres [COLOR FF757677]Open[/COLOR][COLOR FF8ABEE2]ELEC[/COLOR] Systems zu ermoeglichen, wurde ein OpenSSH Server integriert. Der Standard Benutzername lautet [COLOR blue]root[/COLOR] mit dem Kennwort [COLOR blue]openelec[/COLOR].                     \n  "
+msgid "[COLOR FFFF1C77]Ras[/COLOR][COLOR FFFF9522]Plex[/COLOR] also supports SSH for remote access. This is for advanced users who wish to interact with [COLOR FFFF1C77]Ras[/COLOR][COLOR FFFF9522]Plex[/COLOR]'s underlying operating system. The default user is [COLOR blue]root[/COLOR] and the default password is [COLOR blue]openelec.[/COLOR]"
+msgstr "Um administrative Zugriffe auf die Konsole Ihres [COLOR FFFF1C77]Ras[/COLOR][COLOR FFFF9522]Plex[/COLOR] Systems zu ermoeglichen, wurde ein OpenSSH Server integriert. Der Standard Benutzername lautet [COLOR blue]root[/COLOR] mit dem Kennwort [COLOR blue]openelec[/COLOR].                     \n  "
 
 msgctxt "#32313"
-msgid "In order to share your files between your computers [COLOR FF757677]Open[/COLOR][COLOR FF8ABEE2]ELEC[/COLOR] has incorporated a samba server. This samba server can be integrated into your local network by accessing it in a familiar way with Finder or Windows Explorer."
+msgid "In order to share your files between your computers [COLOR FFFF1C77]Ras[/COLOR][COLOR FFFF9522]Plex[/COLOR] has incorporated a samba server. This samba server can be integrated into your local network by accessing it in a familiar way with Finder or Windows Explorer."
 msgstr "Damit Dateien von oder auf Ihr System kopiert werden koennen, steht ein Samba Server zur Verfuegung. Samba ermoeglicht die transparente Integration in jedes Computernetzwerk."
 
 msgctxt "#32314"
@@ -865,8 +865,8 @@ msgid "Thank you"
 msgstr "Danke"
 
 msgctxt "#32318"
-msgid "You [COLOR FF757677]Open[/COLOR][COLOR FF8ABEE2]ELEC[/COLOR] installation is now complete and you'll now enter XBMC when you can set up your media libraries. For help with this, there is a guide available at wiki.xbmc.org[CR][CR][COLOR FF757677]Open[/COLOR][COLOR FF8ABEE2]ELEC[/COLOR] is developed by a dedicated team of developers who work purely in their spare time. Even as a volunteer project, we still have to pay for our internet bandwidth and development resources so if you find [COLOR FF757677]Open[/COLOR][COLOR FF8ABEE2]ELEC[/COLOR] useful, we will always appreciate a donation of any amount.[CR][CR]Finally, we hope you enjoy using [COLOR FF757677]Open[/COLOR][COLOR FF8ABEE2]ELEC[/COLOR] as much as we've enjoying building it. If you need any more help, you can find links to get help along with latest news at openelec.tv"
-msgstr "Vielen Dank fuer die Installation von [COLOR FF757677]Open[/COLOR][COLOR FF8ABEE2]ELEC[/COLOR].[CR][CR][COLOR FF757677]Open[/COLOR][COLOR FF8ABEE2]ELEC[/COLOR] wird von vielen Entwicklern in ihrer Freizeit entwickelt. Um auch weiterhin eine funktionsfähige Version fuer modernste Hardware anbieten zu koennen, sind wir auf die Mithilfe unserer Nutzer angewiesen.[CR][CR]Wir wuerden uns ueber eine kleine Spende sehr freuen. Weitere Informationen und Neuigkeiten finden sich regelmäßig auf www.openelec.tv.[CR][CR][CR]Viel Freude und vor allem Spaß mit [COLOR FF757677]Open[/COLOR][COLOR FF8ABEE2]ELEC[/COLOR]."
+msgid "You [COLOR FFFF1C77]Ras[/COLOR][COLOR FFFF9522]Plex[/COLOR] installation is now complete and you'll now enter XBMC when you can set up your media libraries. For help with this, there is a guide available at wiki.xbmc.org[CR][CR][COLOR FFFF1C77]Ras[/COLOR][COLOR FFFF9522]Plex[/COLOR] is developed by a dedicated team of developers who work purely in their spare time. Even as a volunteer project, we still have to pay for our internet bandwidth and development resources so if you find [COLOR FFFF1C77]Ras[/COLOR][COLOR FFFF9522]Plex[/COLOR] useful, we will always appreciate a donation of any amount.[CR][CR]Finally, we hope you enjoy using [COLOR FFFF1C77]Ras[/COLOR][COLOR FFFF9522]Plex[/COLOR] as much as we've enjoying building it. If you need any more help, you can find links to get help along with latest news at openelec.tv"
+msgstr "Vielen Dank fuer die Installation von [COLOR FFFF1C77]Ras[/COLOR][COLOR FFFF9522]Plex[/COLOR].[CR][CR][COLOR FFFF1C77]Ras[/COLOR][COLOR FFFF9522]Plex[/COLOR] wird von vielen Entwicklern in ihrer Freizeit entwickelt. Um auch weiterhin eine funktionsfähige Version fuer modernste Hardware anbieten zu koennen, sind wir auf die Mithilfe unserer Nutzer angewiesen.[CR][CR]Wir wuerden uns ueber eine kleine Spende sehr freuen. Weitere Informationen und Neuigkeiten finden sich regelmäßig auf www.openelec.tv.[CR][CR][CR]Viel Freude und vor allem Spaß mit [COLOR FFFF1C77]Ras[/COLOR][COLOR FFFF9522]Plex[/COLOR]."
 
 msgctxt "#32319"
 msgid "Cron"
@@ -1041,8 +1041,8 @@ msgid "Check for updates now:"
 msgstr "Updates suchen"
 
 msgctxt "#32363"
-msgid "[COLOR FF757677]Open[/COLOR][COLOR FF8ABEE2]ELEC[/COLOR]"
-msgstr "[COLOR FF757677]Open[/COLOR][COLOR FF8ABEE2]ELEC[/COLOR]"
+msgid "[COLOR FFFF1C77]Ras[/COLOR][COLOR FFFF9522]Plex[/COLOR]"
+msgstr "[COLOR FFFF1C77]Ras[/COLOR][COLOR FFFF9522]Plex[/COLOR]"
 
 msgctxt "#32364"
 msgid "Update available"

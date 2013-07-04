@@ -71,7 +71,7 @@ class services:
                         'samba_username': {
                             'order': 3,
                             'name': 32106,
-                            'value': 'openelec',
+                            'value': 'rasplex',
                             'action': 'initialize_samba',
                             'typ': 'text',
                             'parent': {'entry': 'samba_secure',
@@ -81,7 +81,7 @@ class services:
                         'samba_password': {
                             'order': 4,
                             'name': 32107,
-                            'value': 'openelec',
+                            'value': 'rasplex',
                             'action': 'initialize_samba',
                             'typ': 'text',
                             'parent': {'entry': 'samba_secure',

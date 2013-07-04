@@ -66,7 +66,7 @@ class system:
                     'not_supported': [],
                     'settings': {'hostname': {
                         'name': 32190,
-                        'value': 'OpenELEC',
+                        'value': 'RasPlex',
                         'action': 'set_hostname',
                         'typ': 'text',
                         'validate': '^([a-zA-Z0-9](?:[a-zA-Z0-9-\.]*[a-zA-Z0-9]))$',
@@ -496,6 +496,7 @@ class system:
                             'enter_function', 0)
 
             self.oe.set_busy(1)
+            result = None
 
             if not listItem == None:
                 self.set_value(listItem)
@@ -1029,7 +1030,7 @@ class system:
                 if not self.config['update']['settings']['AutoUpdate'
                         ]['value'] == 'auto':
                     xbmcDialog = xbmcgui.Dialog()
-                    answer = xbmcDialog.yesno('OpenELEC Update',
+                    answer = xbmcDialog.yesno('RasPlex Update',
                             self.oe._(32188) + ':  ' + current_version,
                             self.oe._(32187) + ':  ' + latest_version,
                             self.oe._(32180))
@@ -1082,7 +1083,7 @@ class system:
                         ] == 'manual' and force == True):
                         silent = False
                         xbmcDialog = xbmcgui.Dialog()
-                        answer = xbmcDialog.yesno('OpenELEC Update',
+                        answer = xbmcDialog.yesno('RasPlex Update',
                                 self.oe._(32188).encode('utf-8') + ':  ' + self.version,
                                 self.oe._(32187).encode('utf-8') + ':  ' + update_json['data']['update'].split('-')[-1].replace('.tar.bz2', ''),
                                 self.oe._(32180).encode('utf-8'))
@@ -1278,7 +1279,7 @@ class system:
             xbmcDialog = xbmcgui.Dialog()
 
             self.backup_dlg = xbmcgui.DialogProgress()
-            self.backup_dlg.create('OpenELEC', self.oe._(32375).encode('utf-8'), ' ', ' ')
+            self.backup_dlg.create('RasPlex', self.oe._(32375).encode('utf-8'), ' ', ' ')
             
             if not os.path.exists(self.backup_folder):
                 os.makedirs(self.backup_folder)
