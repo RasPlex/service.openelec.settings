@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: XBMC Addons\n"
-"Report-Msgid-Bugs-To: info@rasplex.com\n"
+"Report-Msgid-Bugs-To: alanwww1@xbmc.org / info@rasplex.com\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: XBMC Translation Team / RasPlex Team\n"
@@ -163,11 +163,11 @@ msgid "Restore a tar archive backup previously created using the backup option a
 msgstr ""
 
 msgctxt "#724"
-msgid "Permanently reset RasPlex OS configuration to defaults (PlexHT is not touched)"
+msgid "[COLOR FF00FF00]SOFT RESET[/COLOR]\nPermanently reset RasPlex OS configuration to defaults (PlexHT is not touched)"
 msgstr ""
 
 msgctxt "#725"
-msgid "Permanently reset RasPlex OS and PlexHT configuration to defaults"
+msgid "[COLOR FF00FF00]HARD RESET[/COLOR]\nPermanently reset RasPlex OS and PlexHT configuration to defaults"
 msgstr ""
 
 msgctxt "#726"
@@ -270,7 +270,15 @@ msgctxt "#750"
 msgid "750"
 msgstr ""
 
-#empty strings from id 751 to 31999
+msgctxt "#751"
+msgid "With OBEX filetransfer you can send files, for example movies or pictures over bluetooth to RasPlex."
+msgstr ""
+
+msgctxt "#752"
+msgid "Here you can set the folder location where OBEX file transfer should store incoming files"
+msgstr ""
+
+#empty strings from id 753 to 31999
 
 msgctxt "#32000"
 msgid "Network"
@@ -1118,4 +1126,24 @@ msgstr ""
 
 msgctxt "#32380"
 msgid "Restoring system settings requires a reboot. Are you sure you want to restore?"
+msgstr ""
+
+msgctxt "#32381"
+msgid "Accept incoming Bluetooth Filetransfer ?"
+msgstr ""
+
+msgctxt "#32382"
+msgid "Speed"
+msgstr ""
+
+msgctxt "#32383"
+msgid "Play Files ?"
+msgstr ""
+
+msgctxt "#32384"
+msgid "OBEX Enabled"
+msgstr ""
+
+msgctxt "#32385"
+msgid "OBEX Upload Folder"
 msgstr ""

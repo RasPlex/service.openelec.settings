@@ -84,26 +84,30 @@ class mainWindow(xbmcgui.WindowXMLDialog):
             for strModule in sorted(self.oe.dictModules, key=lambda x: \
                                     self.oe.dictModules[x].menu.keys()):
 
+                module = self.oe.dictModules[strModule]
+                
                 self.oe.dbg_log('init module', strModule, 0)
-                if hasattr(self.oe.dictModules[strModule], 'do_init'):
-                    Thread(target=self.oe.dictModules[strModule].do_init(),
-                           args=()).start()
+                if module.ENABLED:
+                    if hasattr(module, 'do_init'):
+                        Thread(target=module.do_init(),
+                            args=()).start()
 
-                for men in self.oe.dictModules[strModule].menu:
-                    dictProperties = {'modul': strModule,
-                            'listTyp': self.oe.listObject[self.oe.dictModules[strModule].menu[men]['listTyp'
-                            ]],
-                            'menuLoader': self.oe.dictModules[strModule].menu[men]['menuLoader'
-                            ]}
+                    for men in module.menu:
+                        if 'listTyp' in module.menu[men] and \
+                            'menuLoader' in module.menu[men]: 
+                            
+                            dictProperties = {'modul': strModule,
+                                    'listTyp': self.oe.listObject[module.menu[men]['listTyp']],
+                                    'menuLoader': module.menu[men]['menuLoader']}
 
-                    if 'InfoText' \
-                        in self.oe.dictModules[strModule].menu[men]:
-                        dictProperties['InfoText'] = \
-                            self.oe._(self.oe.dictModules[strModule].menu[men]['InfoText'
-                                ])
+                            if 'InfoText' \
+                                in module.menu[men]:
+                                dictProperties['InfoText'] = \
+                                    self.oe._(module.menu[men]['InfoText'
+                                        ])
 
-                    self.addMenuItem(self.oe.dictModules[strModule].menu[men]['name'
-                            ], dictProperties)
+                            self.addMenuItem(module.menu[men]['name'
+                                    ], dictProperties)
 
             self.setFocusId(self.guiMenList)
             self.onFocus(self.guiMenList)
@@ -155,6 +159,76 @@ class mainWindow(xbmcgui.WindowXMLDialog):
             self.oe.dbg_log('oeWindows.mainWindow::addConfigItem('
                             + strName + ')', 'ERROR: (' + repr(e) + ')')
 
+    def build_menu(self, struct, fltr=[], optional='0'):
+        
+        try:
+
+            for category in sorted(struct, key=lambda x: struct[x]['order']):
+
+                if not 'hidden' in struct[category]:
+                        
+                    if fltr == []:
+                        self.addConfigItem(self.oe._(struct[category]['name'
+                                ]), {'typ': 'separator'}, 1100)
+
+                    else:
+                        if category not in fltr:
+                            continue
+                        
+                    for entry in sorted(struct[category]['settings'],
+                            key=lambda x: struct[category]['settings'
+                            ][x]['order']):
+
+                        setting = struct[category]['settings'][entry]
+                        
+                        if not 'hidden' in setting:
+
+                            dictProperties = {
+                                'value': setting['value'],
+                                'typ': setting['type'],
+                                'entry': entry,
+                                'category': category,
+                                'action': setting['action'],
+                                }
+
+                            if 'InfoText' in setting:
+                                dictProperties['InfoText'] = \
+                                    self.oe._(setting['InfoText'])
+
+                            if 'validate' in setting:
+                                dictProperties['validate'] = \
+                                    setting['validate']
+
+                            if 'values' in setting:
+                                dictProperties['values'] = \
+                                    ','.join(setting['values'])
+
+                            if isinstance(setting['name'], basestring):
+                                name = setting['name']
+                            else:
+                                name = self.oe._(setting['name'])
+                                
+                            if not 'parent' in setting:
+
+                                self.addConfigItem(name, 
+                                        dictProperties,
+                                        1100)
+                            else:
+
+                                if struct[category]['settings'
+                                        ][setting['parent']['entry']]['value'
+                                        ] in setting['parent']['value']:
+
+                                    if not 'optional' in setting or \
+                                        ('optional' in setting and optional != '0'):
+                                        self.addConfigItem(name,
+                                                dictProperties,
+                                                1100)
+
+        except Exception, e:
+
+            self.oe.dbg_log('oeWindows.mainWindow::build_menu', 'ERROR: (' + repr(e) + ')')
+        
     def showButton(
         self,
         number,
@@ -308,12 +382,13 @@ class mainWindow(xbmcgui.WindowXMLDialog):
                     if xbmcKeyboard.isConfirmed():
                         selectedItem.setProperty('value',
                                 xbmcKeyboard.getText())
+                        
                 elif strTyp == 'file':
 
                     xbmcDialog = xbmcgui.Dialog()
                     returnValue = xbmcDialog.browse(
                         1,
-                        'OpenELEC.tv',
+                        'RasPlex',
                         'files',
                         '',
                         False,
@@ -323,10 +398,27 @@ class mainWindow(xbmcgui.WindowXMLDialog):
                     if returnValue != '' and returnValue != '/':
                         selectedItem.setProperty('value',
                                 unicode(returnValue))
+
+                elif strTyp == 'folder':
+
+                    xbmcDialog = xbmcgui.Dialog()
+                    returnValue = xbmcDialog.browse(
+                        0,
+                        'RasPlex',
+                        'files',
+                        '',
+                        False,
+                        False,
+                        '/storage',
+                        )
+                    if returnValue != '' and returnValue != '/':
+                        selectedItem.setProperty('value',
+                                unicode(returnValue))
+                        
                 elif strTyp == 'ip':
 
                     xbmcDialog = xbmcgui.Dialog()
-                    returnValue = xbmcDialog.numeric(3, 'OpenELEC.tv',
+                    returnValue = xbmcDialog.numeric(3, 'RasPlex',
                             strValue)
                     if returnValue != '':
                         if returnValue == '0.0.0.0':
@@ -340,7 +432,7 @@ class mainWindow(xbmcgui.WindowXMLDialog):
                         strValue = '0'
 
                     xbmcDialog = xbmcgui.Dialog()
-                    returnValue = xbmcDialog.numeric(0, 'OpenELEC.tv',
+                    returnValue = xbmcDialog.numeric(0, 'RasPlex',
                             strValue)
                     if returnValue == '':
                         returnValue = -1
@@ -350,11 +442,19 @@ class mainWindow(xbmcgui.WindowXMLDialog):
                                 unicode(returnValue))
                 elif strTyp == 'bool':
 
+                    strValue = strValue.lower()
+                    
                     if strValue == '0':
                         selectedItem.setProperty('value', '1')
-                    else:
+                    elif strValue == '1':
                         selectedItem.setProperty('value', '0')
-
+                    elif strValue == 'true':
+                        selectedItem.setProperty('value', 'false')
+                    elif strValue == 'false':
+                        selectedItem.setProperty('value', 'true')
+                    else:
+                        selectedItem.setProperty('value', '1')
+                        
                 if selectedItem.getProperty('action') != '':
                     if hasattr(self.oe.dictModules[selectedMenuItem.getProperty('modul'
                                )], selectedItem.getProperty('action')):
@@ -376,6 +476,9 @@ class mainWindow(xbmcgui.WindowXMLDialog):
                             + unicode(controlID) + ')', 'ERROR: ('
                             + repr(e) + ')')
 
+    def onUnload(self):
+        pass
+        
     def onFocus(self, controlID):
 
         try:
@@ -413,12 +516,15 @@ class mainWindow(xbmcgui.WindowXMLDialog):
 
                 selectedMenuItem = \
                     self.getControl(controlID).getSelectedItem()
+                
                 self.setProperty('InfoText',
                                  selectedMenuItem.getProperty('InfoText'
                                  ))
-
+                                 
                 if lastMenu != self.lastMenu:
 
+                    self.lastModul = selectedMenuItem.getProperty('Modul')
+                
                     self.lastMenu = lastMenu
 
                     for btn in self.buttons:
@@ -510,36 +616,28 @@ class selectWindow(xbmcgui.WindowXMLDialog):
         pass
 
 
-class passkeyWindow(xbmcgui.WindowXMLDialog):
+class pinkeyWindow(xbmcgui.WindowXMLDialog):
 
-    def __init__(self, *args, **kwargs):
-        self.oe = kwargs['oeMain']
-        pass
-
-    def set_text(self, text):
+    device = ''
+    
+    def set_title(self, text):
         self.getControl(1700).setLabel(text)
 
-    def set_requested_code(self, requested):
-        self.getControl(1701).setLabel(unicode(requested))
+    def set_label1(self, text):
+        self.getControl(1701).setLabel(unicode(text))
 
-    def update_entered_code(self, entered):
-        code = self.getControl(1702).getLabel()
-        self.getControl(1702).setLabel(code + unicode(entered))
+    def set_label2(self, text):
+        self.getControl(1702).setLabel(unicode(text))
 
-    def get_entered_code(self):
-        return self.getControl(1702).getLabel()
+    def set_label3(self, text):
+        self.getControl(1703).setLabel(unicode(text))
+        
+    def append_label3(self, text):
+        label = self.getControl(1703).getLabel()
+        self.getControl(1703).setLabel(label + unicode(text))
 
-    def onInit(self):
-        pass
-
-    def onAction(self, action):
-        pass
-
-    def onClick(self, controlID):
-        pass
-
-    def onFocus(self, controlID):
-        pass
+    def get_label3_len(self):
+        return len(self.getControl(1703).getLabel())
 
 
 class contextWindow(xbmcgui.WindowXMLDialog):
@@ -636,6 +734,7 @@ class wizard(xbmcgui.WindowXMLDialog):
 
     def __init__(self, *args, **kwargs):
 
+        self.lastMenu = -1
         self.guiMenList = 1000
         self.guiNetList = 1200
         self.wizTextbox = 1400
@@ -644,10 +743,10 @@ class wizard(xbmcgui.WindowXMLDialog):
         self.wizLstTitle = 1404
         self.wizWinTitle = 32300
 
-        self.guisettings = '/storage/.plexht/userdata/guisettings.xml'
-        self.languages_dir = '/usr/share/xbmc/language/'
-
         self.oe = kwargs['oeMain']
+        
+        self.guisettings = '%s/userdata/guisettings.xml'  % self.oe.XBMC_USER_HOME
+        self.languages_dir = '/usr/share/xbmc/language/'
 
         self.buttons = {
             1: {'id': 1500, 'modul': '', 'action': ''},
@@ -668,7 +767,6 @@ class wizard(xbmcgui.WindowXMLDialog):
     def onInit(self):
         try:
 
-            self.oe.dictModules['system'].start_service()
             self.oe.dictModules['system'].do_init()
 
             self.getControl(self.wizWinTitle).setLabel(self.oe._(32300).encode('utf-8'))
@@ -960,8 +1058,7 @@ class wizard(xbmcgui.WindowXMLDialog):
                                     'start_service'):
                                 self.oe.dictModules[strModule].is_wizard = \
                                     True
-                                self.oe.dictModules[strModule].start_service()
-
+                                
                             if hasattr(self.oe.dictModules[strModule],
                                     'do_init'):
                                 self.oe.dictModules[strModule].do_init()
@@ -979,7 +1076,6 @@ class wizard(xbmcgui.WindowXMLDialog):
                     self.oe.write_setting('openelec', 'wizard_completed'
                             , 'True')
                     self.close()
-                    self.oe.start_service()
 
             self.oe.dbg_log('wizard::onClick(' + unicode(controlID) + ')',
                             'exit_function', 0)
@@ -1109,7 +1205,7 @@ class wizard(xbmcgui.WindowXMLDialog):
         try:
 
             current_layout = self.oe.dictModules['system'
-                    ].config['keyboard']['settings']['KeyboardLayout1'
+                    ].struct['keyboard']['settings']['KeyboardLayout1'
                     ]['value']
 
             return current_layout
@@ -1125,16 +1221,16 @@ class wizard(xbmcgui.WindowXMLDialog):
             select_window = selectWindow('selectWindow.xml',
                     self.oe.__cwd__, 'Default', oeMain=self.oe)
             select_window.defaultValue = self.oe.dictModules['system'
-                    ].config['keyboard']['settings']['KeyboardLayout1'
+                    ].struct['keyboard']['settings']['KeyboardLayout1'
                     ]['value']
             select_window.availValues = \
-                ','.join(self.oe.dictModules['system'].config['keyboard'
+                ','.join(self.oe.dictModules['system'].struct['keyboard'
                          ]['settings']['KeyboardLayout1']['values'])
             self.oe.set_busy(0)
             select_window.doModal()
 
             if select_window.defaultValue != select_window.result:
-                self.oe.dictModules['system'].config['keyboard'
+                self.oe.dictModules['system'].struct['keyboard'
                         ]['settings']['KeyboardLayout1']['value'] = \
                     select_window.result
                 self.oe.write_setting('system', 'KeyboardLayout1',

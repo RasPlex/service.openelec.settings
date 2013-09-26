@@ -801,7 +801,7 @@ msgid "Welcome"
 msgstr "Καλώς Ορίσατε"
 
 msgctxt "#32302"
-msgid "This wizard will guide you through the process of setting up your new [COLOR FFFF1C77]Ras[/COLOR][COLOR FFFF9522]Plex[/COLOR] installation - setting you location, timzeone and connecting you to the internet.[CR][CR]These settings can be changed later by navigating to Programs > [COLOR FFFF1C77]Ras[/COLOR][COLOR FFFF9522]Plex[/COLOR] Settings.[CR][CR]To begin your [COLOR FFFF1C77]Ras[/COLOR][COLOR FFFF9522]Plex[/COLOR] experience, select your regional settings and your keyboard layout, then click Next."
+msgid "This wizard will guide you through the process of setting up your new [COLOR FFFF1C77]Ras[/COLOR][COLOR FFFF9522]Plex[/COLOR] installation - setting your location, timezone and connecting you to the internet.[CR][CR]These settings can be changed later by navigating to Programs > [COLOR FFFF1C77]Ras[/COLOR][COLOR FFFF9522]Plex[/COLOR] Settings.[CR][CR]To begin your [COLOR FFFF1C77]Ras[/COLOR][COLOR FFFF9522]Plex[/COLOR] experience, select your regional settings and your keyboard layout, then click Next."
 msgstr "Αυτός ο οδηγός θα σας βοηθήσει στη διαδικασία της ρύθμισης της νέας εγκατάστασης [COLOR FFFF1C77]Ras[/COLOR][COLOR FFFF9522]Plex[/COLOR] - ορισμός της τοποθεσίας σας, της χρονικής ζώνης και της σύνδεσης στο διαδίκτυο.[CR][CR]Μπορείτε να αλλάξετε αυτές τις ρυθμίσεις αργότερα πηγαίνοντας στις Εφαρμογές > Ρυθμίσεις [COLOR FFFF1C77]Ras[/COLOR][COLOR FFFF9522]Plex[/COLOR].[CR][CR]Για να ξεκινήσετε την εμπειρία σας με το [COLOR FFFF1C77]Ras[/COLOR][COLOR FFFF9522]Plex[/COLOR], επιλέξτε τις ρυθμίσεις τοποθεσίας σας και τη διάταξη πληκτρολογίου, και πιέστε 'Επόμενο'."
 
 msgctxt "#32303"
@@ -963,10 +963,6 @@ msgstr "Διεύθυνση IP του Διακομιστή Syslog"
 msgctxt "#32343"
 msgid "Enter the following Key on your Device."
 msgstr "Εισάγετε το ακόλουθο Κλειδί στη Συσκευή σας."
-
-msgctxt "#32344"
-msgid "Disable Bluetooth"
-msgstr "Απενεργοποίηση Bluetooth"
 
 msgctxt "#32345"
 msgid "Bluetooth daemon is not running!"
