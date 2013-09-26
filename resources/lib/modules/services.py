@@ -312,7 +312,7 @@ class services:
             if not self.oe.SYSTEMD:
                 # read ssh settings from sshd_samba.conf
                 if os.path.isfile(self.SSH_DAEMON):
-                    if self.oe.get_service_option('ssh', 'SSHD_START', 'false') == 'true':
+                    if self.oe.get_service_option('ssh', 'SSHD_START', 'true') == 'true':
                         self.struct['ssh']['settings']['ssh_autostart']['value'] = '1'
                     else:
                         self.struct['ssh']['settings']['ssh_autostart']['value'] = '0'
@@ -337,7 +337,7 @@ class services:
                 # read samba settings from service_samba.conf
                 if os.path.isfile(self.SAMBA_NMDB) \
                     and os.path.isfile(self.SAMBA_SMDB):
-                    if self.oe.get_service_option('samba', 'SAMBA_ENABLED', 'true') == 'true':
+                    if self.oe.get_service_option('samba', 'SAMBA_ENABLED', 'false') == 'true':
                         self.struct['samba']['settings']['samba_autostart']['value'] = '1'
                     else:
                         self.struct['samba']['settings']['samba_autostart']['value'] = '0'
@@ -347,11 +347,11 @@ class services:
                     else:
                         self.struct['samba']['settings']['samba_secure']['value'] = '0'
 
-                    tmpVal = self.oe.get_service_option('samba', 'SAMBA_USERNAME', 'openelec')
+                    tmpVal = self.oe.get_service_option('samba', 'SAMBA_USERNAME', 'rasplex')
                     if not tmpVal is None:
                         self.struct['samba']['settings']['samba_username']['value'] = tmpVal
                     
-                    tmpVal = self.oe.get_service_option('samba', 'SAMBA_PASSWORD', 'openelec')
+                    tmpVal = self.oe.get_service_option('samba', 'SAMBA_PASSWORD', 'rasplex')
                     if not tmpVal is None:
                         self.struct['samba']['settings']['samba_password']['value'] = tmpVal
 

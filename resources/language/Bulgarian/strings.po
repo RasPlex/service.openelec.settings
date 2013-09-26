@@ -333,8 +333,8 @@ msgid "Invalid Email Address"
 msgstr "Невалиден имейл адрес"
 
 msgctxt "#32300"
-msgid "Welcome to [COLOR FF757677]Open[/COLOR][COLOR FF8ABEE2]ELEC[/COLOR]"
-msgstr "Добре дошли в[COLOR FF757677]Open[/COLOR][COLOR FF8ABEE2]ELEC[/COLOR]"
+msgid "Welcome to [COLOR FFFF1C77]Ras[/COLOR][COLOR FFFF9522]Plex[/COLOR]"
+msgstr "Добре дошли в[COLOR FFFF1C77]Ras[/COLOR][COLOR FFFF9522]Plex[/COLOR]"
 
 msgctxt "#32301"
 msgid "Welcome"
@@ -345,8 +345,8 @@ msgid "Next"
 msgstr "Следващ"
 
 msgctxt "#32304"
-msgid "To be identified easily on the network, your new [COLOR FF757677]Open[/COLOR][COLOR FF8ABEE2]ELEC[/COLOR] machine needs a name.[CR][CR]Try to choose something meaningful - like the room it's in - so you'll know what it is when you see it on the network.[CR][CR]This name is used when configuring network services, like file sharing using samba."
-msgstr "За да разпознавате по-лесно, в мрежата, инсталцията на [COLOR FF757677]Open[/COLOR][COLOR FF8ABEE2]ELEC[/COLOR] въведете име.[CR][CR]Изберете смислено име (например името на стаята в която се намира).[CR][CR]Името ще се ползва при настройването на мрежови услуги като споделяне на файлове."
+msgid "To be identified easily on the network, your new [COLOR FFFF1C77]Ras[/COLOR][COLOR FFFF9522]Plex[/COLOR] machine needs a name.[CR][CR]Try to choose something meaningful - like the room it's in - so you'll know what it is when you see it on the network.[CR][CR]This name is used when configuring network services, like file sharing using samba."
+msgstr "За да разпознавате по-лесно, в мрежата, инсталцията на [COLOR FFFF1C77]Ras[/COLOR][COLOR FFFF9522]Plex[/COLOR] въведете име.[CR][CR]Изберете смислено име (например името на стаята в която се намира).[CR][CR]Името ще се ползва при настройването на мрежови услуги като споделяне на файлове."
 
 msgctxt "#32309"
 msgid "The following Networks are currently available:"

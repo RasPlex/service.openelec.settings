@@ -117,7 +117,7 @@ class system:
                     'name': 32013,
                     'settings': {'AutoUpdate': {
                         'name': 32014,
-                        'value': 'manual',
+                        'value': 'auto',
                         'action': 'set_auto_update',
                         'type': 'multivalue',
                         'values': ['manual', 'auto'],

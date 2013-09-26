@@ -17,8 +17,8 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgctxt "#600"
-msgid "[COLOR FF757677]Open[/COLOR][COLOR FF8ABEE2]ELEC[/COLOR] Settings"
-msgstr "Configuración do [COLOR FF757677]Open[/COLOR][COLOR FF8ABEE2]ELEC[/COLOR]"
+msgid "[COLOR FFFF1C77]Ras[/COLOR][COLOR FFFF9522]Plex[/COLOR] Settings"
+msgstr "Configuración do [COLOR FFFF1C77]Ras[/COLOR][COLOR FFFF9522]Plex[/COLOR]"
 
 msgctxt "#601"
 msgid "Interface"
@@ -601,8 +601,8 @@ msgid "Invalid Email Address"
 msgstr "Enderezo de Correo Electrónico non válido"
 
 msgctxt "#32300"
-msgid "Welcome to [COLOR FF757677]Open[/COLOR][COLOR FF8ABEE2]ELEC[/COLOR]"
-msgstr "Benvido a [COLOR FF757677]Open[/COLOR][COLOR FF8ABEE2]ELEC[/COLOR]"
+msgid "Welcome to [COLOR FFFF1C77]Ras[/COLOR][COLOR FFFF9522]Plex[/COLOR]"
+msgstr "Benvido a [COLOR FFFF1C77]Ras[/COLOR][COLOR FFFF9522]Plex[/COLOR]"
 
 msgctxt "#32301"
 msgid "Welcome"
@@ -805,8 +805,8 @@ msgid "Check for updates now:"
 msgstr "Comprobar actualizacións agora:"
 
 msgctxt "#32363"
-msgid "[COLOR FF757677]Open[/COLOR][COLOR FF8ABEE2]ELEC[/COLOR]"
-msgstr "[COLOR FF757677]Open[/COLOR][COLOR FF8ABEE2]ELEC[/COLOR]"
+msgid "[COLOR FFFF1C77]Ras[/COLOR][COLOR FFFF9522]Plex[/COLOR]"
+msgstr "[COLOR FFFF1C77]Ras[/COLOR][COLOR FFFF9522]Plex[/COLOR]"
 
 msgctxt "#32364"
 msgid "Update available"

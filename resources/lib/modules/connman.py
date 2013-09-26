@@ -1585,7 +1585,7 @@ class connman:
                         'TetheringPassphrase': {
                             'order': 4,
                             'name': 32107,
-                            'value': 'openelec',
+                            'value': 'rasplex',
                             'action': 'set_technologie',
                             'type': 'text',
                             'dbus': 'String',

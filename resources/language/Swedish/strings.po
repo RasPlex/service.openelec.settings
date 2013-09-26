@@ -17,8 +17,8 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgctxt "#600"
-msgid "[COLOR FF757677]Open[/COLOR][COLOR FF8ABEE2]ELEC[/COLOR] Settings"
-msgstr "[COLOR FF757677]Open[/COLOR][COLOR FF8ABEE2]ELEC[/COLOR]-inställningar"
+msgid "[COLOR FFFF1C77]Ras[/COLOR][COLOR FFFF9522]Plex[/COLOR] Settings"
+msgstr "[COLOR FFFF1C77]Ras[/COLOR][COLOR FFFF9522]Plex[/COLOR]-inställningar"
 
 msgctxt "#601"
 msgid "Interface"
@@ -677,8 +677,8 @@ msgid "Invalid Email Address"
 msgstr "Ogiltig epostadress"
 
 msgctxt "#32300"
-msgid "Welcome to [COLOR FF757677]Open[/COLOR][COLOR FF8ABEE2]ELEC[/COLOR]"
-msgstr "Välkommen till [COLOR FF757677]Open[/COLOR][COLOR FF8ABEE2]ELEC[/COLOR]"
+msgid "Welcome to [COLOR FFFF1C77]Ras[/COLOR][COLOR FFFF9522]Plex[/COLOR]"
+msgstr "Välkommen till [COLOR FFFF1C77]Ras[/COLOR][COLOR FFFF9522]Plex[/COLOR]"
 
 msgctxt "#32301"
 msgid "Welcome"

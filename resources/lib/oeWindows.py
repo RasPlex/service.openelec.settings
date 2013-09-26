@@ -388,7 +388,7 @@ class mainWindow(xbmcgui.WindowXMLDialog):
                     xbmcDialog = xbmcgui.Dialog()
                     returnValue = xbmcDialog.browse(
                         1,
-                        'OpenELEC.tv',
+                        'RasPlex',
                         'files',
                         '',
                         False,
@@ -404,7 +404,7 @@ class mainWindow(xbmcgui.WindowXMLDialog):
                     xbmcDialog = xbmcgui.Dialog()
                     returnValue = xbmcDialog.browse(
                         0,
-                        'OpenELEC.tv',
+                        'RasPlex',
                         'files',
                         '',
                         False,
@@ -418,7 +418,7 @@ class mainWindow(xbmcgui.WindowXMLDialog):
                 elif strTyp == 'ip':
 
                     xbmcDialog = xbmcgui.Dialog()
-                    returnValue = xbmcDialog.numeric(3, 'OpenELEC.tv',
+                    returnValue = xbmcDialog.numeric(3, 'RasPlex',
                             strValue)
                     if returnValue != '':
                         if returnValue == '0.0.0.0':
@@ -432,7 +432,7 @@ class mainWindow(xbmcgui.WindowXMLDialog):
                         strValue = '0'
 
                     xbmcDialog = xbmcgui.Dialog()
-                    returnValue = xbmcDialog.numeric(0, 'OpenELEC.tv',
+                    returnValue = xbmcDialog.numeric(0, 'RasPlex',
                             strValue)
                     if returnValue == '':
                         returnValue = -1

@@ -17,8 +17,8 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 msgctxt "#600"
-msgid "[COLOR FF757677]Open[/COLOR][COLOR FF8ABEE2]ELEC[/COLOR] Settings"
-msgstr "[COLOR FF757677]Open[/COLOR][COLOR FF8ABEE2]ELEC[/COLOR]设置"
+msgid "[COLOR FFFF1C77]Ras[/COLOR][COLOR FFFF9522]Plex[/COLOR] Settings"
+msgstr "[COLOR FFFF1C77]Ras[/COLOR][COLOR FFFF9522]Plex[/COLOR]设置"
 
 msgctxt "#601"
 msgid "Interface"

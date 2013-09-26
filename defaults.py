@@ -29,7 +29,7 @@ import os
 ################################################################################
 # Base 
 ################################################################################
-XBMC_USER_HOME = os.environ.get("XBMC_USER_HOME", "/storage/.xbmc")
+XBMC_USER_HOME = os.environ.get("XBMC_USER_HOME", "/storage/.plexht")
 CONFIG_CACHE = os.environ.get("CONFIG_CACHE", "/storage/.cache")
 USER_CONFIG = os.environ.get("USER_CONFIG", "/storage/.config")
 
@@ -73,8 +73,8 @@ services = \
         "SAMBA_INIT"            : "/etc/init.d/52_samba",
       #DEFAULT_VALUES 
         "D_SAMBA_SECURE"        : "0",
-        "D_SAMBA_USERNAME"      : "openelec",
-        "D_SAMBA_PASSWORD"      : "openelec",
+        "D_SAMBA_USERNAME"      : "rasplex",
+        "D_SAMBA_PASSWORD"      : "rasplex",
     
       #SSH
         "SSH_DAEMON"            : "/usr/sbin/sshd",
@@ -112,8 +112,8 @@ system = \
         "LCD_DRIVER_DIR"      : "/usr/lib/lcdproc/",
 
       #UPDATE
-        "UPDATE_REQUEST_URL"  : "http://update.openelec.tv/updates.php",
-        "UPDATE_DOWNLOAD_URL" : "http://%s.openelec.tv/%s",
+        "UPDATE_REQUEST_URL"  : "http://update.rasplex.com/update/updates.php",
+        "UPDATE_DOWNLOAD_URL" : "http://sourceforge.net/projects/rasplex/files/autoupdate/%s/%s",
         "LOCAL_UPDATE_DIR"    : "/storage/.update/",
         "GET_CPU_FLAG"        : "cat /proc/cpuinfo | grep -q 'flags.* lm ' && echo '1' || echo '0'",
         

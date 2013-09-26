@@ -17,8 +17,8 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 msgctxt "#600"
-msgid "[COLOR FF757677]Open[/COLOR][COLOR FF8ABEE2]ELEC[/COLOR] Settings"
-msgstr "[COLOR FF757677]Open[/COLOR][COLOR FF8ABEE2]ELEC[/COLOR] Ajustes"
+msgid "[COLOR FFFF1C77]Ras[/COLOR][COLOR FFFF9522]Plex[/COLOR] Settings"
+msgstr "[COLOR FFFF1C77]Ras[/COLOR][COLOR FFFF9522]Plex[/COLOR] Ajustes"
 
 msgctxt "#601"
 msgid "Interface"
@@ -545,8 +545,8 @@ msgid "Invalid Email Address"
 msgstr "Endereço de E-mail Inválido"
 
 msgctxt "#32300"
-msgid "Welcome to [COLOR FF757677]Open[/COLOR][COLOR FF8ABEE2]ELEC[/COLOR]"
-msgstr "Bem vindo ao [COLOR FF757677]Open[/COLOR][COLOR FF8ABEE2]ELEC[/COLOR]"
+msgid "Welcome to [COLOR FFFF1C77]Ras[/COLOR][COLOR FFFF9522]Plex[/COLOR]"
+msgstr "Bem vindo ao [COLOR FFFF1C77]Ras[/COLOR][COLOR FFFF9522]Plex[/COLOR]"
 
 msgctxt "#32301"
 msgid "Welcome"
@@ -557,8 +557,8 @@ msgid "Next"
 msgstr "Seguinte"
 
 msgctxt "#32304"
-msgid "To be identified easily on the network, your new [COLOR FF757677]Open[/COLOR][COLOR FF8ABEE2]ELEC[/COLOR] machine needs a name.[CR][CR]Try to choose something meaningful - like the room it's in - so you'll know what it is when you see it on the network.[CR][CR]This name is used when configuring network services, like file sharing using samba."
-msgstr "Para ser identificado facilmente na rede, seu nova maquina [COLOR FF757677]Open[/COLOR][COLOR FF8ABEE2]ELEC[/COLOR] precisa de um nome.[CR][CR]Tente escolher algo significativo - como a sala onde está - assim você saberá qual é quando vê-lo na rede.[CR][CR]Esse nome é usando quando configura um serviço de rede, como compartilhamento de arquivo usando samba."
+msgid "To be identified easily on the network, your new [COLOR FFFF1C77]Ras[/COLOR][COLOR FFFF9522]Plex[/COLOR] machine needs a name.[CR][CR]Try to choose something meaningful - like the room it's in - so you'll know what it is when you see it on the network.[CR][CR]This name is used when configuring network services, like file sharing using samba."
+msgstr "Para ser identificado facilmente na rede, seu nova maquina [COLOR FFFF1C77]Ras[/COLOR][COLOR FFFF9522]Plex[/COLOR] precisa de um nome.[CR][CR]Tente escolher algo significativo - como a sala onde está - assim você saberá qual é quando vê-lo na rede.[CR][CR]Esse nome é usando quando configura um serviço de rede, como compartilhamento de arquivo usando samba."
 
 msgctxt "#32307"
 msgid "Select your Regional Settings:"
@@ -693,8 +693,8 @@ msgid "Check for updates now:"
 msgstr "Verificar por atualizações agora:"
 
 msgctxt "#32363"
-msgid "[COLOR FF757677]Open[/COLOR][COLOR FF8ABEE2]ELEC[/COLOR]"
-msgstr "[COLOR FF757677]Open[/COLOR][COLOR FF8ABEE2]ELEC[/COLOR]"
+msgid "[COLOR FFFF1C77]Ras[/COLOR][COLOR FFFF9522]Plex[/COLOR]"
+msgstr "[COLOR FFFF1C77]Ras[/COLOR][COLOR FFFF9522]Plex[/COLOR]"
 
 msgctxt "#32364"
 msgid "Update available"
