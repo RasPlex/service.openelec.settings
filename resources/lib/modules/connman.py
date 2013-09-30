@@ -1449,7 +1449,7 @@ class connmanVpn(object):
 
                         dialog = xbmcgui.Dialog()
                         self.oe.set_busy(0)
-                        dialog.ok('OpenELEC VPN', self.oe._(32378).encode('utf-8'))
+                        dialog.ok('RasPlex VPN', self.oe._(32378).encode('utf-8'))
                         self.oe.dbg_log('connmanVpn::save_vpn_config',
                                 'exit_function (incomplete)', 0)
                         return
@@ -1573,7 +1573,7 @@ class connman:
                         'TetheringIdentifier': {
                             'order': 3,
                             'name': 32198,
-                            'value': 'OpenELEC-AP',
+                            'value': 'RasPlex-AP',
                             'action': 'set_technologie',
                             'type': 'text',
                             'dbus': 'String',

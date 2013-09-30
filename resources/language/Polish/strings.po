@@ -794,7 +794,7 @@ msgstr "Nieprawidłowy adres e-mail "
 
 msgctxt "#32300"
 msgid "Welcome to [COLOR FFFF1C77]Ras[/COLOR][COLOR FFFF9522]Plex[/COLOR]"
-msgstr "Witaj w [COLOR FF757677]Open[/COLOR][COLOR FF8ABEE2]ELEC[/COLOR "
+msgstr "Witaj w [COLOR FFFF1C77]Ras[/COLOR][COLOR FFFF9522]Plex[/COLOR] "
 
 msgctxt "#32301"
 msgid "Welcome"

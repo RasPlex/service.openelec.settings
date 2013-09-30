@@ -76,7 +76,7 @@ class system:
                     'settings': {'hostname': {
                         'order': 1,
                         'name': 32190,
-                        'value': 'OpenELEC',
+                        'value': 'RasPlex',
                         'action': 'set_hostname',
                         'type': 'text',
                         'validate': '^([a-zA-Z0-9](?:[a-zA-Z0-9-\.]*[a-zA-Z0-9]))$',
@@ -859,7 +859,7 @@ class system:
                         ] == 'manual' and force == True):
                         silent = False
                         xbmcDialog = xbmcgui.Dialog()
-                        answer = xbmcDialog.yesno('OpenELEC Update',
+                        answer = xbmcDialog.yesno('RasPlex Update',
                                 self.oe._(32188).encode('utf-8') + ':  ' + self.oe.VERSION,
                                 self.oe._(32187).encode('utf-8') + ':  ' + \
                                     update_json['data']['update'].split('-')[-1].replace('.tar', ''),
@@ -984,7 +984,7 @@ class system:
 
             self.oe.dbg_log('system::reset_oe', 'enter_function', 0)
 
-            if self.ask_sure_reset('OpenELEC') == 1:
+            if self.ask_sure_reset('RasPlex') == 1:
 
                 self.oe.set_busy(1)
 
@@ -1054,7 +1054,7 @@ class system:
             xbmcDialog = xbmcgui.Dialog()
 
             self.backup_dlg = xbmcgui.DialogProgress()
-            self.backup_dlg.create('OpenELEC', self.oe._(32375).encode('utf-8'), ' ', ' ')
+            self.backup_dlg.create('RasPlex', self.oe._(32375).encode('utf-8'), ' ', ' ')
             
             if not os.path.exists(self.BACKUP_DESTINATION):
                 os.makedirs(self.BACKUP_DESTINATION)
