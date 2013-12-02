@@ -932,7 +932,7 @@ class connmanVpn(object):
                         'action': 'set_value',
                         'type': 'multivalue',
                         'dbus': 'String',
-                        'values': ['openvpn', 'pptp'],
+                        'values': [],
                         },
                     'Name': {
                         'order': 2,
@@ -1286,6 +1286,12 @@ class connmanVpn(object):
                 }}
 
             self.oe = oeMain
+
+            if os.path.exists('%s/%s' % (self.oe.dictModules['connman'].VPN_PLUGINS_DIR, 'openvpn.so')):
+                self.struct['Provider']['settings']['Type']['values'].append('openvpn')
+            if os.path.exists('%s/%s' % (self.oe.dictModules['connman'].VPN_PLUGINS_DIR, 'pptp.so')):
+                self.struct['Provider']['settings']['Type']['values'].append('pptp')
+
             self.winOeCon = oeWindows.mainWindow('mainWindow.xml',
                     self.oe.__cwd__, 'Default', oeMain=oeMain,
                     isChild=True)
@@ -1811,7 +1817,7 @@ class connman:
             dbusConnmanManager = None
             
             rebuildList = 0
-            if len(dbusServices) != len(self.listItems):
+            if len(dbusServices) != len(self.listItems) or force:
                 rebuildList = 1
                 self.oe.winOeMain.getControl(int(self.oe.listObject['netlist'
                         ])).reset()

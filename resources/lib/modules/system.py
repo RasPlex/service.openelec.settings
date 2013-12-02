@@ -34,6 +34,8 @@ import xbmcgui
 import tarfile
 import oeWindows
 import threading
+import subprocess
+
 from xml.dom import minidom
 
 class system:
@@ -86,7 +88,8 @@ class system:
                 'keyboard': {
                     'order': 2,
                     'name': 32009,
-                    'settings': {'KeyboardLayout1': {
+                    'settings': 
+                        {'KeyboardLayout1': {
                         'order': 1,
                         'name': 32010,
                         'value': 'us',
@@ -94,16 +97,32 @@ class system:
                         'type': 'multivalue',
                         'values': [],
                         'InfoText': 711,
-                        }, 'KeyboardLayout2': {
+                        }, 'KeyboardVariant1': {
                         'order': 2,
+                        'name': 32386,
+                        'value': '',
+                        'action': 'set_keyboard_layout',
+                        'type': 'multivalue',
+                        'values': [],
+                        'InfoText': 753,
+                        }, 'KeyboardLayout2': {
+                        'order': 3,
                         'name': 32010,
                         'value': 'us',
                         'action': 'set_keyboard_layout',
                         'type': 'multivalue',
                         'values': [],
                         'InfoText': 712,
+                        }, 'KeyboardVariant2': {
+                        'order': 4,
+                        'name': 32387,
+                        'value': '',
+                        'action': 'set_keyboard_layout',
+                        'type': 'multivalue',
+                        'values': [],
+                        'InfoText': 754,
                         }, 'KeyboardType': {
-                        'order': 3,
+                        'order': 5,
                         'name': 32330,
                         'value': 'pc105',
                         'action': 'set_keyboard_layout',
@@ -216,7 +235,8 @@ class system:
             self.keyboard_layouts = False
             self.rpi_keyboard_layouts = False
             self.last_update_check = 0            
-
+            self.arrVariants = {}
+            
             self.oe.dbg_log('system::__init__', 'exit_function', 0)
         except Exception, e:
 
@@ -285,7 +305,7 @@ class system:
             self.cpu_lm_flag = self.oe.execute(self.GET_CPU_FLAG, 1)
 
             # Keyboard Layout
-            (arrLayouts, arrTypes) = self.get_keyboard_layouts()
+            (arrLayouts, arrTypes, self.arrVariants) = self.get_keyboard_layouts()
             arrLcd = self.get_lcd_drivers()
 
             if not arrTypes is None:
@@ -311,11 +331,23 @@ class system:
                     self.struct['keyboard']['settings'
                             ]['KeyboardLayout1']['value'] = value
 
+                value = self.oe.read_setting('system', 'KeyboardVariant1'
+                        )
+                if not value is None:
+                    self.struct['keyboard']['settings'
+                            ]['KeyboardVariant1']['value'] = value
+                    
                 value = self.oe.read_setting('system', 'KeyboardLayout2'
                         )
                 if not value is None:
                     self.struct['keyboard']['settings'
                             ]['KeyboardLayout2']['value'] = value
+
+                value = self.oe.read_setting('system', 'KeyboardVariant2'
+                        )
+                if not value is None:
+                    self.struct['keyboard']['settings'
+                            ]['KeyboardVariant2']['value'] = value
 
                 if not arrTypes == None: 
                     self.keyboard_layouts = True
@@ -430,9 +462,27 @@ class system:
             self.oe.set_busy(1)
 
             if not listItem == None:
+                if listItem.getProperty('entry') == 'KeyboardLayout1':
+                    if self.struct['keyboard']['settings'
+                        ]['KeyboardLayout1']['value'] != listItem.getProperty('value'):
+                        self.struct['keyboard']['settings'
+                                ]['KeyboardVariant1']['value'] = ""
+                if listItem.getProperty('entry') == 'KeyboardLayout2':
+                    if self.struct['keyboard']['settings'
+                        ]['KeyboardLayout2']['value'] != listItem.getProperty('value'):
+                        self.struct['keyboard']['settings'
+                                ]['KeyboardVariant2']['value'] = ""                    
                 self.set_value(listItem)
                   
             if self.keyboard_layouts == True:
+
+                self.struct['keyboard']['settings']['KeyboardVariant1'
+                        ]['values'] = self.arrVariants[self.struct['keyboard'
+                              ]['settings']['KeyboardLayout1']['value']]
+                
+                self.struct['keyboard']['settings']['KeyboardVariant2'
+                        ]['values'] = self.arrVariants[self.struct['keyboard'
+                              ]['settings']['KeyboardLayout2']['value']]
 
                 self.oe.dbg_log('system::set_keyboard_layout',
                                 unicode(self.struct['keyboard']['settings'
@@ -449,7 +499,10 @@ class system:
                 config_file.write('XKBMODEL="' + self.struct['keyboard'
                                   ]['settings']['KeyboardType']['value']
                                   + '"\n')
-                config_file.write('XKBVARIANT=""\n')
+                config_file.write('XKBVARIANT="%s,%s"\n' % (self.struct['keyboard']['settings'
+                                                            ]['KeyboardVariant1']['value'], \
+                                                            self.struct['keyboard']['settings'
+                                                            ]['KeyboardVariant2']['value']))
                 config_file.write('XKBLAYOUT="' + self.struct['keyboard'
                                   ]['settings']['KeyboardLayout1']['value']
                                   + ',' + self.struct['keyboard']['settings'
@@ -461,7 +514,11 @@ class system:
                               '-layout ' + self.struct['keyboard'
                               ]['settings']['KeyboardLayout1']['value']
                               + ',' + self.struct['keyboard']['settings'
-                              ]['KeyboardLayout2']['value'], '-model '
+                              ]['KeyboardLayout2']['value'], 
+                              '-variant ' + self.struct['keyboard'
+                              ]['settings']['KeyboardVariant1']['value']
+                              + ',' + self.struct['keyboard']['settings'
+                              ]['KeyboardVariant2']['value'], '-model '
                               + unicode(self.struct['keyboard']['settings'
                               ]['KeyboardType']['value']),
                               '-option "grp:alt_shift_toggle"']
@@ -616,12 +673,14 @@ class system:
                 value = int(self.struct['power']['settings'
                             ]['hdd_standby']['value']) #* 12
 
-                #find system hdd
+                #find system and storage hdd
                 cmd_file = open(self.KERNEL_CMD, 'r')
                 cmd_args = cmd_file.read()
                 for param in cmd_args.split(' '):
                     if param.startswith('boot='):
                         sys_hdd = param.replace('boot=', '').split('=')[-1]                       
+                    if param.startswith('disk='):
+                        stor_hdd = param.replace('disk=', '').split('=')[-1]                       
                         
                 cmd_file.close()  
                 
@@ -629,6 +688,11 @@ class system:
                     sys_hdd_dev = sys_hdd.replace('/dev/', '')
                 else:
                     sys_hdd_dev = ""
+
+                if ('/dev/') in stor_hdd:
+                    stor_hdd_dev = stor_hdd.replace('/dev/', '')
+                else:
+                    stor_hdd_dev = ""
 
                 blkid = self.oe.execute('blkid', 1)
                 for volume in blkid.splitlines():
@@ -638,13 +702,19 @@ class system:
                        ('UUID="%s"' % sys_hdd) in volume:
                          
                         sys_hdd_dev = volume.split(':')[0].replace('/dev/', '')                     
+
+                    if ('LABEL="%s"' % stor_hdd) in volume or \
+                       ('LABEL=%s' % stor_hdd) in volume or \
+                       ('UUID="%s"' % stor_hdd) in volume:
+                         
+                        stor_hdd_dev = volume.split(':')[0].replace('/dev/', '')                     
                 
                 parameters = []
                 for device in glob.glob('/dev/sd?'):
 
                     device = device.replace('/dev/', '')
                     
-                    if not device in sys_hdd_dev:
+                    if not device in sys_hdd_dev and not device in stor_hdd_dev:
                       
                         parameters.append('-a %s' % device)
                         
@@ -725,6 +795,7 @@ class system:
                             'enter_function', 0)
 
             arrLayouts = []
+            arrVariants = {}
             arrTypes = []
 
             if os.path.exists(self.KEYBOARD_INFO):
@@ -743,13 +814,34 @@ class system:
                                     if hasattr(subnode_2.firstChild,
                                             'nodeValue'):
                                         value = \
-        subnode_2.firstChild.nodeValue
+                                          subnode_2.firstChild.nodeValue
                                 if subnode_2.nodeName == 'description':
                                     if hasattr(subnode_2.firstChild,
                                             'nodeValue'):
                                         arrLayouts.append(value + ':'
-            + subnode_2.firstChild.nodeValue)
-
+                                          + subnode_2.firstChild.nodeValue)
+                                        
+                        if subnode_1.nodeName == 'variantList':
+                            arrVariants[value] = [":"]
+                            for subnode_vl in subnode_1.childNodes:
+                                if subnode_vl.nodeName == 'variant':
+                                    for subnode_v in subnode_vl.childNodes:
+                                        if subnode_v.nodeName == 'configItem':
+                                            for subnode_ci in subnode_v.childNodes:
+                                                if subnode_ci.nodeName == 'name':
+                                                    if hasattr(subnode_ci.firstChild,
+                                                            'nodeValue'):
+                                                        vvalue = \
+                                                        subnode_ci.firstChild.nodeValue.replace(",", "")
+                                                if subnode_ci.nodeName == 'description':
+                                                    if hasattr(subnode_ci.firstChild,
+                                                            'nodeValue'):
+                                                        try:
+                                                            arrVariants[value].append(vvalue + ":" \
+                                                                + subnode_ci.firstChild.nodeValue.replace(",", ""))
+                                                        except:
+                                                            pass
+                
                 for xml_layout in xml_conf.getElementsByTagName('model'):
                     for subnode_1 in xml_layout.childNodes:
                         if subnode_1.nodeName == 'configItem':
@@ -786,7 +878,7 @@ class system:
             self.oe.dbg_log('system::get_keyboard_layouts',
                             'exit_function', 0)
 
-            return (arrLayouts, arrTypes)
+            return (arrLayouts, arrTypes, arrVariants)
         except Exception, e:
 
             self.oe.dbg_log('system::get_keyboard_layouts', 'ERROR: ('
@@ -928,6 +1020,8 @@ class system:
                                 + 'oe_update/*'):
                             os.rename(update_file, self.LOCAL_UPDATE_DIR
                                     + update_file.rsplit('/')[-1])
+
+                        subprocess.call('sync', shell=True, stdin=None, stdout=None, stderr=None)
 
                         if silent == False:
                             self.oe.winOeMain.close()
@@ -1305,8 +1399,6 @@ class updateThread(threading.Thread):
             self.oe.dbg_log('system::updateThread::stop()',
                             'exit_function', 0)    
             
-            del self.oe
-         
         except Exception, e:
 
             self.oe.dbg_log('system::updateThread::stop()', 'ERROR: ('
