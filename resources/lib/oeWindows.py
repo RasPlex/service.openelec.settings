@@ -1073,6 +1073,9 @@ class wizard(xbmcgui.WindowXMLDialog):
                             break
 
                 if self.is_last_wizard == True:
+                    xbmc.executebuiltin('XBMC.CalibrateVideo',True)
+                    xbmc.executebuiltin('XBMC.MyPlexLogin',True)
+                    xbmc.executebuiltin('XBMC.ControlGlobalCacher',True)
                     self.oe.write_setting('openelec', 'wizard_completed'
                             , 'True')
                     self.close()
