@@ -57,9 +57,11 @@ class mainWindow(xbmcgui.WindowXMLDialog):
             5: {'id': 1504, 'modul': '', 'action': ''},
             }
 
+        self.is_done = False
         self.isChild = False
         self.oe = kwargs['oeMain']
         self.lastGuiList = -1
+        self.end_state = 'calibrate'
 
         if 'isChild' in kwargs:
             self.isChild = True
@@ -1070,12 +1072,20 @@ class wizard(xbmcgui.WindowXMLDialog):
                             self.oe.write_setting(strModule,
                                     'wizard_completed', 'True')
                             self.is_last_wizard = False
+                            self.is_done = False
                             break
 
                 if self.is_last_wizard == True:
-                    xbmc.executebuiltin('XBMC.CalibrateVideo',True)
-                    xbmc.executebuiltin('XBMC.MyPlexLogin',True)
-                    xbmc.executebuiltin('XBMC.ControlGlobalCacher',True)
+                    if self.end_state == 'calibrate':
+                        self.oe.winOeMain.set_wizard_text("Screen calibrate?")
+                        self.oe.winOeMain.set_wizard_button_title("Calibrate.")
+                        self.oe.winOeMain.set_wizard_radiobutton_1("Do Calibrate.",
+                                self, 'start_calibrate', True)
+                        self.is_done = True
+
+                if self.is_done
+#                    xbmc.executebuiltin('XBMC.MyPlexLogin',True)
+#                    xbmc.executebuiltin('XBMC.ControlGlobalCacher',True)
                     self.oe.write_setting('openelec', 'wizard_completed'
                             , 'True')
                     self.close()
@@ -1086,6 +1096,10 @@ class wizard(xbmcgui.WindowXMLDialog):
 
             self.oe.dbg_log('oeWindows.wizard::onClick()', 'ERROR: ('
                             + repr(e) + ')')
+
+    def start_calibrate(self):
+        xbmc.executebuiltin('XBMC.CalibrateVideo',True)
+
 
     def onFocus(self, controlID):
         pass
