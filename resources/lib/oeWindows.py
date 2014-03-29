@@ -1083,7 +1083,7 @@ class wizard(xbmcgui.WindowXMLDialog):
                                 self, 'start_calibrate', True)
                         self.is_done = True
 
-                if self.is_done
+                if self.is_done:
 #                    xbmc.executebuiltin('XBMC.MyPlexLogin',True)
 #                    xbmc.executebuiltin('XBMC.ControlGlobalCacher',True)
                     self.oe.write_setting('openelec', 'wizard_completed'
