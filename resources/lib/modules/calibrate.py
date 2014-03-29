@@ -31,7 +31,7 @@ class calibrate:
 
     ENABLED = False
     
-    menu = {'99': {
+    menu = {'90': {
         'name': 32196,
         'menuLoader': 'menu_loader',
         'listTyp': 'other',
@@ -95,8 +95,7 @@ class calibrate:
             self.oe.winOeMain.set_wizard_title("Screen calibration title")
             self.oe.winOeMain.set_wizard_text("Screen calibrate?")
             self.oe.winOeMain.set_wizard_button_title("Calibrate.")
-            self.oe.winOeMain.set_wizard_radiobutton_1("Do Calibrate.",
-                    self, 'start_calibrate', True)
+            self.oe.winOeMain.set_wizard_button_1("Do Calibrate.", self, 'start_calibrate')
 
             self.oe.dbg_log('about::do_wizard', 'exit_function', 0)
         except Exception, e:
