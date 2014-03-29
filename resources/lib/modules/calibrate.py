@@ -92,8 +92,7 @@ class calibrate:
 
             self.oe.dbg_log('about::do_wizard', 'enter_function', 0)
 
-            self.oe.winOeMain.set_wizard_title(self.oe._(32317))
-            self.oe.winOeMain.set_wizard_text(self.oe._(32318))
+            self.oe.winOeMain.set_wizard_title("Screen calibration title")
             self.oe.winOeMain.set_wizard_text("Screen calibrate?")
             self.oe.winOeMain.set_wizard_button_title("Calibrate.")
             self.oe.winOeMain.set_wizard_radiobutton_1("Do Calibrate.",
