@@ -100,7 +100,6 @@ class myplex:
                                + '[CR][CR]' + "You can log into my plex at any time by going to: Preferences -> System -> myPlex -> Log in to myPlex."
                                )
 
-            self.oe.winOeMain.set_wizard_button_title("Login to Myplex.")
             self.oe.winOeMain.set_wizard_button_1("Login to MyPlex.", self, 'start_myplex')
 
             self.oe.dbg_log('myplex::do_wizard', 'exit_function', 4)

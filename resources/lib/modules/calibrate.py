@@ -101,7 +101,6 @@ class calibrate:
                                + '[CR][CR]' + "You can calibrate your screen at any time under: Preferences -> System -> Advanced -> Video Calibration..."
                                )
  
-            self.oe.winOeMain.set_wizard_button_title("Calibrate.")
             self.oe.winOeMain.set_wizard_button_1("Do Calibrate.", self, 'start_calibrate')
 
             self.oe.dbg_log('calibrate::do_wizard', 'exit_function', 4)

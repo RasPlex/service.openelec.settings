@@ -95,11 +95,9 @@ class precache:
             self.oe.winOeMain.set_wizard_title("Should we precache?")
             self.oe.winOeMain.set_wizard_text("Precaching your library will lead to dramatically better performance."
                                  + '[CR][CR]' + "This will take some time, but allows for much faster library browsing, as all images will already be stored locally."  
-                                 + '[CR][CR]' + "Precaching only needs to be done once per library, and is highly recommended on the first install. Remote library browsing benefits even more from precaching."  
-                                 + '[CR][CR]' + "For best results, reboot once it is complete."  
+                                 + '[CR][CR]' + "Precaching only needs to be done once per library, and is highly recommended on the first install. Remote library browsing benefits even more from precaching. You should reboot once precaching is complete for best performance."  
                                  + '[CR][CR]' + "You can precache at any time by going to: Preferences -> Control Precaching."  
                                  )
-            self.oe.winOeMain.set_wizard_button_title("Start precaching.")
             self.oe.winOeMain.set_wizard_button_1("Start precaching", self, 'start_precache')
 
             self.oe.dbg_log('precache::do_wizard', 'exit_function', 4)
