@@ -90,20 +90,20 @@ class calibrate:
     def do_wizard(self):
         try:
 
-            self.oe.dbg_log('about::do_wizard', 'enter_function', 0)
+            self.oe.dbg_log('myplex::do_wizard', 'enter_function', 4)
 
             self.oe.winOeMain.set_wizard_title("MyPlex title")
             self.oe.winOeMain.set_wizard_text("MyPlex?")
             self.oe.winOeMain.set_wizard_button_title("Myplex.")
             self.oe.winOeMain.set_wizard_button_1("Do myplex.", self, 'start_myplex')
 
-            self.oe.dbg_log('about::do_wizard', 'exit_function', 0)
+            self.oe.dbg_log('myplex::do_wizard', 'exit_function', 4)
         except Exception, e:
             self.oe.dbg_log('about::do_wizard', 'ERROR: (' + repr(e)
                             + ')')
 #                    xbmc.executebuiltin('XBMC.ControlGlobalCacher',True)
 
 
-    def start_calibrate(self):
+    def start_myplex(self):
         xbmc.executebuiltin('XBMC.MyPlexLogin',True)
 

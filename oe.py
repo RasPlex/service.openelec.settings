@@ -918,7 +918,7 @@ def load_modules():
                     dictModules[module_name] = \
                         getattr(__import__(module_name),
                                 module_name)(__oe__)
-                        
+                    dbg_log("MAIN","Added "+module_name)
                     if hasattr(defaults, module_name):
                         for key in getattr(defaults, module_name):
                             setattr(dictModules[module_name], 

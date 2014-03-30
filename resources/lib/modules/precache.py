@@ -90,14 +90,14 @@ class calibrate:
     def do_wizard(self):
         try:
 
-            self.oe.dbg_log('about::do_wizard', 'enter_function', 0)
+            self.oe.dbg_log('precache::do_wizard', 'enter_function', 4)
 
             self.oe.winOeMain.set_wizard_title("Precache title")
             self.oe.winOeMain.set_wizard_text("Precahce?")
             self.oe.winOeMain.set_wizard_button_title("precache.")
             self.oe.winOeMain.set_wizard_button_1("Do precache.", self, 'start_precache')
 
-            self.oe.dbg_log('about::do_wizard', 'exit_function', 0)
+            self.oe.dbg_log('precache::do_wizard', 'exit_function', 4)
         except Exception, e:
             self.oe.dbg_log('about::do_wizard', 'ERROR: (' + repr(e)
                             + ')')

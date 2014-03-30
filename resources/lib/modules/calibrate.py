@@ -90,14 +90,14 @@ class calibrate:
     def do_wizard(self):
         try:
 
-            self.oe.dbg_log('about::do_wizard', 'enter_function', 0)
+            self.oe.dbg_log('calibrate::do_wizard', 'enter_function', 4)
 
             self.oe.winOeMain.set_wizard_title("Screen calibration title")
             self.oe.winOeMain.set_wizard_text("Screen calibrate?")
             self.oe.winOeMain.set_wizard_button_title("Calibrate.")
             self.oe.winOeMain.set_wizard_button_1("Do Calibrate.", self, 'start_calibrate')
 
-            self.oe.dbg_log('about::do_wizard', 'exit_function', 0)
+            self.oe.dbg_log('calibrate::do_wizard', 'exit_function', 4)
         except Exception, e:
             self.oe.dbg_log('about::do_wizard', 'ERROR: (' + repr(e)
                             + ')')
