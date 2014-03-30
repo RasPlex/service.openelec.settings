@@ -27,7 +27,7 @@
 
 import xbmc
 
-class calibrate:
+class myplex:
 
     ENABLED = False
     

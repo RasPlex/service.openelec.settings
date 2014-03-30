@@ -1044,7 +1044,7 @@ class wizard(xbmcgui.WindowXML):
                 for strModule in sorted(self.oe.dictModules,
                         key=lambda x: \
                         self.oe.dictModules[x].menu.keys()):
-                    dbg_log("Running wizard for "+strModule)
+                    self.oe.dbg_log("Running wizard for "+strModule)
                     if hasattr(self.oe.dictModules[strModule],
                                'do_wizard'):
                         if strModule == self.last_wizard:
