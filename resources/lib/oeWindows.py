@@ -730,7 +730,7 @@ class contextWindow(xbmcgui.WindowXMLDialog):
         pass
 
 
-class wizard(xbmcgui.WindowXMLDialog):
+class wizard(xbmcgui.WindowXML):
 
     def __init__(self, *args, **kwargs):
 
