@@ -825,7 +825,7 @@ msgid "Welcome"
 msgstr ""
 
 msgctxt "#32302"
-msgid "This wizard will guide you through the process of setting up your new [COLOR FFFF1C77]Ras[/COLOR][COLOR FFFF9522]Plex[/COLOR] installation - setting your location, timezone and connecting you to the internet.[CR][CR]These settings can be changed later by navigating to Preferences > [COLOR FFFF1C77]Ras[/COLOR][COLOR FFFF9522]Plex[/COLOR] Settings.[CR][CR]To begin your [COLOR FFFF1C77]Ras[/COLOR][COLOR FFFF9522]Plex[/COLOR] experience, select your regional settings and your keyboard layout, then click Next."
+msgid "This wizard will guide you through the process of setting up your new [COLOR FFFF1C77]Ras[/COLOR][COLOR FFFF9522]Plex[/COLOR] installation - connecting you to the internet, calibrating your screen, connecting you with MyPlex and starting precaching.[CR][CR]Most of these settings can be changed later by navigating to Preferences > [COLOR FFFF1C77]Ras[/COLOR][COLOR FFFF9522]Plex[/COLOR] Settings.[CR][CR]To begin your [COLOR FFFF1C77]Ras[/COLOR][COLOR FFFF9522]Plex[/COLOR] experience, select your regional settings and your keyboard layout, then click Next."
 msgstr ""
 
 msgctxt "#32303"

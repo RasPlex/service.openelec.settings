@@ -97,7 +97,7 @@ class myplex:
                                + '[CR][CR]' + "MyPlex is a free, feature rich service provided by Plex. PlexPass is not required to use MyPlex."
                                + '[CR][CR]' + "While MyPlex is not required, it is highly recommended and has been known solve problems to make it much easier to detect local media servers, and work with iPhone and Android Plex apps."  
                                + '[CR][CR]' + "MyPlex also lets you connect to remote media servers that have been shared with you."  
-                               + '[CR][CR]' + "You can log into my plex at any time by going to: Preferences -> System -> myPlex -> Log in to myPlex."
+                               + '[CR][CR]' + "You can log into my plex at any time by going to: Preferences -> System -> Plex -> Sign in to Plex."
                                )
 
             self.oe.winOeMain.set_wizard_button_1("Login to MyPlex.", self, 'start_myplex')
