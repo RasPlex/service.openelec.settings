@@ -763,34 +763,39 @@ class wizard(xbmcgui.WindowXML):
 
         self.wizards = []
         self.last_wizard = None
+        self.did_init =False
 
     def onInit(self):
         try:
 
-            self.oe.dictModules['system'].do_init()
+            if not self.did_init:
+                self.oe.dictModules['system'].do_init()
 
-            self.getControl(self.wizWinTitle).setLabel(self.oe._(32300).encode('utf-8'))
-            self.getControl(self.buttons[3]['id']).setVisible(False)
-            self.getControl(self.buttons[4]['id']).setVisible(False)
-            self.getControl(self.radiobuttons[1]['id'
-                            ]).setVisible(False)
-            self.getControl(self.radiobuttons[2]['id'
-                            ]).setVisible(False)
+                self.getControl(self.wizWinTitle).setLabel(self.oe._(32300).encode('utf-8'))
+                self.getControl(self.buttons[3]['id']).setVisible(False)
+                self.getControl(self.buttons[4]['id']).setVisible(False)
+                self.getControl(self.radiobuttons[1]['id'
+                                ]).setVisible(False)
+                self.getControl(self.radiobuttons[2]['id'
+                                ]).setVisible(False)
 
-            self.set_wizard_title(self.oe._(32301).encode('utf-8'))
-            self.set_wizard_text(self.oe._(32302).encode('utf-8'))
-            self.set_wizard_button_title(self.oe._(32307).encode('utf-8'))
-            self.set_wizard_button_1(self.get_current_language(), self,
-                    'select_language')
+                self.set_wizard_title(self.oe._(32301).encode('utf-8'))
+                self.set_wizard_text(self.oe._(32302).encode('utf-8'))
+                self.set_wizard_button_title(self.oe._(32307).encode('utf-8'))
+                self.set_wizard_button_1(self.get_current_language(), self,
+                        'select_language')
 
-            if self.oe.dictModules['system'].keyboard_layouts == True:
-                self.set_wizard_button_2(self.oe._(32310).encode('utf-8')
-                        + self.get_keyboard_layout(), self,
-                        'select_keyboard')
+                if self.oe.dictModules['system'].keyboard_layouts == True:
+                    self.set_wizard_button_2(self.oe._(32310).encode('utf-8')
+                            + self.get_keyboard_layout(), self,
+                            'select_keyboard')
 
-            self.showButton(1, 32303)
+                self.showButton(1, 32303)
 
-            self.setFocusId(self.buttons[1]['id'])
+                self.setFocusId(self.buttons[1]['id'])
+                self.did_init = True
+            else:
+                self.onClick(1500)
         except Exception, e:
 
             self.oe.dbg_log('oeWindows.wizard::onInit()', 'ERROR: ('
