@@ -92,10 +92,16 @@ class myplex:
 
             self.oe.dbg_log('myplex::do_wizard', 'enter_function', 4)
 
-            self.oe.winOeMain.set_wizard_title("MyPlex title")
-            self.oe.winOeMain.set_wizard_text("MyPlex?")
-            self.oe.winOeMain.set_wizard_button_title("Myplex.")
-            self.oe.winOeMain.set_wizard_button_1("Do myplex.", self, 'start_myplex')
+            self.oe.winOeMain.set_wizard_title("Login to MyPlex?")
+            self.oe.winOeMain.set_wizard_text("Logging in to MyPlex connects you with your MyPlex account."
+                               + '[CR][CR]' + "MyPlex is a free, feature rich service provided by Plex. PlexPass is not required to use MyPlex."
+                               + '[CR][CR]' + "While MyPlex is not required, it is highly recommended and has been known solve problems to make it much easier to detect local media servers, and work with iPhone and Android Plex apps."  
+                               + '[CR][CR]' + "MyPlex also lets you connect to remote media servers that have been shared with you."  
+                               + '[CR][CR]' + "You can log into my plex at any time by going to: Preferences -> System -> myPlex -> Log in to myPlex."
+                               )
+
+            self.oe.winOeMain.set_wizard_button_title("Login to Myplex.")
+            self.oe.winOeMain.set_wizard_button_1("Login to MyPlex.", self, 'start_myplex')
 
             self.oe.dbg_log('myplex::do_wizard', 'exit_function', 4)
         except Exception, e:

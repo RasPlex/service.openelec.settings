@@ -92,8 +92,15 @@ class calibrate:
 
             self.oe.dbg_log('calibrate::do_wizard', 'enter_function', 4)
 
-            self.oe.winOeMain.set_wizard_title("Screen calibration title")
-            self.oe.winOeMain.set_wizard_text("Screen calibrate?")
+            self.oe.winOeMain.set_wizard_title("Calibrate screen?")
+            self.oe.winOeMain.set_wizard_text("Calibrating your screen will ensure that [COLOR FFFF1C77]Ras[/COLOR][COLOR FFFF9522]Plex[/COLOR] is displayed at the proper size."
+                               + '[CR][CR]' + "It is a quick process that involves you lining up the calibration arrows with the corners of your screen."
+                               + '[CR][CR]' + "Once calibration is finished, hit the back or escape to continue with the setup wizard."
+                               + '[CR][CR]' + "While [COLOR FFFF1C77]Ras[/COLOR][COLOR FFFF9522]Plex[/COLOR] tries its best to correctly detect your screen size, it is quite difficult to do perfectly in every case. If you have severe calibration or overscan issues, please report them as bugs with as much detail (and screenshots) as possible."
+                               + '[CR][CR]' + "Screen calibration is highly recommended, and only needs to be done once."
+                               + '[CR][CR]' + "You can calibrate your screen at any time under: Preferences -> System -> Advanced -> Video Calibration..."
+                               )
+ 
             self.oe.winOeMain.set_wizard_button_title("Calibrate.")
             self.oe.winOeMain.set_wizard_button_1("Do Calibrate.", self, 'start_calibrate')
 
