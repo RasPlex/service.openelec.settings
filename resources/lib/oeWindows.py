@@ -33,7 +33,7 @@ from xml.dom import minidom
 from threading import Thread
 
 
-class mainWindow(xbmcgui.WindowXML):
+class mainWindow(xbmcgui.WindowXMLDialog):
 
     def __init__(self, *args, **kwargs):
 
