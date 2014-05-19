@@ -110,5 +110,5 @@ class calibrate:
 
 
     def start_calibrate(self):
-        xbmc.executebuiltin('XBMC.CalibrateVideo',True)
+        xbmc.executebuiltin('XBMC.ActivateWindow(10011)',True)
 

@@ -110,5 +110,5 @@ class myplex:
 
 
     def start_myplex(self):
-        xbmc.executebuiltin('XBMC.MyPlexLogin',True)
+        xbmc.executebuiltin('XBMC.ActivateWindow(10203)',True)
 

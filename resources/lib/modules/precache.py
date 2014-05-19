@@ -109,5 +109,5 @@ class precache:
     def start_precache(self):
         
         self.oe.winOeMain.set_wizard_text("")
-        xbmc.executebuiltin('XBMC.ControlGlobalCacher',True)
+        xbmc.executebuiltin('XBMC.ActivateWindow(10208)',True)
 
