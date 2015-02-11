@@ -41,51 +41,67 @@ class calibrate:
     def __init__(self, oeMain):
         try:
 
-            oeMain.dbg_log('about::__init__', 'enter_function', 0)
+            oeMain.dbg_log('calibrate::__init__', 'enter_function', 0)
 
             self.oe = oeMain
             self.controls = {}
 
-            self.oe.dbg_log('about::__init__', 'exit_function', 0)
+            self.oe.dbg_log('calibrate::__init__', 'exit_function', 0)
         except Exception, e:
-            self.oe.dbg_log('about::__init__', 'ERROR: (' + repr(e)
+            self.oe.dbg_log('calibrate::__init__', 'ERROR: (' + repr(e)
                             + ')')
 
     def menu_loader(self, menuItem):
         try:
 
-            self.oe.dbg_log('about::menu_loader', 'enter_function', 0)
+            self.oe.dbg_log('calibrate::menu_loader', 'enter_function', 0)
 
             if len(self.controls) == 0:
                 self.init_controls()
 
-            self.oe.dbg_log('about::menu_loader', 'exit_function', 0)
+            self.oe.dbg_log('calibrate::menu_loader', 'exit_function', 0)
         except Exception, e:
-            self.oe.dbg_log('about::menu_loader', 'ERROR: (' + repr(e)
+            self.oe.dbg_log('calibrate::menu_loader', 'ERROR: (' + repr(e)
                             + ')', 4)
 
     def exit_addon(self):
         try:
 
-            self.oe.dbg_log('about::exit_addon', 'enter_function', 0)
+            self.oe.dbg_log('calibrate::exit_addon', 'enter_function', 0)
 
             self.oe.winOeMain.close()
 
-            self.oe.dbg_log('about::exit_addon', 'exit_function', 0)
+            self.oe.dbg_log('calibrate::exit_addon', 'exit_function', 0)
         except Exception, e:
-            self.oe.dbg_log('about::exit_addon', 'ERROR: (' + repr(e)
+            self.oe.dbg_log('calibrate::exit_addon', 'ERROR: (' + repr(e)
                             + ')')
 
     def init_controls(self):
         try:
 
-            self.oe.dbg_log('about::init_controls', 'enter_function', 0)
+            self.oe.dbg_log('calibrate::init_controls', 'enter_function', 0)
 
-            self.oe.dbg_log('about::init_controls', 'exit_function', 0)
+            self.oe.dbg_log('calibrate::init_controls', 'exit_function', 0)
         except Exception, e:
-            self.oe.dbg_log('about::init_controls', 'ERROR: ('
+            self.oe.dbg_log('calibrate::init_controls', 'ERROR: ('
                             + repr(e) + ')')
 
+    def exit(self):
+        try:
+
+            self.oe.dbg_log('calibrate::exit', 'enter_function', 0)
+
+            for control in self.controls:
+                try:
+                    self.oe.winOeMain.removeControl(self.controls[control])
+                except:
+                    pass
+
+            self.controls = {}
+
+            self.oe.dbg_log('calibrate::exit', 'exit_function', 0)
+        except Exception, e:
+            self.oe.dbg_log('calibrate::exit', 'ERROR: (' + repr(e) + ')')
 
     def do_wizard(self):
         try:
@@ -98,16 +114,13 @@ class calibrate:
                                + '[CR][CR]' + "Screen calibration is highly recommended, and only needs to be done once."
                                + '[CR][CR]' + "You can calibrate your screen at any time under: Preferences -> System -> Advanced -> Video Calibration..."
                                )
- 
+
             self.oe.winOeMain.set_wizard_button_1("Do Calibrate.", self, 'start_calibrate')
 
             self.oe.dbg_log('calibrate::do_wizard', 'exit_function', 4)
         except Exception, e:
-            self.oe.dbg_log('about::do_wizard', 'ERROR: (' + repr(e)
+            self.oe.dbg_log('calibrate::do_wizard', 'ERROR: (' + repr(e)
                             + ')')
-#                    xbmc.executebuiltin('XBMC.MyPlexLogin',True)
-#                    xbmc.executebuiltin('XBMC.ControlGlobalCacher',True)
-
 
     def start_calibrate(self):
         xbmc.executebuiltin('XBMC.ActivateWindow(10011)',True)
