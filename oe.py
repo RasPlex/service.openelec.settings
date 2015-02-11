@@ -108,16 +108,14 @@ sys.setdefaultencoding(encoding)
 
 import oeWindows
 
-winOeMain = oeWindows.mainWindow('mainWindow.xml', __cwd__, 'Default', oeMain=__oe__)
-
 xbmc.log('## RasPlex Addon ## ' + unicode(__addon__.getAddonInfo('version')))
 
 def _(code):
     return __addon__.getLocalizedString(code)
 
 def dbg_log(source, text, level=4):
-#    if os.environ.get('DEBUG', 'no') == 'no':
-#        return
+    if os.environ.get('DEBUG', 'no') == 'no':
+        return
 
     xbmc.log('## RasPlex Addon ## ' + source + ' ## ' + text, level)
     xbmc.log(traceback.format_exc())
@@ -241,14 +239,11 @@ def get_service_option(service, option, default=None):
 
         lines = []        
         conf_file_name = ''
-        
-        if not SYSTEMD:
+
+        if os.path.exists('%s/services/%s.conf' % (CONFIG_CACHE, service)):
             conf_file_name = '%s/services/%s.conf' % (CONFIG_CACHE, service)
-        else:
-            if os.path.exists('%s/services/%s.conf' % (CONFIG_CACHE, service)):
-                conf_file_name = '%s/services/%s.conf' % (CONFIG_CACHE, service)
-            if os.path.exists('%s/services/%s.disabled' % (CONFIG_CACHE, service)):
-                conf_file_name = '%s/services/%s.disabled' % (CONFIG_CACHE, service)
+        if os.path.exists('%s/services/%s.disabled' % (CONFIG_CACHE, service)):
+            conf_file_name = '%s/services/%s.disabled' % (CONFIG_CACHE, service)
                 
         if os.path.exists(conf_file_name):
             with open(conf_file_name, "r") as conf_file:
@@ -629,10 +624,7 @@ def start_service():
                                 dictModules[x].menu.keys()):
             if hasattr(dictModules[strModule], 'start_service'):
                 dictModules[strModule].start_service()
-                
-        if read_setting('openelec', 'wizard_completed') == None:
-            openWizard()
- 
+
         __oe__.is_service = False
     except Exception, e:
 
@@ -648,8 +640,6 @@ def stop_service():
         for strModule in dictModules:
             if hasattr(dictModules[strModule], 'stop_service'):
                 dictModules[strModule].stop_service()
-
-        exit()
 
         xbmc.log('## RasPlex Addon ## STOP SERVICE DONE !')
     except Exception, e:
@@ -918,7 +908,7 @@ def load_modules():
                     dictModules[module_name] = \
                         getattr(__import__(module_name),
                                 module_name)(__oe__)
-                    dbg_log("MAIN","Added "+module_name)
+                        
                     if hasattr(defaults, module_name):
                         for key in getattr(defaults, module_name):
                             setattr(dictModules[module_name], 
@@ -1022,31 +1012,67 @@ def fixed_writexml(
     else:
         writer.write('/>%s' % newl)
 
+def parse_os_release():
+    os_release_fields = re.compile(r'(?!#)(?P<key>.+)=(?P<quote>[\'\"]?)(?P<value>.+)(?P=quote)$')
+    os_release_unescape = re.compile(r'\\(?P<escaped>[\'\"\\])')
+    try:
+        with open('/etc/os-release') as f:
+            info = {}
+            for line in f:
+                m = re.match(os_release_fields, line)
+                if m is not None:
+                    key = m.group('key')
+                    value = re.sub(os_release_unescape, r'\g<escaped>', m.group('value'))
+                    info[key] = value
+            return info
+    except OSError:
+        return None
 
+def get_os_release():
+    distribution = version = architecture = build = ''
+    os_release_info = parse_os_release()
+    if os_release_info is not None:
+        if 'NAME' in os_release_info:
+            distribution = os_release_info['NAME']
+        if 'VERSION_ID' in os_release_info:
+            version = os_release_info['VERSION_ID']
+        if 'VERSION' in os_release_info:
+            version = os_release_info['VERSION']
+        if 'OPENELEC_ARCH' in os_release_info:
+            architecture = os_release_info['OPENELEC_ARCH']
+        if 'OPENELEC_BUILD' in os_release_info:
+            build = os_release_info['OPENELEC_BUILD']
+        return (
+            distribution,
+            version,
+            architecture,
+            build,
+            )
+            
 minidom.Element.writexml = fixed_writexml
 
 ############################################################################################
 # Base Environment
 ############################################################################################
-DISTRIBUTION   = load_file('/etc/distribution')
-ARCHITECTURE   = load_file('/etc/arch')
-VERSION        = load_file('/etc/version')    
-BUILD          = load_file('/etc/build')
+os_release_data = get_os_release()
+DISTRIBUTION = os_release_data[0]
+VERSION = os_release_data[1]
+ARCHITECTURE = os_release_data[2]
+BUILD = os_release_data[3]
+
 DOWNLOAD_DIR   = "/storage/downloads"
 XBMC_USER_HOME = os.environ.get('XBMC_USER_HOME', '/storage/.plexht')
 CONFIG_CACHE   = os.environ.get('CONFIG_CACHE', '/storage/.cache')
 USER_CONFIG    = os.environ.get('USER_CONFIG', '/storage/.config')
 TEMP           = '%s/temp/' % XBMC_USER_HOME
 
+winOeMain = oeWindows.mainWindow('mainWindow.xml', __cwd__, 'Default', oeMain=__oe__)
+
 if os.path.exists('/etc/machine-id'):
     SYSTEMID = load_file('/etc/machine-id')
 else:
     SYSTEMID = os.environ.get('SYSTEMID', '')
     
-if os.path.exists('/lib/systemd/systemd'):
-    SYSTEMD = True
-else:
-    SYSTEMD = False
 ############################################################################################
 
 try:
@@ -1058,8 +1084,3 @@ try:
 
 except:
     pass
-
-if read_setting('openelec', 'wizard_completed') == None:
-    winOeMain = oeWindows.wizard('wizard.xml', __cwd__, 'Default',
-                                 oeMain=__oe__)
-

@@ -286,7 +286,11 @@ msgctxt "#754"
 msgid "Configure the 2nd keyboard software Variant"
 msgstr ""
 
-#empty strings from id 753 to 31999
+msgctxt "#755"
+msgid "Auto share external drives / partitions"
+msgstr ""
+
+#empty strings from id 756 to 31999
 
 msgctxt "#32000"
 msgid "Network"
@@ -814,7 +818,11 @@ msgctxt "#32215"
 msgid "Invalid Email Address"
 msgstr ""
 
-#empty strings from id 32216 to 32299
+msgctxt "#32216"
+msgid "Auto-Share External Drives"
+msgstr ""
+
+#empty strings from id 32217 to 32299
 
 msgctxt "#32300"
 msgid "Welcome to [COLOR FFFF1C77]Ras[/COLOR][COLOR FFFF9522]Plex[/COLOR]"
@@ -991,7 +999,7 @@ msgid "Enter the following Key on your Device."
 msgstr ""
 
 msgctxt "#32344"
-msgid "Disable Bluetooth"
+msgid "Enable Bluetooth"
 msgstr ""
 
 msgctxt "#32345"
@@ -1173,5 +1181,9 @@ msgid "Disable Standby"
 msgstr ""
 
 msgctxt "#32390"
-msgid "Settings addon is not yet ready, please again later."
+msgid "Settings addon is not yet ready, please try again later."
+msgstr ""
+
+msgctxt "#32391"
+msgid "Enable LCD Driver Support"
 msgstr ""

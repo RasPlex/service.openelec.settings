@@ -60,7 +60,8 @@ class mainWindow(xbmcgui.WindowXMLDialog):
         self.isChild = False
         self.oe = kwargs['oeMain']
         self.lastGuiList = -1
-
+        self.lastListType = -1
+              
         if 'isChild' in kwargs:
             self.isChild = True
 
@@ -79,6 +80,16 @@ class mainWindow(xbmcgui.WindowXMLDialog):
 
             self.oe.set_busy(1)
 
+            self.setProperty('arch', self.oe.ARCHITECTURE)
+            self.setProperty('distri', self.oe.DISTRIBUTION)
+            self.setProperty('version', self.oe.VERSION)
+            self.setProperty('build', self.oe.BUILD)
+          
+            self.setProperty('DIST_MEDIA', 'default')
+            
+            if os.path.exists(self.oe.__media__ + self.oe.DISTRIBUTION):
+                self.setProperty('DIST_MEDIA', self.oe.DISTRIBUTION)
+                
             self.oe.winOeMain = self
 
             for strModule in sorted(self.oe.dictModules, key=lambda x: \
@@ -163,13 +174,20 @@ class mainWindow(xbmcgui.WindowXMLDialog):
         
         try:
 
+            self.getControl(1100).reset()
+            
+            m_menu = []
+            
             for category in sorted(struct, key=lambda x: struct[x]['order']):
 
                 if not 'hidden' in struct[category]:
-                        
+                    
                     if fltr == []:
-                        self.addConfigItem(self.oe._(struct[category]['name'
-                                ]), {'typ': 'separator'}, 1100)
+                        m_entry = {}
+                        m_entry["name"] = self.oe._(struct[category]['name'])
+                        m_entry["properties"] = {'typ': 'separator'}
+                        m_entry["list"] = 1100
+                        m_menu.append(m_entry)                        
 
                     else:
                         if category not in fltr:
@@ -207,12 +225,16 @@ class mainWindow(xbmcgui.WindowXMLDialog):
                                 name = setting['name']
                             else:
                                 name = self.oe._(setting['name'])
-                                
+                            
+                            m_entry = {}
+                            
                             if not 'parent' in setting:
 
-                                self.addConfigItem(name, 
-                                        dictProperties,
-                                        1100)
+                                m_entry["name"] = name
+                                m_entry["properties"] = dictProperties
+                                m_entry["list"] = 1100
+                                m_menu.append(m_entry)
+                                
                             else:
 
                                 if struct[category]['settings'
@@ -221,10 +243,16 @@ class mainWindow(xbmcgui.WindowXMLDialog):
 
                                     if not 'optional' in setting or \
                                         ('optional' in setting and optional != '0'):
-                                        self.addConfigItem(name,
-                                                dictProperties,
-                                                1100)
+                                        m_entry["name"] = name
+                                        m_entry["properties"] = dictProperties
+                                        m_entry["list"] = 1100
+                                        m_menu.append(m_entry)
 
+            for m_entry in m_menu:
+                self.addConfigItem(m_entry["name"],
+                            m_entry["properties"],
+                            m_entry["list"])
+            
         except Exception, e:
 
             self.oe.dbg_log('oeWindows.mainWindow::build_menu', 'ERROR: (' + repr(e) + ')')
@@ -523,6 +551,19 @@ class mainWindow(xbmcgui.WindowXMLDialog):
                                  
                 if lastMenu != self.lastMenu:
 
+                    if self.lastListType == int(selectedMenuItem.getProperty('listTyp')):
+                        self.getControl(int(selectedMenuItem.getProperty('listTyp'))).setAnimations( \
+                            [('conditional', 'effect=fade start=100 end=0 time=100 condition=True')])
+                        
+                    self.getControl(1100).setAnimations( \
+                        [('conditional', 'effect=fade start=0 end=0 time=1 condition=True')])
+                    self.getControl(1200).setAnimations( \
+                        [('conditional', 'effect=fade start=0 end=0 time=1 condition=True')])
+                    self.getControl(1300).setAnimations( \
+                        [('conditional', 'effect=fade start=0 end=0 time=1 condition=True')])
+                    self.getControl(1900).setAnimations( \
+                        [('conditional', 'effect=fade start=0 end=0 time=1 condition=True')])
+                                        
                     self.lastModul = selectedMenuItem.getProperty('Modul')
                 
                     self.lastMenu = lastMenu
@@ -533,8 +574,6 @@ class mainWindow(xbmcgui.WindowXMLDialog):
 
                     strMenuLoader = \
                         selectedMenuItem.getProperty('menuLoader')
-
-                    self.getControl(self.guiList).reset()
 
                     if int(selectedMenuItem.getProperty('listTyp')) \
                         == self.guiOther:
@@ -551,6 +590,10 @@ class mainWindow(xbmcgui.WindowXMLDialog):
                                    )], strMenuLoader):
                             getattr(self.oe.dictModules[selectedMenuItem.getProperty('modul'
                                     )], strMenuLoader)(selectedMenuItem)
+                            
+                    self.getControl(int(selectedMenuItem.getProperty('listTyp'))).setAnimations( \
+                        [('conditional', 'effect=fade start=0 end=100 time=100 condition=true')])
+
         except Exception, e:
 
             self.oe.dbg_log('oeWindows.mainWindow::onFocus('
@@ -574,6 +617,17 @@ class selectWindow(xbmcgui.WindowXMLDialog):
 
     def __init__(self, *args, **kwargs):
         self.oe = kwargs['oeMain']
+    
+        self.setProperty('arch', self.oe.ARCHITECTURE)
+        self.setProperty('distri', self.oe.DISTRIBUTION)
+        self.setProperty('version', self.oe.VERSION)
+        self.setProperty('build', self.oe.BUILD)
+      
+        self.setProperty('DIST_MEDIA', 'default')
+        
+        if os.path.exists(self.oe.__media__ + self.oe.DISTRIBUTION):
+            self.setProperty('DIST_MEDIA', self.oe.DISTRIBUTION)
+              
         pass
 
     def onInit(self):
@@ -667,6 +721,16 @@ class contextWindow(xbmcgui.WindowXMLDialog):
             self.oe.dbg_log('oeWindows.contextWindow.onInit',
                             'enter_function', 0)
 
+            self.setProperty('arch', self.oe.ARCHITECTURE)
+            self.setProperty('distri', self.oe.DISTRIBUTION)
+            self.setProperty('version', self.oe.VERSION)
+            self.setProperty('build', self.oe.BUILD)
+          
+            self.setProperty('DIST_MEDIA', 'default')
+            
+            if os.path.exists(self.oe.__media__ + self.oe.DISTRIBUTION):
+                self.setProperty('DIST_MEDIA', self.oe.DISTRIBUTION)
+                
             self.result = ''
             self.count = len(self.options)
 
@@ -744,9 +808,9 @@ class wizard(xbmcgui.WindowXML):
         self.wizWinTitle = 32300
 
         self.oe = kwargs['oeMain']
-        
+              
         self.guisettings = '%s/userdata/guisettings.xml'  % self.oe.XBMC_USER_HOME
-        self.languages_dir = '/usr/share/xbmc/language/'
+        self.languages_dir = '/usr/share/XBMC/language/'
 
         self.buttons = {
             1: {'id': 1500, 'modul': '', 'action': ''},
@@ -763,11 +827,21 @@ class wizard(xbmcgui.WindowXML):
 
         self.wizards = []
         self.last_wizard = None
-        self.did_init =False
+        self.did_init = False
 
     def onInit(self):
         try:
 
+            self.setProperty('arch', self.oe.ARCHITECTURE)
+            self.setProperty('distri', self.oe.DISTRIBUTION)
+            self.setProperty('version', self.oe.VERSION)
+            self.setProperty('build', self.oe.BUILD)
+          
+            self.setProperty('DIST_MEDIA', 'default')
+            
+            if os.path.exists(self.oe.__media__ + self.oe.DISTRIBUTION):
+                self.setProperty('DIST_MEDIA', self.oe.DISTRIBUTION)
+                
             if not self.did_init:
                 self.oe.dictModules['system'].do_init()
 
@@ -1044,7 +1118,6 @@ class wizard(xbmcgui.WindowXML):
                 for strModule in sorted(self.oe.dictModules,
                         key=lambda x: \
                         self.oe.dictModules[x].menu.keys()):
-                    self.oe.dbg_log("oeWindow:onClick", "Running wizard for "+strModule)
                     if hasattr(self.oe.dictModules[strModule],
                                'do_wizard'):
                         if strModule == self.last_wizard:
@@ -1059,11 +1132,6 @@ class wizard(xbmcgui.WindowXML):
                                 'wizard_completed') == None \
                             and strModule not in self.wizards:
                             self.last_wizard = strModule
-
-                            if hasattr(self.oe.dictModules[strModule],
-                                    'start_service'):
-                                self.oe.dictModules[strModule].is_wizard = \
-                                    True
                                 
                             if hasattr(self.oe.dictModules[strModule],
                                     'do_init'):

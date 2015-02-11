@@ -28,319 +28,12 @@ import os
 import xbmc
 import time
 import dbus
+import dbus.service
 import uuid
 import xbmcgui
 import threading
 import oeWindows
 import ConfigParser
-
-####################################################################
-## Network Mount 
-####################################################################
-class networkMount(object):
-
-    def __init__(self, mount_id, oeMain):
-        try:
-
-            oeMain.dbg_log('networkMount::__init__', 'enter_function',
-                           0)
-
-            oeMain.set_busy(1)
-
-            self.struct = {'mount': {
-                'order': 1,
-                'name': 32350,
-                'menuLoader': 'menu_network_configuration',
-                'settings': {
-                    'type': {
-                        'order': 1,
-                        'name': 32351,
-                        'value': '',
-                        'type': 'multivalue',
-                        'values': ['cifs', 'nfs'],
-                        'action': 'set_value'
-                        },
-                    'mountpoint': {
-                        'order': 2,
-                        'name': 32352,
-                        'value': '',
-                        'type': 'text',
-                        'parent': {'entry': 'type', 'value': ['cifs',
-                                   'nfs']},
-                        'action': 'set_value'
-                        },
-                    'server': {
-                        'order': 3,
-                        'name': 32353,
-                        'value': '',
-                        'type': 'text',
-                        'parent': {'entry': 'type', 'value': ['cifs',
-                                   'nfs']},
-                        'action': 'set_value'
-                        },
-                    'share': {
-                        'order': 4,
-                        'name': 32354,
-                        'value': '',
-                        'type': 'text',
-                        'parent': {'entry': 'type', 'value': ['cifs',
-                                   'nfs']},
-                        'action': 'set_value'
-                        },
-                    'user': {
-                        'order': 5,
-                        'name': 32355,
-                        'value': '',
-                        'type': 'text',
-                        'parent': {'entry': 'type', 'value': ['cifs',
-                                   'nfs']},
-                        'action': 'set_value'
-                        },
-                    'pass': {
-                        'order': 6,
-                        'name': 32356,
-                        'value': '',
-                        'type': 'text',
-                        'parent': {'entry': 'type', 'value': ['cifs',
-                                   'nfs']},
-                        'action': 'set_value'
-                        },
-                    'options': {
-                        'order': 7,
-                        'name': 32357,
-                        'value': '',
-                        'type': 'text',
-                        'parent': {'entry': 'type', 'value': ['cifs',
-                                   'nfs']},
-                        'action': 'set_value'
-                        },
-                    },
-                }}
-
-            self.oe = oeMain
-            self.winOeMount = oeWindows.mainWindow('mainWindow.xml',
-                    self.oe.__cwd__, 'Default', oeMain=oeMain,
-                    isChild=True)
-            self.mount_id = mount_id
-            self.oe.dictModules['networkMount'] = self
-            self.winOeMount.show()
-            self.current_mountpoint = None
-
-            if self.mount_id != 'new_mount':
-
-                mount_dict = self.oe.read_node('mounts')
-                if self.mount_id in mount_dict['mounts']:
-                    for entry in self.struct['mount']['settings']:
-                        self.struct['mount']['settings'][entry]['value'
-                                ] = mount_dict['mounts'
-                                ][self.mount_id][entry]
-
-                    self.current_mountpoint = mount_dict['mounts'
-                            ][self.mount_id]['mountpoint']
-
-            for strEntry in sorted(self.struct, key=lambda x: \
-                                   self.struct[x]['order']):
-
-                dictProperties = {
-                    'modul': 'networkMount',
-                    'listTyp': self.oe.listObject['list'],
-                    'menuLoader': 'menu_loader',
-                    'category': strEntry,
-                    }
-
-                self.winOeMount.addMenuItem(self.struct[strEntry]['name'
-                        ], dictProperties)
-
-            self.oe.set_busy(0)
-
-            self.winOeMount.doModal()
-
-            del self.winOeMount
-            del self.oe.dictModules['networkMount']
-
-            oeMain.dbg_log('networkMount::__init__', 'exit_function', 0)
-        except Exception, e:
-            self.oe.set_busy(0)
-            self.oe.dbg_log('networkMount::__init__', 'ERROR: ('
-                            + repr(e) + ')', 4)
-
-    def menu_loader(self, menuItem):
-        try:
-
-            self.oe.dbg_log('networkMount::menu_loader',
-                            'enter_function', 0)
-
-            self.winOeMount.showButton(3, 32140, 'networkMount',
-                    'save_mount')
-
-            if self.mount_id != 'new_mount':
-                self.winOeMount.showButton(2, 32141, 'networkMount',
-                        'delete_mount')
-
-            self.winOeMount.build_menu(self.struct)
-            
-            self.oe.dbg_log('networkMount::menu_loader', 'exit_function'
-                            , 0)
-        except Exception, e:
-            self.oe.dbg_log('networkMount::menu_loader', 'ERROR: ('
-                            + repr(e) + ')', 4)
-
-    def set_value(self, listItem):
-        try:
-
-            self.oe.dbg_log('networkMount::set_value', 'enter_function'
-                            , 0)
-
-            if listItem.getProperty('entry') == 'mountpoint':
-                s = listItem.getProperty('value')
-                listItem.setProperty('value', ''.join(x for x in s
-                        if x.isalnum()))
-
-            self.struct[listItem.getProperty('category')]['settings'
-                    ][listItem.getProperty('entry')]['value'] = \
-                listItem.getProperty('value')
-
-            self.struct[listItem.getProperty('category')]['settings'
-                    ][listItem.getProperty('entry')]['changed'] = True
-
-            self.oe.dbg_log('networkMount::set_value', 'exit_function',
-                            0)
-        except Exception, e:
-            self.oe.dbg_log('networkMount::set_value', 'ERROR: ('
-                            + repr(e) + ')', 4)
-
-    def save_mount(self):
-        try:
-
-            self.oe.dbg_log('save_mount::save_mount', 'enter_function',
-                            0)
-
-            if self.struct['mount']['settings']['mountpoint']['value'] \
-                == '':
-                dialog = xbmcgui.Dialog()
-                dialog.ok('Mount', self.oe._(32361).encode('utf-8'), '',
-                          self.oe._(32352).encode('utf-8'))
-                return
-
-            if self.struct['mount']['settings']['server']['value'] \
-                == '':
-                dialog = xbmcgui.Dialog()
-                dialog.ok('Mount', self.oe._(32361).encode('utf-8'), '',
-                          self.oe._(32353).encode('utf-8'))
-                return
-
-            if self.struct['mount']['settings']['share']['value'] == '':
-                dialog = xbmcgui.Dialog()
-                dialog.ok('Mount', self.oe._(32361).encode('utf-8'), '',
-                          self.oe._(32354).encode('utf-8'))
-                return
-
-            self.oe.set_busy(1)
-
-            if self.current_mountpoint != None \
-                and os.path.exists('/media/' + self.current_mountpoint):
-                umount = self.oe.execute('umount /media/'
-                        + self.current_mountpoint, 1)
-            else:
-                umount = ''
-
-            if 'busy' in umount:
-                self.oe.notify('Umount Error', umount)
-
-                self.oe.set_busy(0)
-                return 'close'
-
-            if self.mount_id == 'new_mount':
-                mount_uuid = 'mount_' + unicode(uuid.uuid1()).replace('-',
-                        '')
-            else:
-                self.oe.remove_node(self.mount_id)
-                mount_uuid = self.mount_id
-
-            mount_info = {}
-
-            mount_info['type'] = self.struct['mount']['settings']['type'
-                    ]['value']
-            self.oe.write_setting(mount_uuid, 'type',
-                                  self.struct['mount']['settings'
-                                  ]['type']['value'], 'mounts')
-
-            mount_info['mountpoint'] = self.struct['mount']['settings'
-                    ]['mountpoint']['value']
-            self.oe.write_setting(mount_uuid, 'mountpoint',
-                                  self.struct['mount']['settings'
-                                  ]['mountpoint']['value'], 'mounts')
-
-            mount_info['server'] = self.struct['mount']['settings'
-                    ]['server']['value']
-            self.oe.write_setting(mount_uuid, 'server',
-                                  self.struct['mount']['settings'
-                                  ]['server']['value'], 'mounts')
-
-            mount_info['share'] = self.struct['mount']['settings'
-                    ]['share']['value']
-            self.oe.write_setting(mount_uuid, 'share',
-                                  self.struct['mount']['settings'
-                                  ]['share']['value'], 'mounts')
-
-            mount_info['user'] = self.struct['mount']['settings']['user'
-                    ]['value']
-            self.oe.write_setting(mount_uuid, 'user',
-                                  self.struct['mount']['settings'
-                                  ]['user']['value'], 'mounts')
-
-            mount_info['pass'] = self.struct['mount']['settings']['pass'
-                    ]['value']
-            self.oe.write_setting(mount_uuid, 'pass',
-                                  self.struct['mount']['settings'
-                                  ]['pass']['value'], 'mounts')
-
-            mount_info['options'] = self.struct['mount']['settings'
-                    ]['options']['value']
-            self.oe.write_setting(mount_uuid, 'options',
-                                  self.struct['mount']['settings'
-                                  ]['options']['value'], 'mounts')
-
-            self.oe.dictModules['connman'].mount_drive(mount_info)
-
-            self.oe.dbg_log('save_mount::save_mount', 'exit_function',
-                            0)
-
-            self.oe.set_busy(0)
-
-            return 'close'
-        except Exception, e:
-            self.oe.set_busy(0)
-            self.oe.dbg_log('save_mount::save_mount', 'ERROR: ('
-                            + repr(e) + ')', 4)
-
-    def delete_mount(self):
-        try:
-
-            self.oe.dbg_log('save_mount::delete_mount', 'enter_function'
-                            , 0)
-
-            umount = self.oe.execute('umount /media/'
-                    + self.current_mountpoint, 1)
-            if 'busy' in umount:
-                self.oe.notify('Umount Error', umount)
-
-            else:
-                del self.oe.dictModules['connman'].struct['mounts'
-                                       ]['settings'][self.mount_id]
-                self.oe.remove_node(self.mount_id)
-
-            self.oe.dbg_log('save_mount::delete_mount', 'exit_function'
-                            , 0)
-
-            return 'close'
-        except Exception, e:
-            self.oe.dbg_log('save_mount::delete_mount', 'ERROR: ('
-                            + repr(e) + ')', 4)
-
-    def exit(self):
-        pass
-
 
 ####################################################################
 ## Connection properties class
@@ -989,7 +682,7 @@ class connmanVpn(object):
                         },
                     
                     
-                    'PPTP.EchoFailure': {
+                    'PPPD.EchoFailure': {
                         'order': 9,
                         'name': 32162,
                         'value': '0',
@@ -998,7 +691,7 @@ class connmanVpn(object):
                         'parent': {'entry': 'Type', 'value': ['pptp']},
                         'optional': '',
                         },
-                    'PPTP.EchoInterval': {
+                    'PPPD.EchoInterval': {
                         'order': 9,
                         'name': 32163,
                         'value': '0',
@@ -1007,7 +700,7 @@ class connmanVpn(object):
                         'parent': {'entry': 'Type', 'value': ['pptp']},
                         'optional': '',
                         },
-                    'PPTP.RefuseEAP': {
+                    'PPPD.RefuseEAP': {
                         'order': 9,
                         'name': 32151,
                         'value': '0',
@@ -1016,7 +709,7 @@ class connmanVpn(object):
                         'parent': {'entry': 'Type', 'value': ['pptp']},
                         'optional': '',
                         },
-                    'PPTP.RefusePAP': {
+                    'PPPD.RefusePAP': {
                         'order': 9,
                         'name': 32152,
                         'value': '0',
@@ -1025,7 +718,7 @@ class connmanVpn(object):
                         'parent': {'entry': 'Type', 'value': ['pptp']},
                         'optional': '',
                         },
-                    'PPTP.RefuseCHAP': {
+                    'PPPD.RefuseCHAP': {
                         'order': 9,
                         'name': 32153,
                         'value': '0',
@@ -1034,7 +727,7 @@ class connmanVpn(object):
                         'parent': {'entry': 'Type', 'value': ['pptp']},
                         'optional': '',
                         },
-                    'PPTP.RefuseMSCHAP': {
+                    'PPPD.RefuseMSCHAP': {
                         'order': 9,
                         'name': 32154,
                         'value': '0',
@@ -1043,7 +736,7 @@ class connmanVpn(object):
                         'parent': {'entry': 'Type', 'value': ['pptp']},
                         'optional': '',
                         },
-                    'PPTP.RefuseMSCHAP2': {
+                    'PPPD.RefuseMSCHAP2': {
                         'order': 9,
                         'name': 32155,
                         'value': '0',
@@ -1052,7 +745,7 @@ class connmanVpn(object):
                         'parent': {'entry': 'Type', 'value': ['pptp']},
                         'optional': '',
                         },
-                    'PPTP.NoBSDComp': {
+                    'PPPD.NoBSDComp': {
                         'order': 9,
                         'name': 32160,
                         'value': '0',
@@ -1061,7 +754,7 @@ class connmanVpn(object):
                         'parent': {'entry': 'Type', 'value': ['pptp']},
                         'optional': '',
                         },
-                    'PPTP.NoDeflate': {
+                    'PPPD.NoDeflate': {
                         'order': 9,
                         'name': 32164,
                         'value': '0',
@@ -1070,7 +763,7 @@ class connmanVpn(object):
                         'parent': {'entry': 'Type', 'value': ['pptp']},
                         'optional': '',
                         },
-                    'PPTP.RequirMPPE': {
+                    'PPPD.RequirMPPE': {
                         'order': 9,
                         'name': 32156,
                         'value': '0',
@@ -1079,7 +772,7 @@ class connmanVpn(object):
                         'parent': {'entry': 'Type', 'value': ['pptp']},
                         'optional': '',
                         },
-                    'PPTP.RequirMPPE40': {
+                    'PPPD.RequirMPPE40': {
                         'order': 9,
                         'name': 32157,
                         'value': '0',
@@ -1088,7 +781,7 @@ class connmanVpn(object):
                         'parent': {'entry': 'Type', 'value': ['pptp']},
                         'optional': '',
                         },
-                    'PPTP.RequirMPPE128': {
+                    'PPPD.RequirMPPE128': {
                         'order': 9,
                         'name': 32158,
                         'value': '0',
@@ -1097,7 +790,7 @@ class connmanVpn(object):
                         'parent': {'entry': 'Type', 'value': ['pptp']},
                         'optional': '',
                         },
-                    'PPTP.RequirMPPEStateful': {
+                    'PPPD.RequirMPPEStateful': {
                         'order': 9,
                         'name': 32159,
                         'value': '0',
@@ -1106,7 +799,7 @@ class connmanVpn(object):
                         'parent': {'entry': 'Type', 'value': ['pptp']},
                         'optional': '',
                         },
-                    'PPTP.NoVJ': {
+                    'PPPD.NoVJ': {
                         'order': 9,
                         'name': 32161,
                         'value': '0',
@@ -1643,7 +1336,7 @@ class connman:
                         'action': 'set_timeservers',
                         'type': 'text',
                         'dbus': 'String',
-                        'validate': '^([a-zA-Z0-9](?:[a-zA-Z0-9-\.]*[a-zA-Z0-9]))$',
+                        'validate': '^([a-zA-Z0-9](?:[a-zA-Z0-9-\.]*[a-zA-Z0-9]))$|^$',
                         'InfoText': 732,
                         }, '1': {
                         'order': 2,
@@ -1652,7 +1345,7 @@ class connman:
                         'action': 'set_timeservers',
                         'type': 'text',
                         'dbus': 'String',
-                        'validate': '^([a-zA-Z0-9](?:[a-zA-Z0-9-\.]*[a-zA-Z0-9]))$',
+                        'validate': '^([a-zA-Z0-9](?:[a-zA-Z0-9-\.]*[a-zA-Z0-9]))$|^$',
                         'InfoText': 733,
                         }, '2': {
                         'order': 3,
@@ -1661,24 +1354,10 @@ class connman:
                         'action': 'set_timeservers',
                         'type': 'text',
                         'dbus': 'String',
-                        'validate': '^([a-zA-Z0-9](?:[a-zA-Z0-9-\.]*[a-zA-Z0-9]))$',
+                        'validate': '^([a-zA-Z0-9](?:[a-zA-Z0-9-\.]*[a-zA-Z0-9]))$|^$',
                         'InfoText': 734,
                         }},
                         'order': 2
-                    },
-                'mounts': {
-                    'hidden': 'true',
-                    'order': 5, 
-                    'name': 32348,
-                    'settings': {
-                        'add': {
-                            'order': 1,
-                            'name': 32349,
-                            'value': 'new_mount',
-                            'action': 'edit_mount',
-                            'type': 'button',
-                            'InfoText': 735,
-                    }}, 'order': 3
                     },
                 'advanced': {'order': 6, 'name': 32368,
                              'settings': {'wait_for_network': {
@@ -1933,11 +1612,11 @@ class connman:
                     if 'hidden' in self.struct[path]:
                         del self.struct[path]['hidden']
                  
-                for entry in self.struct[path]['settings']:
-                    if entry in technologie:
-                        self.struct[path]['settings'
-                                ][entry]['value'] = \
-                            unicode(technologie[entry])
+                    for entry in self.struct[path]['settings']:
+                        if entry in technologie:
+                            self.struct[path]['settings'
+                                    ][entry]['value'] = \
+                                unicode(technologie[entry])
         
             for setting in self.struct['Timeservers']['settings']:
                 if 'Timeservers' in self.clock_properties:
@@ -1950,20 +1629,6 @@ class connman:
                     self.struct['Timeservers']['settings'
                                 ][setting]['value'] = ''
             
-            #mount_dict = self.oe.read_node('mounts')
-            #if 'mounts' in mount_dict:
-            #    for mount in mount_dict['mounts']:
-            #        tmp_mount = {
-            #            'type': 'button',
-            #            'name': mount_dict['mounts'][mount]['mountpoint'],
-            #            'value': mount,
-            #            'action': 'edit_mount',
-            #            'dynamic': 'true',
-            #            'order': 1
-            #            }
-            #        self.struct['mounts']['settings'
-            #                              ][mount] = tmp_mount
-                    
             self.oe.winOeMain.build_menu(self.struct)
             
             self.oe.set_busy(0)
@@ -2417,128 +2082,6 @@ class connman:
             self.oe.dbg_log('connman::get_service_path', 'ERROR: ('
                             + repr(e) + ')', 4)
 
-    def edit_mount(self, listItem=None):
-        try:
-
-            self.oe.dbg_log('connman::add_mount', 'enter_function', 0)
-
-            self.configureMount = \
-                networkMount(listItem.getProperty('value'), self.oe)
-            del self.configureMount
-
-            self.oe.dbg_log('connman::add_mount', 'enter_function', 0)
-        except Exception, e:
-            self.oe.dbg_log('connman::add_mount', 'ERROR: (' + repr(e)
-                            + ')')
-
-    def mount_drives(self):
-        try:
-
-            self.oe.dbg_log('connman::mount_drives', 'enter_function',
-                            0)
-
-            self.oe.set_busy(1)
-
-            mount_dict = self.oe.read_node('mounts')
-            if 'mounts' in mount_dict:
-                for mount in mount_dict['mounts']:
-                    self.mount_drive(mount_dict['mounts'][mount])
-
-            self.oe.set_busy(0)
-
-            self.oe.dbg_log('connman::mount_drives', 'exit_function', 0)
-        except Exception, e:
-            self.oe.set_busy(0)
-            self.oe.dbg_log('connman::mount_drives', 'ERROR: ('
-                            + repr(e) + ')')
-
-    def mount_drive(self, mount_info):
-        try:
-
-            self.oe.set_busy(1)
-
-            self.oe.dbg_log('connman::mount_drive', 'enter_function', 0)
-
-            if mount_info['type'] == 'cifs':
-
-                if os.path.exists('/media/' + mount_info['mountpoint']):
-                    if os.listdir('/media/' + mount_info['mountpoint']) \
-                        != []:
-                        mount_info['mountpoint'] = '_' \
-                            + mount_info['mountpoint']
-
-                mount_info['mountpoint'] = '/media/' \
-                    + mount_info['mountpoint']
-
-                if not os.path.exists(mount_info['mountpoint']):
-                    os.makedirs(mount_info['mountpoint'])
-
-                self.oe.dbg_log('connman::umount_drive',
-                                self.oe.execute('umount '
-                                + mount_info['mountpoint'], 1), 0)
-
-                mount_command = 'mount -t cifs //' + mount_info['server'
-                        ] + '/' + mount_info['share'] + ' ' \
-                    + mount_info['mountpoint'] + ' -o "'
-
-                if mount_info['options'] != '':
-                    mount_command = mount_command + mount_info['options'
-                            ] + ','
-
-                self.oe.dbg_log('connman::mount_drive', mount_command
-                                + '"', 0)
-
-                mount_command = mount_command + 'user=' \
-                    + mount_info['user'] + ','
-                mount_command = mount_command + 'pass=' \
-                    + mount_info['pass']
-                mount_command = mount_command + '"'
-
-                self.oe.dbg_log('connman::mount_drive',
-                                self.oe.execute(mount_command, 1), 0)
-
-            if mount_info['type'] == 'nfs':
-
-                if os.path.exists('/media/' + mount_info['mountpoint']):
-                    if os.listdir('/media/' + mount_info['mountpoint']) \
-                        != []:
-                        mount_info['mountpoint'] = '_' \
-                            + mount_info['mountpoint']
-
-                mount_info['mountpoint'] = '/media/' \
-                    + mount_info['mountpoint']
-
-                if not os.path.exists(mount_info['mountpoint']):
-                    os.makedirs(mount_info['mountpoint'])
-
-                self.oe.dbg_log('connman::umount_drive',
-                                self.oe.execute('umount '
-                                + mount_info['mountpoint']), 0)
-
-                mount_command = 'mount ' + mount_info['server'] + ':/' \
-                    + mount_info['share'] + ' ' \
-                    + mount_info['mountpoint'] + ' -o "nolock,tcp'
-
-                if mount_info['options'] != '':
-                    mount_command = mount_command + ',' \
-                        + mount_info['options']
-
-                self.oe.dbg_log('connman::mount_drive', mount_command
-                                + '"', 0)
-
-                mount_command = mount_command + '"'
-
-                self.oe.dbg_log('connman::mount_drive',
-                                self.oe.execute(mount_command, 1), 0)
-
-            self.oe.set_busy(0)
-
-            self.oe.dbg_log('connman::mount_drive', 'enter_function', 0)
-        except Exception, e:
-            self.oe.set_busy(0)
-            self.oe.dbg_log('connman::mount_drive', 'ERROR: ('
-                            + repr(e) + ')')
-
     def start_service(self):
         try:
 
@@ -2546,7 +2089,6 @@ class connman:
                             0)
 
             self.load_values()
-            #self.mount_drives()
 
             self.oe.dbg_log('connman::start_service', 'exit_function',
                             0)
