@@ -2,15 +2,7 @@
 	<defaultcontrol always="true">1500</defaultcontrol>
 	<allowoverlay>no</allowoverlay>
 	<controls>
-		<control type="image">
-			<posx>0</posx>
-			<posy>100r</posy>
-			<width>1280</width>
-			<height>100</height>
-			<texture>floor.png</texture>
-			<animation effect="fade" time="300">Visible</animation>
-			<animation effect="fade" time="300">Hidden</animation>
-		</control>		
+		<include>BGGrainy</include>
 		<control type="group">
 			<posx>90</posx>
 			<posy>30</posy>
@@ -41,15 +33,8 @@
 		    <posy>10</posy>
 		    <width>260</width>
 		    <height>621</height>
-		    <texture>wizard_rasplex.png</texture>				
+		    <texture>wizard.png</texture>				
 	    </control>					
-			<control type="image">
-				<posx>5</posx>
-				<posy>625</posy>
-				<width>1090</width>
-				<height>64</height>
-				<texture border="15">ContentPanelMirror.png</texture>
-			</control>			
 			<control type="image">
 				<posx>268</posx>
 				<posy>10</posy>
@@ -63,7 +48,7 @@
 				<width>804</width>
 				<height>70</height>
 				<aspectratio>stretch</aspectratio>
-				<texture>GlassTitleBar.png</texture>
+				<texture>dialogheader.png</texture>
 			</control>
 			<control type="label" id="32300">
 				<description>header label</description>
@@ -154,7 +139,7 @@
 				    <width>230</width>
 				    <height>40</height>
 				    <label></label>				    
-			      <textcolor>FFEBEBEB</textcolor>
+			      <textcolor>FF999999</textcolor>
 			      <focusedcolor>white</focusedcolor>
 			      <texturefocus border="5">button-focus2.png</texturefocus>
 		      </control>		
@@ -164,7 +149,7 @@
 				    <width>230</width>
 				    <height>40</height>
 				    <label></label>				    
-			      <textcolor>FFEBEBEB</textcolor>
+			      <textcolor>FF999999</textcolor>
 			      <focusedcolor>white</focusedcolor>
 			      <texturefocus border="5">button-focus2.png</texturefocus>
 		      </control>			      	            
@@ -301,7 +286,7 @@
 							  <font>font12</font>
 							  <textcolor>FFFF1C77</textcolor>
 							  <visible>StringCompare(ListItem.Property(State), online) | StringCompare(ListItem.Property(State), ready)</visible>
-							  <label>$LOCALIZE[150]: [COLOR=white]$INFO[ListItem.Property(Address)][/COLOR]</label>
+							  <label>$ADDON[service.openelec.settings 602]: [COLOR=white]$INFO[ListItem.Property(Address)][/COLOR]</label>
 						  </control>
 						  <!-- State -->
 						  <control type="label">
@@ -311,7 +296,7 @@
 							  <height>20</height>									
 							  <font>font12</font>
 							  <textcolor>FFFF1C77</textcolor>
-                <label>$LOCALIZE[126]: [COLOR=white]$INFO[ListItem.Property(State)][/COLOR]</label>
+                <label>$ADDON[service.openelec.settings 604]: [COLOR=white]$INFO[ListItem.Property(State)][/COLOR]</label>
 						  </control>						  					    
 					    <!-- Signal strength -->
 					    <control type="progress">
@@ -335,7 +320,7 @@
 				    </itemlayout>
 				    <focusedlayout height="50">
 					    <posx>0</posx>
-					    <posy>0</posy>
+					    <posy>0</posy>					
 					    <control type="image">
 						    <posx>0</posx>
 						    <posy>2</posy>
@@ -387,7 +372,7 @@
 							  <font>font12</font>
 							  <textcolor>FFFF1C77</textcolor>
 							  <visible>StringCompare(ListItem.Property(State), online) | StringCompare(ListItem.Property(State), ready)</visible>
-							  <label>$LOCALIZE[150]: [COLOR=white]$INFO[ListItem.Property(Address)][/COLOR]</label>
+							  <label>$ADDON[service.openelec.settings 602]: [COLOR=white]$INFO[ListItem.Property(Address)][/COLOR]</label>
 						  </control>
 						  <!-- State -->
 						  <control type="label">
@@ -397,7 +382,7 @@
 							  <height>20</height>									
 							  <font>font12</font>
 							  <textcolor>FFFF1C77</textcolor>
-                <label>$LOCALIZE[126]: [COLOR=white]$INFO[ListItem.Property(State)][/COLOR]</label>
+                <label>$ADDON[service.openelec.settings 604]: [COLOR=white]$INFO[ListItem.Property(State)][/COLOR]</label>
 						  </control>						  					    
 					    <!-- Signal strength -->
 					    <control type="progress">
@@ -428,9 +413,9 @@
 				    <height>162</height>
 				    <onright>1500</onright>
 				    <onleft>1200</onleft>
-				    <texturesliderbackground border="0,14,0,14">ScrollBarV.png</texturesliderbackground>
-				    <texturesliderbar border="0,14,0,14">ScrollBarV_bar.png</texturesliderbar>
-				    <texturesliderbarfocus border="0,14,0,14">ScrollBarV_bar_focus.png</texturesliderbarfocus>
+				    <texturesliderbackground border="0,14,0,14">scrollbar-back.png</texturesliderbackground>
+				    <texturesliderbar border="0,14,0,14">scrollbar-unfocus.png</texturesliderbar>
+				    <texturesliderbarfocus border="0,14,0,14">scrollbar-focus.png</texturesliderbarfocus>
 				    <textureslidernib>ScrollBarNib.png</textureslidernib>
 				    <textureslidernibfocus>ScrollBarNib.png</textureslidernibfocus>
 				    <orientation>vertical</orientation>
