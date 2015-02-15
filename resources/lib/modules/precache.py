@@ -27,10 +27,10 @@
 
 import xbmc
 
+
 class precache:
 
     ENABLED = False
-    
     menu = {'92': {
         'name': 32196,
         'menuLoader': 'menu_loader',
@@ -40,74 +40,53 @@ class precache:
 
     def __init__(self, oeMain):
         try:
-
             oeMain.dbg_log('precache::__init__', 'enter_function', 0)
-
             self.oe = oeMain
             self.controls = {}
-
             self.oe.dbg_log('precache::__init__', 'exit_function', 0)
         except Exception, e:
-            self.oe.dbg_log('precache::__init__', 'ERROR: (' + repr(e)
-                            + ')')
+            self.oe.dbg_log('precache::__init__', 'ERROR: (' + repr(e) + ')')
 
     def menu_loader(self, menuItem):
         try:
-
             self.oe.dbg_log('precache::menu_loader', 'enter_function', 0)
-
             if len(self.controls) == 0:
                 self.init_controls()
-
             self.oe.dbg_log('precache::menu_loader', 'exit_function', 0)
         except Exception, e:
-            self.oe.dbg_log('precache::menu_loader', 'ERROR: (' + repr(e)
-                            + ')', 4)
+            self.oe.dbg_log('precache::menu_loader', 'ERROR: (' + repr(e) + ')', 4)
 
     def exit_addon(self):
         try:
-
             self.oe.dbg_log('precache::exit_addon', 'enter_function', 0)
-
             self.oe.winOeMain.close()
-
             self.oe.dbg_log('precache::exit_addon', 'exit_function', 0)
         except Exception, e:
-            self.oe.dbg_log('precache::exit_addon', 'ERROR: (' + repr(e)
-                            + ')')
+            self.oe.dbg_log('precache::exit_addon', 'ERROR: (' + repr(e) + ')')
 
     def init_controls(self):
         try:
-
             self.oe.dbg_log('precache::init_controls', 'enter_function', 0)
-
             self.oe.dbg_log('precache::init_controls', 'exit_function', 0)
         except Exception, e:
-            self.oe.dbg_log('precache::init_controls', 'ERROR: ('
-                            + repr(e) + ')')
+            self.oe.dbg_log('precache::init_controls', 'ERROR: (' + repr(e) + ')')
 
     def exit(self):
         try:
-
             self.oe.dbg_log('precache::exit', 'enter_function', 0)
-
             for control in self.controls:
                 try:
                     self.oe.winOeMain.removeControl(self.controls[control])
                 except:
                     pass
-
             self.controls = {}
-
             self.oe.dbg_log('precache::exit', 'exit_function', 0)
         except Exception, e:
             self.oe.dbg_log('precache::exit', 'ERROR: (' + repr(e) + ')')
 
     def do_wizard(self):
         try:
-
-            self.oe.dbg_log('precache::do_wizard', 'enter_function', 4)
-
+            self.oe.dbg_log('precache::do_wizard', 'enter_function', 0)
             self.oe.winOeMain.set_wizard_title("Should we precache?")
             self.oe.winOeMain.set_wizard_text("Precaching your library will lead to dramatically better performance."
                                  + '[CR][CR]' + "This will take some time, but allows for much faster library browsing, as all images will already be stored locally."  
@@ -115,11 +94,9 @@ class precache:
                                  + '[CR][CR]' + "You can precache at any time by going to: Preferences -> Control Precaching."  
                                  )
             self.oe.winOeMain.set_wizard_button_1("Start precaching", self, 'start_precache')
-
-            self.oe.dbg_log('precache::do_wizard', 'exit_function', 4)
+            self.oe.dbg_log('precache::do_wizard', 'exit_function', 0)
         except Exception, e:
-            self.oe.dbg_log('precache::do_wizard', 'ERROR: (' + repr(e)
-                            + ')')
+            self.oe.dbg_log('precache::do_wizard', 'ERROR: (' + repr(e) + ')')
 
     def start_precache(self):
         self.oe.winOeMain.set_wizard_text("")
