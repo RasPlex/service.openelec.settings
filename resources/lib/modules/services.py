@@ -239,6 +239,34 @@ class services:
                             },
                         },
                     },
+                'remotepi': {
+                    'order': 7,
+                    'name': 32392,
+                    'not_supported': [],
+                    'settings': {
+                        'remotepi_autostart': {
+                            'order': 1,
+                            'name': 32393,
+                            'value': None,
+                            'action': 'initialize_remotepi',
+                            'type': 'bool',
+                            'InfoText': 32394,
+                            },
+                        'remotepi_version': {
+                            'order': 2,
+                            'name': 32395,
+                            'value': None,
+                            'action': 'initialize_remotepi',
+                            'type': 'multivalue',
+                            'parent': {
+                                'entry': 'remotepi_autostart',
+                                'value': ['1'],
+                                },
+                            'values': ['2015', '2013'],
+                            'InfoText': 32396,
+                            },
+                        },
+                    },
                 }
 
             self.oe = oeMain
@@ -255,6 +283,7 @@ class services:
             self.initialize_avahi(service=1)
             self.initialize_cron(service=1)
             self.init_bluetooth(service=1)
+            self.initialize_remotepi(service=1)
             self.oe.dbg_log('services::start_service', 'exit_function', 0)
         except Exception, e:
             self.oe.dbg_log('services::start_service', 'ERROR: (%s)' % repr(e))
@@ -363,6 +392,17 @@ class services:
                         self.struct['bluez']['settings']['obex_root']['hidden'] = True
                 else:
                     self.struct['bluez']['hidden'] = 'true'
+
+            # REMOTE PI
+
+            if os.path.isfile(self.REMOTEPI_DAEMON):
+                self.struct['remotepi']['settings']['remotepi_autostart']['value'] = \
+                    self.oe.get_service_state('remotepi')
+                self.struct['remotepi']['settings']['remotepi_version']['value'] = \
+                    self.oe.get_service_option('remotepi', 'REMOTEPI_VERSION', self.D_REMOTEPI_VERSION).replace('"', '')
+            else:
+                self.struct['remotepi']['hidden'] = 'true'
+
             self.oe.dbg_log('services::load_values', 'exit_function', 0)
         except Exception, e:
             self.oe.dbg_log('services::load_values', 'ERROR: (%s)' % repr(e))
@@ -538,6 +578,25 @@ class services:
             return arrDrivers
         except Exception, e:
             self.oe.dbg_log('services::get_lcd_drivers', 'ERROR: (' + repr(e) + ')')
+
+    def initialize_remotepi(self, **kwargs):
+        try:
+            self.oe.dbg_log('services::initialize_remotepi', 'enter_function', 0)
+            self.oe.set_busy(1)
+            if 'listItem' in kwargs:
+                self.set_value(kwargs['listItem'])
+            state = 1
+            options = {}
+            if self.struct['remotepi']['settings']['remotepi_autostart']['value'] != '1':
+                state = 0
+            if not self.struct['remotepi']['settings']['remotepi_version']['value'] is None and state == 1:
+                options['REMOTEPI_VERSION'] = '"%s"' % self.struct['remotepi']['settings']['remotepi_version']['value']
+            self.oe.set_service('remotepi', options, state)
+            self.oe.set_busy(0)
+            self.oe.dbg_log('services::initialize_remotepi', 'exit_function', 0)
+        except Exception, e:
+            self.oe.set_busy(0)
+            self.oe.dbg_log('services::initialize_remotepi', 'ERROR: (%s)' % repr(e), 4)
 
     def exit(self):
         try:

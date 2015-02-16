@@ -843,3 +843,23 @@ msgstr ""
 msgctxt "#32391"
 msgid "Enable LCD Driver Support"
 msgstr ""
+
+msgctxt "#32392"
+msgid "RemotePi Board"
+msgstr ""
+
+msgctxt "#32393"
+msgid "Enable RemotePi Board Support"
+msgstr ""
+
+msgctxt "#32394"
+msgid "Set to ON to enable the RemotePi daemon"
+msgstr ""
+
+msgctxt "#32395"
+msgid "RemotePi Board Version"
+msgstr ""
+
+msgctxt "#32396"
+msgid "Set to 2015 for 2015/Plus 2015 and 2013 for the older version"
+msgstr ""
