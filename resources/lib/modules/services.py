@@ -239,7 +239,7 @@ class services:
                             },
                         },
                     },
-                'remotepi': {
+                'remotepi-board': {
                     'order': 7,
                     'name': 32392,
                     'not_supported': [],
@@ -396,12 +396,12 @@ class services:
             # REMOTE PI
 
             if os.path.isfile(self.REMOTEPI_DAEMON):
-                self.struct['remotepi']['settings']['remotepi_autostart']['value'] = \
-                    self.oe.get_service_state('remotepi')
-                self.struct['remotepi']['settings']['remotepi_version']['value'] = \
-                    self.oe.get_service_option('remotepi', 'REMOTEPI_VERSION', self.D_REMOTEPI_VERSION).replace('"', '')
+                self.struct['remotepi-board']['settings']['remotepi_autostart']['value'] = \
+                    self.oe.get_service_state('remotepi-board')
+                self.struct['remotepi-board']['settings']['remotepi_version']['value'] = \
+                    self.oe.get_service_option('remotepi-board', 'BOARD_VERSION', self.D_REMOTEPI_VERSION).replace('"', '')
             else:
-                self.struct['remotepi']['hidden'] = 'true'
+                self.struct['remotepi-board']['hidden'] = 'true'
 
             self.oe.dbg_log('services::load_values', 'exit_function', 0)
         except Exception, e:
@@ -587,11 +587,11 @@ class services:
                 self.set_value(kwargs['listItem'])
             state = 1
             options = {}
-            if self.struct['remotepi']['settings']['remotepi_autostart']['value'] != '1':
+            if self.struct['remotepi-board']['settings']['remotepi_autostart']['value'] != '1':
                 state = 0
-            if not self.struct['remotepi']['settings']['remotepi_version']['value'] is None and state == 1:
-                options['REMOTEPI_VERSION'] = '"%s"' % self.struct['remotepi']['settings']['remotepi_version']['value']
-            self.oe.set_service('remotepi', options, state)
+            if not self.struct['remotepi-board']['settings']['remotepi_version']['value'] is None and state == 1:
+                options['BOARD_VERSION'] = '"%s"' % self.struct['remotepi-board']['settings']['remotepi_version']['value']
+            self.oe.set_service('remotepi-board', options, state)
             self.oe.set_busy(0)
             self.oe.dbg_log('services::initialize_remotepi', 'exit_function', 0)
         except Exception, e:

@@ -76,7 +76,7 @@ services = {
     'CRON_DAEMON': '/sbin/crond',
     'LCD_DRIVER_DIR': '/usr/lib/lcdproc/',
     'D_LCD_DRIVER': 'none',
-    'REMOTEPI_DAEMON': '/usr/bin/remotepi-switch',
+    'REMOTEPI_DAEMON': '/usr/bin/remotepi-board',
     'D_REMOTEPI_VERSION': '2015',
     }
 
@@ -114,5 +114,5 @@ _services = {
     'obexd': ['obex.service'],
     'crond': ['cron.service'],
     'lcdd': ['lcdd.service'],
-    'remotepi': ['remotepi-switch.service'],
+    'remotepi-board': ['remotepi-board.service'],
     }
