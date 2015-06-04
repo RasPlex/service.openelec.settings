@@ -282,9 +282,7 @@ msgctxt "#32010"
 msgid "Keyboard Layout"
 msgstr ""
 
-msgctxt "#32011"
-msgid "Language"
-msgstr ""
+#empty string with id 32011
 
 msgctxt "#32012"
 msgid "Select Action"
@@ -583,7 +581,7 @@ msgid "Welcome"
 msgstr ""
 
 msgctxt "#32302"
-msgid "This wizard will guide you through the process of setting up your new [COLOR FFFF1C77]Ras[/COLOR][COLOR FFFF9522]Plex[/COLOR] installation - connecting you to the internet, calibrating your screen, connecting you with MyPlex and starting precaching.[CR][CR]Most of these settings can be changed later by navigating to Preferences > [COLOR FFFF1C77]Ras[/COLOR][COLOR FFFF9522]Plex[/COLOR] Settings.[CR][CR]To begin your [COLOR FFFF1C77]Ras[/COLOR][COLOR FFFF9522]Plex[/COLOR] experience, select your regional settings and your keyboard layout, then click Next."
+msgid "This wizard will guide you through the process of setting up your new [COLOR FFFF1C77]Ras[/COLOR][COLOR FFFF9522]Plex[/COLOR] installation - connecting you to the internet, calibrating your screen, connecting you with MyPlex and starting precaching.[CR][CR]Most of these settings can be changed later by navigating to Preferences > [COLOR FFFF1C77]Ras[/COLOR][COLOR FFFF9522]Plex[/COLOR] Settings."
 msgstr ""
 
 msgctxt "#32303"
@@ -602,9 +600,7 @@ msgctxt "#32306"
 msgid "In order to access the Plex Media Server, [COLOR FFFF1C77]Ras[/COLOR][COLOR FFFF9522]Plex[/COLOR] needs to be connected the Network.[CR][CR]An Internet connection is also required for [COLOR FFFF1C77]Ras[/COLOR][COLOR FFFF9522]Plex[/COLOR] to automatically update itself."
 msgstr ""
 
-msgctxt "#32307"
-msgid "Select your Regional Settings:"
-msgstr ""
+#empty string with id 32307
 
 msgctxt "#32308"
 msgid "Hostname:"
@@ -614,9 +610,7 @@ msgctxt "#32309"
 msgid "The following Networks are currently available:"
 msgstr ""
 
-msgctxt "#32310"
-msgid "Keyboard:"
-msgstr ""
+#empty string with id 32310
 
 msgctxt "#32311"
 msgid "Sharing and Remote Access"
@@ -641,7 +635,7 @@ msgid "Thank you"
 msgstr ""
 
 msgctxt "#32318"
-msgid "You [COLOR FFFF1C77]Ras[/COLOR][COLOR FFFF9522]Plex[/COLOR] installation is now complete and you'll now enter PlexHomeTheater.[CR][CR][COLOR FFFF1C77]Ras[/COLOR][COLOR FFFF9522]Plex[/COLOR] is developed by a dedicated team of developers who work purely in their spare time. Even as a volunteer project, we still have to pay for our internet bandwidth and development resources so if you find [COLOR FFFF1C77]Ras[/COLOR][COLOR FFFF9522]Plex[/COLOR] useful, we will always appreciate a donation of any amount.[CR][CR]Finally, we hope you enjoy using [COLOR FFFF1C77]Ras[/COLOR][COLOR FFFF9522]Plex[/COLOR] as much as we've enjoying building it. If you need any more help, you can find links to get help along with latest news at rasplex.com[CR][CR]If you experience any issues, please follow the guidelines at tiny.cc/rasplex-bugs"
+msgid "You [COLOR FFFF1C77]Ras[/COLOR][COLOR FFFF9522]Plex[/COLOR] installation is now complete and you'll now enter Plex Home Theater.[CR][CR][COLOR FFFF1C77]Ras[/COLOR][COLOR FFFF9522]Plex[/COLOR] is developed by a dedicated team of developers who work purely in their spare time. Even as a volunteer project, we still have to pay for our internet bandwidth and development resources so if you find [COLOR FFFF1C77]Ras[/COLOR][COLOR FFFF9522]Plex[/COLOR] useful, we will always appreciate a donation of any amount.[CR][CR]Finally, we hope you enjoy using [COLOR FFFF1C77]Ras[/COLOR][COLOR FFFF9522]Plex[/COLOR] as much as we've enjoying building it. If you need any more help, you can find links to get help along with latest news at rasplex.com[CR][CR]If you experience any issues, please follow the guidelines at tiny.cc/rasplex-bugs"
 msgstr ""
 
 msgctxt "#32319"

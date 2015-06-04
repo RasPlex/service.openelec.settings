@@ -297,7 +297,7 @@ class mainWindow(xbmcgui.WindowXML):
                             items1.append(i1)
                             items2.append(i2)
                     select_window = xbmcgui.Dialog()
-                    title = selectedItem.getProperty('menuname').encode('utf-8')
+                    title = selectedItem.getProperty('menuname')
                     result = select_window.select(title, items1)
                     if result >= 0:
                         selectedItem.setProperty('value', items2[result])
@@ -458,7 +458,6 @@ class wizard(xbmcgui.WindowXML):
         self.wizWinTitle = 32300
         self.oe = kwargs['oeMain']
         self.guisettings = '%s/userdata/guisettings.xml' % self.oe.XBMC_USER_HOME
-        self.languages_dir = '/usr/share/XBMC/language/'
         self.buttons = {
             1: {
                 'id': 1500,
@@ -518,8 +517,6 @@ class wizard(xbmcgui.WindowXML):
                 self.getControl(self.radiobuttons[2]['id']).setVisible(False)
                 self.set_wizard_title(self.oe._(32301).encode('utf-8'))
                 self.set_wizard_text(self.oe._(32302).encode('utf-8'))
-                self.set_wizard_button_title(self.oe._(32307).encode('utf-8'))
-                self.set_wizard_button_1(self.get_current_language(), self, 'select_language')
                 self.showButton(1, 32303)
                 self.setFocusId(self.buttons[1]['id'])
                 self.did_init = True
@@ -687,60 +684,4 @@ class wizard(xbmcgui.WindowXML):
             return lstItem
         except Exception, e:
             self.oe.dbg_log('oeWindows.wizard::addConfigItem(' + strName + ')', 'ERROR: (' + repr(e) + ')')
-
-    def select_language(self):
-        try:
-            self.oe.dbg_log('oeWindows::select_language', 'enter_function', 0)
-            languages = []
-            currentLanguage = self.get_current_language()
-            for filename in os.listdir(self.languages_dir):
-                languages.append(filename)
-            newLanguage = ''
-            select_window = xbmcgui.Dialog()
-            title = self.oe._(32011).encode('utf-8')
-            result = select_window.select(title, languages)
-            if result >= 0:
-                newLanguage = languages[result]
-            if newLanguage != '':
-                if currentLanguage != newLanguage:
-                    self.oe.language = newLanguage
-                    self.close()
-                    self.oe.set_language(newLanguage)
-            del select_window
-            self.oe.dbg_log('oeWindows::select_language', 'exit_function', 0)
-        except Exception, e:
-            self.oe.dbg_log('oeWindows.wizard::select_language()', 'ERROR: (' + repr(e) + ')')
-
-    def get_current_language(self):
-        try:
-            if hasattr(self.oe, 'language'):
-                return self.oe.language
-            config_file = open(self.guisettings, 'r')
-            config_text = config_file.read()
-            config_file.close()
-            xml_conf = minidom.parseString(config_text)
-            for xml_entry in xml_conf.getElementsByTagName('locale'):
-                for xml_modul in xml_entry.childNodes:
-                    if xml_modul.nodeName == 'language':
-                        if hasattr(xml_modul.firstChild, 'nodeValue'):
-                            return xml_modul.firstChild.nodeValue
-        except Exception, e:
-            self.oe.dbg_log('oeWindows.wizard::get_current_language()', 'ERROR: (' + repr(e) + ')')
-
-    def set_new_language(self, language):
-        try:
-            config_file = open(self.guisettings, 'r')
-            config_text = config_file.read()
-            config_file.close()
-            xml_conf = minidom.parseString(config_text)
-            for xml_entry in xml_conf.getElementsByTagName('locale'):
-                for xml_modul in xml_entry.childNodes:
-                    if xml_modul.nodeName == 'language':
-                        xml_modul.firstChild.nodeValue = language
-            config_file = open(self.guisettings, 'w')
-            config_file.write(xml_conf.toprettyxml())
-            config_file.close()
-            os.system('killall xbmc.bin')
-        except Exception, e:
-            self.oe.dbg_log('oeWindows.wizard::set_new_language(' + unicode(language) + ')', 'ERROR: (' + repr(e) + ')')
 
