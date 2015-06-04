@@ -168,7 +168,9 @@ msgctxt "#730"
 msgid "Enable or disable support for Wired (Ethernet) networks"
 msgstr ""
 
-#empty string with id 731
+msgctxt "#731"
+msgid "Configure OpenVPN and PPTP VPN connections"
+msgstr ""
 
 msgctxt "#732"
 msgid "Configure the 1st time (NTP) server"
@@ -314,7 +316,9 @@ msgctxt "#32103"
 msgid "Wired Networks"
 msgstr ""
 
-#empty string with id 32104
+msgctxt "#32104"
+msgid "VPN"
+msgstr ""
 
 msgctxt "#32105"
 msgid "Active"
@@ -420,7 +424,35 @@ msgctxt "#32130"
 msgid "Domain #3"
 msgstr ""
 
-#empty strings from id 32131 to 32139
+msgctxt "#32131"
+msgid "VPN Type"
+msgstr ""
+
+msgctxt "#32132"
+msgid "Network Name"
+msgstr ""
+
+msgctxt "#32133"
+msgid "VPN Server"
+msgstr ""
+
+msgctxt "#32134"
+msgid "VPN DNS Domain"
+msgstr ""
+
+#empty strings from id 32135 to 32136
+
+msgctxt "#32137"
+msgid "Certificate Autority Certificate"
+msgstr ""
+
+msgctxt "#32138"
+msgid "Certificate"
+msgstr ""
+
+msgctxt "#32139"
+msgid "Key"
+msgstr ""
 
 msgctxt "#32140"
 msgid "Save"
@@ -462,7 +494,119 @@ msgctxt "#32150"
 msgid "Edit"
 msgstr ""
 
-#empty strings from id 32151 to 32179
+msgctxt "#32151"
+msgid "Refuse EAP"
+msgstr ""
+
+msgctxt "#32152"
+msgid "Refuse PAP"
+msgstr ""
+
+msgctxt "#32153"
+msgid "Refuse CHAP"
+msgstr ""
+
+msgctxt "#32154"
+msgid "Refuse MS-CHAP"
+msgstr ""
+
+msgctxt "#32155"
+msgid "Refuse MS-CHAP v2"
+msgstr ""
+
+msgctxt "#32156"
+msgid "Require MPPE"
+msgstr ""
+
+msgctxt "#32157"
+msgid "Require MPPE (40 bit)"
+msgstr ""
+
+msgctxt "#32158"
+msgid "Require MPPE (128 bit)"
+msgstr ""
+
+msgctxt "#32159"
+msgid "Require Stateful MPPE"
+msgstr ""
+
+msgctxt "#32160"
+msgid "Disable BSD Compression"
+msgstr ""
+
+msgctxt "#32161"
+msgid "Disable VJ Compression"
+msgstr ""
+
+msgctxt "#32162"
+msgid "LCP Echo Failure"
+msgstr ""
+
+msgctxt "#32163"
+msgid "LCP Echo Interval"
+msgstr ""
+
+msgctxt "#32164"
+msgid "Disable Deflate Compression"
+msgstr ""
+
+msgctxt "#32165"
+msgid "MTU"
+msgstr ""
+
+msgctxt "#32166"
+msgid "NSCertType"
+msgstr ""
+
+msgctxt "#32167"
+msgid "Proto"
+msgstr ""
+
+msgctxt "#32168"
+msgid "Port"
+msgstr ""
+
+msgctxt "#32169"
+msgid "AuthUserPass"
+msgstr ""
+
+msgctxt "#32170"
+msgid "AskPass"
+msgstr ""
+
+msgctxt "#32171"
+msgid "AuthNoCache"
+msgstr ""
+
+msgctxt "#32172"
+msgid "TLSRemote"
+msgstr ""
+
+msgctxt "#32173"
+msgid "TLSAuth"
+msgstr ""
+
+msgctxt "#32174"
+msgid "TLSAuthDir"
+msgstr ""
+
+msgctxt "#32175"
+msgid "Auth"
+msgstr ""
+
+msgctxt "#32176"
+msgid "CompLZO"
+msgstr ""
+
+msgctxt "#32177"
+msgid "RemoteCertTls"
+msgstr ""
+
+msgctxt "#32178"
+msgid "ConfigFile"
+msgstr ""
+
+#empty string with id 32179
 
 msgctxt "#32180"
 msgid "Would you like to update RasPlex now?"
@@ -646,7 +790,13 @@ msgctxt "#32320"
 msgid "Enable Cron"
 msgstr ""
 
-#empty strings from id 32321 to 32322
+msgctxt "#32321"
+msgid "Virtual Private Networks"
+msgstr ""
+
+msgctxt "#32322"
+msgid "Add new VPN configuration"
+msgstr ""
 
 msgctxt "#32323"
 msgid "Reset to Defaults"
@@ -784,7 +934,11 @@ msgctxt "#32375"
 msgid "Backup Progress"
 msgstr ""
 
-#empty strings from id 32376 to 32378
+#empty strings from id 32376 to 32377
+
+msgctxt "#32378"
+msgid "The information you entered is incomplete"
+msgstr ""
 
 msgctxt "#32379"
 msgid "There is not enough free storage space to continue!"
