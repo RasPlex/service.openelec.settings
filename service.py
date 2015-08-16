@@ -104,6 +104,13 @@ class cxbmcm(xbmc.Monitor):
             oe.__oe__.dictModules['bluetooth'].standby_devices()
         oe.__oe__.dbg_log('c_xbmcm::onScreensaverActivated', 'exit_function', 0)
 
+    def onNotification(self, sender, method, data):
+        oe.__oe__.dbg_log('c_xbmcm::onNotification', 'enter_function', 0)
+        if method == "System.OnSleep":
+            if 'bluetooth' in oe.__oe__.dictModules:
+                oe.__oe__.dictModules['bluetooth'].standby_devices()
+        oe.__oe__.dbg_log('c_xbmcm::onNotification', 'exit_function', 0)
+
     def onAbortRequested(self):
         pass
 
