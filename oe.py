@@ -155,7 +155,7 @@ def enable_service(service):
             pass
         service_file = '%s/services/%s' % (CONFIG_CACHE, service)
     except Exception, e:
-        dbg_log('oe::set_service_cmd', 'ERROR: (' + repr(e) + ')')
+        dbg_log('oe::enable_service', 'ERROR: (' + repr(e) + ')')
 
 
 def set_service_option(service, option, value):
@@ -209,7 +209,10 @@ def get_service_state(service):
 
 def set_service(service, options, state):
     try:
-        dbg_log('oe::set_service', 'enter_function')
+        dbg_log('oe::set_service', 'enter_function', 0)
+        dbg_log('oe::set_service::service', repr(service), 0)
+        dbg_log('oe::set_service::options', repr(options), 0)
+        dbg_log('oe::set_service::state', repr(state), 0)
         config = {}
         changed = False
 
@@ -242,9 +245,9 @@ def set_service(service, options, state):
             if service in defaults._services:
                 for svc in defaults._services[service]:
                     execute('systemctl restart %s' % svc)
-        dbg_log('oe::set_service', 'exit_function')
+        dbg_log('oe::set_service', 'exit_function', 0)
     except Exception, e:
-        dbg_log('oe::set_service_option', 'ERROR: (' + repr(e) + ')')
+        dbg_log('oe::set_service', 'ERROR: (' + repr(e) + ')', 4)
 
 
 def load_file(filename):
