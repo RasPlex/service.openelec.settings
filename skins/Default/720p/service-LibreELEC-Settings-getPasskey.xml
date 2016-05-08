@@ -3,8 +3,8 @@
     <allowoverlay>no</allowoverlay>
     <controls>
         <control type="group">
-            <left>440</left>
-            <top>260</top>
+            <posx>440</posx>
+            <posy>260</posy>
             <animation type="WindowOpen" reversible="false">
                 <effect type="zoom" start="80" end="100" center="640,360" easing="out" tween="back" time="300" />
                 <effect type="fade" start="0" end="100" time="300" />
@@ -14,26 +14,26 @@
                 <effect type="fade" start="100" end="0" time="300" />
             </animation>
             <control type="image">
-                <left>5</left>
-                <top>5</top>
+                <posx>5</posx>
+                <posy>5</posy>
                 <width>600</width>
                 <height>174</height>
                 <texture border="15">default/ContentPanel.png</texture>
             </control>
             <control type="image">
-                <left>5</left>
-                <top>5</top>
+                <posx>5</posx>
+                <posy>5</posy>
                 <width>600</width>
                 <height>174</height>
                 <texture border="15">default/ContentPanel.png</texture>
             </control>
             <control type="group">
-                <left>17</left>
-                <top>16</top>
+                <posx>17</posx>
+                <posy>16</posy>
                 <!-- Window Title -->
                 <control type="label" id="1700">
-                    <left>20</left>
-                    <top>10</top>
+                    <posx>20</posx>
+                    <posy>10</posy>
                     <width>540</width>
                     <height>30</height>
                     <font>font12</font>
@@ -43,41 +43,41 @@
                     <visible>true</visible>
                 </control>
                 <control type="label" id="1701">
-                    <left>10</left>
-                    <top>50</top>
+                    <posx>10</posx>
+                    <posy>50</posy>
                     <width>560</width>
                     <height>30</height>
                     <font>font24_title</font>
-                    <textcolor>blue</textcolor>
+                    <textcolor>FFd1801c</textcolor>
                     <label></label>
                     <align>center</align>
                     <visible>true</visible>
                 </control>
                 <control type="label" id="1702">
-                    <left>10</left>
-                    <top>70</top>
+                    <posx>10</posx>
+                    <posy>70</posy>
                     <width>560</width>
                     <height>30</height>
                     <font>font24_title</font>
-                    <textcolor>blue</textcolor>
+                    <textcolor>FFd1801c</textcolor>
                     <label></label>
                     <align>center</align>
                     <visible>true</visible>
                 </control>
                 <control type="label" id="1703">
-                    <left>10</left>
-                    <top>90</top>
+                    <posx>10</posx>
+                    <posy>90</posy>
                     <width>560</width>
                     <height>30</height>
                     <font>font24_title</font>
-                    <textcolor>blue</textcolor>
+                    <textcolor>FFd1801c</textcolor>
                     <label></label>
                     <align>center</align>
                     <visible>true</visible>
                 </control>
                 <control type="progress" id="1704">
-                    <left>10</left>
-                    <top>140</top>
+                    <posx>10</posx>
+                    <posy>140</posy>
                     <width>555</width>
                     <height>12</height>
                 </control>

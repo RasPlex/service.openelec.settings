@@ -34,7 +34,7 @@ from xml.dom import minidom
 from threading import Thread
 
 
-class mainWindow(xbmcgui.WindowXMLDialog):
+class mainWindow(xbmcgui.WindowXML):
 
     def __init__(self, *args, **kwargs):
         self.visible = False
@@ -445,7 +445,7 @@ class pinkeyWindow(xbmcgui.WindowXMLDialog):
         return len(self.getControl(1703).getLabel())
 
 
-class wizard(xbmcgui.WindowXMLDialog):
+class wizard(xbmcgui.WindowXML):
 
     def __init__(self, *args, **kwargs):
         self.lastMenu = -1
@@ -497,6 +497,7 @@ class wizard(xbmcgui.WindowXMLDialog):
         self.actions = {}
         self.wizards = []
         self.last_wizard = None
+        self.did_init = False
 
     def onInit(self):
         try:
@@ -507,16 +508,20 @@ class wizard(xbmcgui.WindowXMLDialog):
             self.setProperty('DIST_MEDIA', 'default')
             if os.path.exists(self.oe.__media__ + self.oe.DISTRIBUTION):
                 self.setProperty('DIST_MEDIA', self.oe.DISTRIBUTION)
-            self.oe.dictModules['system'].do_init()
-            self.getControl(self.wizWinTitle).setLabel(self.oe._(32300).encode('utf-8'))
-            self.getControl(self.buttons[3]['id']).setVisible(False)
-            self.getControl(self.buttons[4]['id']).setVisible(False)
-            self.getControl(self.radiobuttons[1]['id']).setVisible(False)
-            self.getControl(self.radiobuttons[2]['id']).setVisible(False)
-            self.set_wizard_title(self.oe._(32301).encode('utf-8'))
-            self.set_wizard_text(self.oe._(32302).encode('utf-8'))
-            self.showButton(1, 32303)
-            self.setFocusId(self.buttons[1]['id'])
+            if not self.did_init:
+                self.oe.dictModules['system'].do_init()
+                self.getControl(self.wizWinTitle).setLabel(self.oe._(32300).encode('utf-8'))
+                self.getControl(self.buttons[3]['id']).setVisible(False)
+                self.getControl(self.buttons[4]['id']).setVisible(False)
+                self.getControl(self.radiobuttons[1]['id']).setVisible(False)
+                self.getControl(self.radiobuttons[2]['id']).setVisible(False)
+                self.set_wizard_title(self.oe._(32301).encode('utf-8'))
+                self.set_wizard_text(self.oe._(32302).encode('utf-8'))
+                self.showButton(1, 32303)
+                self.setFocusId(self.buttons[1]['id'])
+                self.did_init = True
+            else:
+                self.onClick(1500)
         except Exception, e:
             self.oe.dbg_log('oeWindows.wizard::onInit()', 'ERROR: (' + repr(e) + ')')
 

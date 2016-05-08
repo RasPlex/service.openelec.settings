@@ -640,17 +640,6 @@ class system:
             elif os.path.isdir(itempath):
                 self.get_folder_size(itempath)
 
-    def do_wizard(self):
-        try:
-            self.oe.dbg_log('system::do_wizard', 'enter_function', 0)
-            self.oe.winOeMain.set_wizard_title(self.oe._(32003))
-            self.oe.winOeMain.set_wizard_text(self.oe._(32304))
-            self.oe.winOeMain.set_wizard_button_title(self.oe._(32308))
-            self.oe.winOeMain.set_wizard_button_1(self.struct['ident']['settings']['hostname']['value'], self, 'wizard_set_hostname')
-            self.oe.dbg_log('system::do_wizard', 'exit_function', 0)
-        except Exception, e:
-            self.oe.dbg_log('system::do_wizard', 'ERROR: (' + repr(e) + ')')
-
     def wizard_set_hostname(self):
         try:
             self.oe.dbg_log('system::wizard_set_hostname', 'enter_function', 0)

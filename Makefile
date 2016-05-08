@@ -29,7 +29,7 @@ ADDON_VERSION=0.7.3
 DISTRONAME:=LibreELEC
 
 BUILDDIR=build
-DATADIR=/usr/share/kodi
+DATADIR=/usr/share/XBMC
 ADDONDIR=$(DATADIR)/addons
 
 SHELL:=/bin/bash -O globstar
