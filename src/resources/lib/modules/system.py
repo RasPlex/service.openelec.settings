@@ -132,37 +132,6 @@ class system:
                             },
                         },
                     },
-                'update': {
-                    'order': 3,
-                    'name': 32013,
-                    'settings': {
-                        'AutoUpdate': {
-                            'name': 32014,
-                            'value': 'manual',
-                            'action': 'set_auto_update',
-                            'type': 'multivalue',
-                            'values': ['manual', 'auto'],
-                            'InfoText': 714,
-                            'order': 1,
-                            },
-                        'UpdateNotify': {
-                            'name': 32365,
-                            'value': '1',
-                            'action': 'set_value',
-                            'type': 'bool',
-                            'InfoText': 715,
-                            'order': 2,
-                            },
-                        'CheckUpdate': {
-                            'name': 32362,
-                            'value': '',
-                            'action': 'manual_check_update',
-                            'type': 'button',
-                            'InfoText': 716,
-                            'order': 3,
-                            },
-                        },
-                    },
                 'backup': {
                     'order': 7,
                     'name': 32371,
@@ -211,7 +180,6 @@ class system:
 
             self.keyboard_layouts = False
             self.nox_keyboard_layouts = False
-            self.last_update_check = 0
             self.arrVariants = {}
             self.oe.dbg_log('system::__init__', 'exit_function', 0)
         except Exception, e:
@@ -225,7 +193,6 @@ class system:
             self.set_hostname()
             self.set_keyboard_layout()
             self.set_hw_clock()
-            self.set_auto_update()
             del self.is_service
             self.oe.dbg_log('system::start_service', 'exit_function', 0)
         except Exception, e:
@@ -234,8 +201,6 @@ class system:
     def stop_service(self):
         try:
             self.oe.dbg_log('system::stop_service', 'enter_function', 0)
-            if hasattr(self, 'update_thread'):
-                self.update_thread.stop()
             self.oe.dbg_log('system::stop_service', 'exit_function', 0)
         except Exception, e:
             self.oe.dbg_log('system::stop_service', 'ERROR: (' + repr(e) + ')')
@@ -305,24 +270,6 @@ class system:
             else:
                 self.struct['ident']['settings']['hostname']['value'] = self.oe.DISTRIBUTION
 
-            # AutoUpdate
-
-            value = self.oe.read_setting('system', 'AutoUpdate')
-            if not value is None:
-                self.struct['update']['settings']['AutoUpdate']['value'] = value
-            value = self.oe.read_setting('system', 'UpdateNotify')
-            if not value is None:
-                self.struct['update']['settings']['UpdateNotify']['value'] = value
-            if os.path.isfile('%s/SYSTEM' % self.LOCAL_UPDATE_DIR):
-                self.update_in_progress = True
-
-            # AutoUpdate = manual by environment var.
-
-            if os.path.exists('/dev/.update_disabled'):
-                self.update_disabled = True
-                self.struct['update']['hidden'] = 'true'
-                self.struct['update']['settings']['AutoUpdate']['value'] = 'manual'
-                self.struct['update']['settings']['UpdateNotify']['value'] = '0'
             self.oe.dbg_log('system::load_values', 'exit_function', 0)
         except Exception, e:
             self.oe.dbg_log('system::load_values', 'ERROR: (' + repr(e) + ')')
@@ -425,30 +372,6 @@ class system:
             self.oe.set_busy(0)
             self.oe.dbg_log('system::set_hostname', 'ERROR: (' + repr(e) + ')')
 
-    def manual_check_update(self, listItem=None):
-        try:
-            self.oe.dbg_log('system::manual_check_update', 'enter_function', 0)
-            self.check_updates_v2(True)
-            self.oe.dbg_log('system::manual_check_update', 'exit_function', 0)
-        except Exception, e:
-            self.oe.dbg_log('system::manual_check_update', 'ERROR: (' + repr(e) + ')')
-
-    def set_auto_update(self, listItem=None):
-        try:
-            self.oe.dbg_log('system::set_auto_update', 'enter_function', 0)
-            if not listItem == None:
-                self.set_value(listItem)
-            if not hasattr(self, 'update_disabled'):
-                if not hasattr(self, 'update_thread'):
-                    self.update_thread = updateThread(self.oe)
-                    self.update_thread.start()
-                else:
-                    self.update_thread.wait_evt.set()
-                self.oe.dbg_log('system::set_auto_update', unicode(self.struct['update']['settings']['AutoUpdate']['value']), 1)
-            self.oe.dbg_log('system::set_auto_update', 'exit_function', 0)
-        except Exception, e:
-            self.oe.dbg_log('system::set_auto_update', 'ERROR: (' + repr(e) + ')')
-
     def get_keyboard_layouts(self):
         try:
             self.oe.dbg_log('system::get_keyboard_layouts', 'enter_function', 0)
@@ -515,74 +438,6 @@ class system:
                 )
         except Exception, e:
             self.oe.dbg_log('system::get_keyboard_layouts', 'ERROR: (' + repr(e) + ')')
-
-    def check_updates_v2(self, force=False):
-        try:
-            self.oe.dbg_log('system::check_updates_v2', 'enter_function', 0)
-            if hasattr(self, 'update_in_progress'):
-                self.oe.dbg_log('system::check_updates_v2', 'Update in progress (exit)', 0)
-                return
-            url = '%s?i=%s&d=%s&pa=%s&v=%s&l=%s' % (
-                self.UPDATE_REQUEST_URL,
-                self.oe.SYSTEMID,
-                self.oe.DISTRIBUTION,
-                self.oe.ARCHITECTURE,
-                self.oe.VERSION,
-                self.cpu_lm_flag,
-                )
-            self.oe.dbg_log('system::check_updates_v2', 'URL: %s' % url, 0)
-            update_json = self.oe.load_url(url)
-            self.oe.dbg_log('system::check_updates_v2', 'RESULT: %s' % repr(update_json), 0)
-            if update_json != '':
-                update_json = json.loads(update_json)
-                self.last_update_check = time.time()
-                silent = True
-                answer = 0
-                if 'update' in update_json['data'] and 'folder' in update_json['data']:
-                    self.update_file = self.UPDATE_DOWNLOAD_URL % (update_json['data']['folder'], update_json['data']['update'])
-                    if self.struct['update']['settings']['UpdateNotify']['value'] == '1':
-                        self.oe.notify(self.oe._(32363).encode('utf-8'), self.oe._(32364).encode('utf-8'))
-                    if self.struct['update']['settings']['AutoUpdate']['value'] == 'manual' and force == True:
-                        silent = False
-                        xbmcDialog = xbmcgui.Dialog()
-                        answer = xbmcDialog.yesno('LibreELEC Update', self.oe._(32188).encode('utf-8') + ':  ' + self.oe.VERSION,
-                                                  self.oe._(32187).encode('utf-8') + ':  ' + update_json['data']['update'].split('-'
-                                                  )[-1].replace('.tar', '').encode('utf-8'), self.oe._(32180).encode('utf-8'))
-                        xbmcDialog = None
-                        del xbmcDialog
-                        if answer == 1:
-                            self.update_in_progress = True
-                            self.do_autoupdate()
-                    if self.struct['update']['settings']['AutoUpdate']['value'] == 'auto' and force == False:
-                        self.update_in_progress = True
-                        self.do_autoupdate(None, True)
-            self.oe.dbg_log('system::check_updates_v2', 'exit_function', 0)
-        except Exception, e:
-            self.oe.dbg_log('system::check_updates_v2', 'ERROR: (' + repr(e) + ')')
-
-    def do_autoupdate(self, listItem=None, silent=False):
-        try:
-            self.oe.dbg_log('system::do_autoupdate', 'enter_function', 0)
-            if hasattr(self, 'update_file'):
-                if not os.path.exists(self.LOCAL_UPDATE_DIR):
-                    os.makedirs(self.LOCAL_UPDATE_DIR)
-                downloaded = self.oe.download_file(self.update_file, self.oe.TEMP + self.update_file.split('/')[-1], silent)
-                if not downloaded is None:
-                    self.update_file = self.update_file.split('/')[-1]
-                    if self.struct['update']['settings']['UpdateNotify']['value'] == '1':
-                        self.oe.notify(self.oe._(32363), self.oe._(32366))
-                    os.rename(self.oe.TEMP + self.update_file, self.LOCAL_UPDATE_DIR + self.update_file)
-                    subprocess.call('sync', shell=True, stdin=None, stdout=None, stderr=None)
-                    if silent == False:
-                        self.oe.winOeMain.close()
-                        time.sleep(1)
-                        xbmc.executebuiltin('Reboot')
-                else:
-                    delattr(self, 'update_in_progress')
-
-            self.oe.dbg_log('system::do_autoupdate', 'exit_function', 0)
-        except Exception, e:
-            self.oe.dbg_log('system::do_autoupdate', 'ERROR: (' + repr(e) + ')')
 
     def set_hw_clock(self):
         try:
@@ -820,46 +675,5 @@ class system:
             self.oe.dbg_log('system::wizard_set_hostname', 'exit_function', 0)
         except Exception, e:
             self.oe.dbg_log('system::wizard_set_hostname', 'ERROR: (' + repr(e) + ')')
-
-
-class updateThread(threading.Thread):
-
-    def __init__(self, oeMain):
-        try:
-            oeMain.dbg_log('system::updateThread::__init__', 'enter_function', 0)
-            self.oe = oeMain
-            self.stopped = False
-            self.wait_evt = threading.Event()
-            threading.Thread.__init__(self)
-            self.oe.dbg_log('system::updateThread', 'Started', 1)
-            self.oe.dbg_log('system::updateThread::__init__', 'exit_function', 0)
-        except Exception, e:
-            self.oe.dbg_log('system::updateThread::__init__', 'ERROR: (' + repr(e) + ')')
-
-    def stop(self):
-        try:
-            self.oe.dbg_log('system::updateThread::stop()', 'enter_function', 0)
-            self.stopped = True
-            self.wait_evt.set()
-            self.oe.dbg_log('system::updateThread::stop()', 'exit_function', 0)
-        except Exception, e:
-            self.oe.dbg_log('system::updateThread::stop()', 'ERROR: (' + repr(e) + ')')
-
-    def run(self):
-        try:
-            self.oe.dbg_log('system::updateThread::run', 'enter_function', 0)
-            while self.stopped == False:
-                if not xbmc.Player(xbmc.PLAYER_CORE_AUTO).isPlaying():
-                    self.oe.dictModules['system'].check_updates_v2()
-                if not hasattr(self.oe.dictModules['system'], 'update_in_progress'):
-                    self.wait_evt.wait(21600)
-                else:
-                    self.oe.notify(self.oe._(32363).encode('utf-8'), self.oe._(32364).encode('utf-8'))
-                    self.wait_evt.wait(3600)
-                self.wait_evt.clear()
-            self.oe.dbg_log('system::updateThread', 'Stopped', 1)
-            self.oe.dbg_log('system::updateThread::run', 'exit_function', 0)
-        except Exception, e:
-            self.oe.dbg_log('system::updateThread::run', 'ERROR: (' + repr(e) + ')')
 
 
