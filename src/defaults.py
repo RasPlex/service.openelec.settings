@@ -80,6 +80,7 @@ services = {
     'D_LCD_DRIVER': 'none',
     'REMOTEPI_DAEMON': '/usr/bin/remotepi-board',
     'D_REMOTEPI_VERSION': '2015',
+    'HYPERION_DAEMON': '/usr/bin/hyperiond',
     }
 
 system = {
@@ -116,4 +117,5 @@ _services = {
     'crond': ['cron.service'],
     'lcdd': ['lcdd.service'],
     'remotepi-board': ['remotepi-board.service'],
+    'hyperion': ['hyperion.service'],
     }

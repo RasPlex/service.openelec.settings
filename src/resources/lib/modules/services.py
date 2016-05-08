@@ -267,6 +267,21 @@ class services:
                             },
                         },
                     },
+                'hyperion': {
+                    'order': 8,
+                    'name': 32397,
+                    'not_supported': [],
+                    'settings': {
+                        'hyperion_autostart': {
+                            'order': 1,
+                            'name': 32398,
+                            'value': None,
+                            'action': 'initialize_hyperion',
+                            'type': 'bool',
+                            'InfoText': 32399,
+                            },
+                        },
+                    },
                 }
 
             self.oe = oeMain
@@ -284,6 +299,7 @@ class services:
             self.initialize_cron(service=1)
             self.init_bluetooth(service=1)
             self.initialize_remotepi(service=1)
+            self.initialize_hyperion(service=1)
             self.oe.dbg_log('services::start_service', 'exit_function', 0)
         except Exception, e:
             self.oe.dbg_log('services::start_service', 'ERROR: (%s)' % repr(e))
@@ -402,6 +418,14 @@ class services:
                     self.oe.get_service_option('remotepi-board', 'BOARD_VERSION', self.D_REMOTEPI_VERSION).replace('"', '')
             else:
                 self.struct['remotepi-board']['hidden'] = 'true'
+
+            # HYPERION
+
+            if os.path.isfile(self.HYPERION_DAEMON):
+                self.struct['hyperion']['settings']['hyperion_autostart']['value'] = \
+                    self.oe.get_service_state('hyperion')
+            else:
+                self.struct['hyperion']['hidden'] = 'true'
 
             self.oe.dbg_log('services::load_values', 'exit_function', 0)
         except Exception, e:
@@ -597,6 +621,23 @@ class services:
         except Exception, e:
             self.oe.set_busy(0)
             self.oe.dbg_log('services::initialize_remotepi', 'ERROR: (%s)' % repr(e), 4)
+
+    def initialize_hyperion(self, **kwargs):
+        try:
+            self.oe.dbg_log('services::initialize_hyperion', 'enter_function', 0)
+            self.oe.set_busy(1)
+            if 'listItem' in kwargs:
+                self.set_value(kwargs['listItem'])
+            state = 1
+            options = {}
+            if self.struct['hyperion']['settings']['hyperion_autostart']['value'] != '1':
+                state = 0
+            self.oe.set_service('hyperion', options, state)
+            self.oe.set_busy(0)
+            self.oe.dbg_log('services::initialize_hyperion', 'exit_function', 0)
+        except Exception, e:
+            self.oe.set_busy(0)
+            self.oe.dbg_log('services::initialize_hyperion', 'ERROR: (%s)' % repr(e), 4)
 
     def exit(self):
         try:

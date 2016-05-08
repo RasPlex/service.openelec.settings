@@ -1013,3 +1013,15 @@ msgstr ""
 msgctxt "#32396"
 msgid "Set to 2015 for 2015/Plus 2015 and 2013 for the 2013 version"
 msgstr ""
+
+msgctxt "#32397"
+msgid "Hyperion"
+msgstr ""
+
+msgctxt "#32398"
+msgid "Enable Hyperion Support"
+msgstr ""
+
+msgctxt "#32399"
+msgid "Set to ON to enable Hyperion support"
+msgstr ""
