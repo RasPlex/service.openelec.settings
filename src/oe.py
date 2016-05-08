@@ -281,7 +281,7 @@ def download_file(source, destination, silent=False):
         local_file = open(destination, 'wb')
         if silent == False:
             download_dlg = xbmcgui.DialogProgress()
-            download_dlg.create('LibreELEC', _(32181).encode('utf-8'), ' ', ' ')
+            download_dlg.create('@DISTRONAME@', _(32181).encode('utf-8'), ' ', ' ')
         response = urllib2.urlopen(source)
         total_size = int(response.info().getheader('Content-Length').strip())
         minutes = 0
@@ -330,7 +330,7 @@ def extract_file(filename, extract, destination, silent=False):
         if tarfile.is_tarfile(filename):
             if silent == False:
                 extract_dlg = xbmcgui.DialogProgress()
-                extract_dlg.create('LibreELEC ', _(32186).encode('utf-8'), ' ', ' ')
+                extract_dlg.create('@DISTRONAME@ ', _(32186).encode('utf-8'), ' ', ' ')
                 extract_dlg.update(0)
             compressed = tarfile.open(filename)
             if silent == False:
@@ -398,7 +398,7 @@ def copy_file(source, destination, silent=False):
         destination_file = open(destination, 'wb')
         if silent == False:
             copy_dlg = xbmcgui.DialogProgress()
-            copy_dlg.create('LibreELEC', _(32181).encode('utf-8'), ' ', ' ')
+            copy_dlg.create('@DISTRONAME@', _(32181).encode('utf-8'), ' ', ' ')
         total_size = os.path.getsize(source)
         minutes = 0
         seconds = 0
@@ -686,7 +686,7 @@ def split_dialog_text(text):
 
 def reboot_counter(seconds=10, title=' '):
     reboot_dlg = xbmcgui.DialogProgress()
-    reboot_dlg.create('LibreELEC %s' % title, ' ', ' ', ' ')
+    reboot_dlg.create('@DISTRONAME@ %s' % title, ' ', ' ', ' ')
     reboot_dlg.update(0)
     wait_time = seconds
     while seconds >= 0 and not reboot_dlg.iscanceled():

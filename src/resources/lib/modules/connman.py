@@ -540,7 +540,7 @@ class connman:
                         'TetheringIdentifier': {
                             'order': 3,
                             'name': 32198,
-                            'value': 'LibreELEC-AP',
+                            'value': '@DISTRONAME@-AP',
                             'action': 'set_technologie',
                             'type': 'text',
                             'dbus': 'String',
