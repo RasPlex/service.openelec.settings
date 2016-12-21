@@ -1812,6 +1812,12 @@ class connman:
 
             self.oe.winOeMain.getControl(self.oe.winOeMain.buttons[1]['id'
                                          ]).controlLeft(self.oe.winOeMain.getControl(self.oe.winOeMain.guiNetList))
+
+            if not os.path.exists(self.WAIT_CONF_FILE):
+                self.struct['advanced']['settings']['wait_for_network']['value'] = '1'
+                self.struct['advanced']['settings']['wait_for_network_time']['value'] = '10'
+                self.set_network_wait()
+
             self.menu_connections(None)
             self.oe.dbg_log('connman::do_wizard', 'exit_function', 0)
         except Exception, e:
