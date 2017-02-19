@@ -25,14 +25,13 @@
 ################################################################################
 
 ADDON_NAME=service.libreelec.settings
-ADDON_VERSION=0.7.3
+ADDON_VERSION=0.8.9
 DISTRONAME:=LibreELEC
 
+SHELL:=/bin/bash -O globstar
 BUILDDIR=build
 DATADIR=/usr/share/XBMC
 ADDONDIR=$(DATADIR)/addons
-
-SHELL:=/bin/bash -O globstar
 
 ################################################################################
 

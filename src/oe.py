@@ -112,7 +112,7 @@ def dbg_log(source, text, level=4):
         return
     xbmc.log('## LibreELEC Addon ## ' + source + ' ## ' + text, level)
     trace = traceback.format_exc()
-    if trace != None:
+    if trace is not None and trace != 'None':
         xbmc.log(trace, level)
 
 
@@ -282,7 +282,7 @@ def download_file(source, destination, silent=False):
         if silent == False:
             download_dlg = xbmcgui.DialogProgress()
             download_dlg.create('@DISTRONAME@', _(32181).encode('utf-8'), ' ', ' ')
-        response = urllib2.urlopen(source)
+        response = urllib2.urlopen(urllib2.quote(source, safe=':/'))
         total_size = int(response.info().getheader('Content-Length').strip())
         minutes = 0
         seconds = 0

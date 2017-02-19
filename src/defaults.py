@@ -76,8 +76,7 @@ services = {
     'D_SSH_DISABLE_PW_AUTH': '0',
     'AVAHI_DAEMON': '/usr/sbin/avahi-daemon',
     'CRON_DAEMON': '/sbin/crond',
-    'LCD_DRIVER_DIR': '/usr/lib/lcdproc/',
-    'D_LCD_DRIVER': 'none',
+    'LIRCD_UEVENT_FILE': '/sys/class/lirc/lirc0/uevent',
     'REMOTEPI_DAEMON': '/usr/bin/remotepi-board',
     'D_REMOTEPI_VERSION': '2015',
     'HYPERION_DAEMON': '/usr/bin/hyperiond',
@@ -115,7 +114,6 @@ _services = {
     'bluez': ['bluetooth.service'],
     'obexd': ['obex.service'],
     'crond': ['cron.service'],
-    'lcdd': ['lcdd.service'],
     'remotepi-board': ['remotepi-board.service'],
     'hyperion': ['hyperion.service'],
     }

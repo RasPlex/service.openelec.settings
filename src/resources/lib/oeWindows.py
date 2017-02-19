@@ -414,7 +414,7 @@ class mainWindow(xbmcgui.WindowXML):
                     self.getControl(int(selectedMenuItem.getProperty('listTyp'))).setAnimations([('conditional',
                             'effect=fade start=0 end=100 time=100 condition=true')])
         except Exception, e:
-            self.oe.dbg_log('oeWindows.mainWindow::onFocus(' + unicode(controlID) + ')', 'ERROR: (' + repr(e) + ')')
+            self.oe.dbg_log('oeWindows.mainWindow::onFocus(' + repr(controlID) + ')', 'ERROR: (' + repr(e) + ')')
 
     def emptyButtonLabels(self):
         for btn in self.buttons:
