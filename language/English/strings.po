@@ -4,17 +4,9 @@
 # Addon Provider: LibreELEC
 msgid ""
 msgstr ""
-"Project-Id-Version: XBMC Addons\n"
-"Report-Msgid-Bugs-To: alanwww1@xbmc.org\n"
-"POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Kodi Translation Team\n"
-"Language-Team: English (http://www.transifex.com/projects/p/xbmc-addons/language/en/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: en\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgctxt "#600"
 msgid "@DISTRONAME@ Settings"
@@ -64,10 +56,8 @@ msgctxt "#611"
 msgid "The @DISTRONAME@ project runs on goodwill, love, and your donations. If you would like to contribute to the project you can donate using PayPal, Flattr or Bitcoin. Making a donation is easy and takes only a couple of minutes. http://rasplex.com/donate"
 msgstr ""
 
-#empty strings from id 612 to 699
-
 msgctxt "#700"
-msgid "Configure a hostname, keyboard type, perform a reset, update, or backups and restores"
+msgid "Configure a hostname, keyboard type, perform a reset, or backups and restores"
 msgstr ""
 
 msgctxt "#701"
@@ -90,8 +80,6 @@ msgctxt "#705"
 msgid "Useful information like version and architecture details, support and social media links, and how to make a donation to the project"
 msgstr ""
 
-#empty strings from id 706 to 709
-
 msgctxt "#710"
 msgid "Configure the Hostname of your @DISTRONAME@ system. This will be used for the HTPC \\\\hostname in Windows and SMB server name in the Mac OS Finder"
 msgstr ""
@@ -108,27 +96,13 @@ msgctxt "#713"
 msgid "Configure the physical keyboard type"
 msgstr ""
 
-msgctxt "#714"
-msgid "@DISTRONAME@ can be configured for automatic or manual updates. Automatic updates are available on stable releases and stable release candidates. Automatic update self-disables on beta and development builds"
-msgstr ""
-
-msgctxt "#715"
-msgid "Set to ON and an on-screen notification will be displayed when a new update is available"
-msgstr ""
-
-#empty strings from id 716 to 717
-
 msgctxt "#718"
-msgid "Send config.txt, cmdline.txt, shutdown.sh, autostart.sh, and plexhometheater.log to http://sprunge.us and display the short URL"
+msgid "Send config.txt, cmdline.txt, shutdown.sh, autostart.sh, and plexhometheater.log to http://ix.io and display the short URL"
 msgstr ""
-
-#empty strings with id 719
 
 msgctxt "#720"
 msgid "Set to ON and Bluetooth devices will be disabled during power-saving modes"
 msgstr ""
-
-#empty string with id 721
 
 msgctxt "#722"
 msgid "Create a tar archive containing all @DISTRONAME@ and OpenPHT configuration settings. Backup files will be stored in /storage/backups"
@@ -182,8 +156,6 @@ msgctxt "#734"
 msgid "Configure the 3rd time (NTP) server"
 msgstr ""
 
-#empty string with id 735
-
 msgctxt "#736"
 msgid "Set to ON to delay OpenPHT startup until the network is available."
 msgstr ""
@@ -228,8 +200,6 @@ msgctxt "#746"
 msgid "Set to ON to enable the lirc daemon"
 msgstr ""
 
-#empty strings from id 747 to 749
-
 msgctxt "#750"
 msgid "750"
 msgstr ""
@@ -254,7 +224,17 @@ msgctxt "#755"
 msgid "Auto share external drives / partitions"
 msgstr ""
 
-#empty strings from id 756 to 32000
+msgctxt "#756"
+msgid "Disable older SMB protocols by specifying the minimum supported protocol."
+msgstr ""
+
+msgctxt "#757"
+msgid "Disable more recent SMB protocols for backward compatability with legacy clients."
+msgstr ""
+
+msgctxt "#758"
+msgid "NetBIOS group to which the server belongs. Default is WORKGROUP."
+msgstr ""
 
 msgctxt "#32001"
 msgid "Services"
@@ -268,8 +248,6 @@ msgctxt "#32003"
 msgid "Interface"
 msgstr ""
 
-#empty strings from id 32004 to 32008
-
 msgctxt "#32009"
 msgid "Keyboard"
 msgstr ""
@@ -278,21 +256,9 @@ msgctxt "#32010"
 msgid "Keyboard Layout"
 msgstr ""
 
-#empty string with id 32011
-
 msgctxt "#32012"
 msgid "Select Action"
 msgstr ""
-
-msgctxt "#32013"
-msgid "Updates"
-msgstr ""
-
-msgctxt "#32014"
-msgid "Automatic Updates"
-msgstr ""
-
-#empty strings from id 32015 to 32099
 
 msgctxt "#32100"
 msgid "Connections"
@@ -434,8 +400,6 @@ msgctxt "#32134"
 msgid "VPN DNS Domain"
 msgstr ""
 
-#empty strings from id 32135 to 32136
-
 msgctxt "#32137"
 msgid "Certificate Autority Certificate"
 msgstr ""
@@ -483,8 +447,6 @@ msgstr ""
 msgctxt "#32148"
 msgid "Wireless Network Username"
 msgstr ""
-
-#empty string with id 32149
 
 msgctxt "#32150"
 msgid "Edit"
@@ -602,12 +564,6 @@ msgctxt "#32178"
 msgid "ConfigFile"
 msgstr ""
 
-#empty string with id 32179
-
-msgctxt "#32180"
-msgid "Would you like to update @DISTRONAME@ now?"
-msgstr ""
-
 msgctxt "#32181"
 msgid "Filename"
 msgstr ""
@@ -632,14 +588,6 @@ msgctxt "#32186"
 msgid "Initialize Archive File"
 msgstr ""
 
-msgctxt "#32187"
-msgid "Latest Version"
-msgstr ""
-
-msgctxt "#32188"
-msgid "Current Version"
-msgstr ""
-
 msgctxt "#32189"
 msgid "Identification"
 msgstr ""
@@ -648,19 +596,13 @@ msgctxt "#32190"
 msgid "System Name"
 msgstr ""
 
-#empty strings from id 32191 to 32195
-
 msgctxt "#32196"
 msgid "About"
 msgstr ""
 
-#empty string with id 32197
-
 msgctxt "#32198"
 msgid "SSID"
 msgstr ""
-
-#empty string with id 32199
 
 msgctxt "#32200"
 msgid "Samba"
@@ -698,19 +640,25 @@ msgctxt "#32208"
 msgid "Hidden Wlan"
 msgstr ""
 
-#empty strings from id 32209 to 32211
-
 msgctxt "#32212"
 msgid "Cancel"
 msgstr ""
 
-#empty strings from id 32213 to 32215
+msgctxt "#32215"
+msgid "Workgroup name"
+msgstr ""
 
 msgctxt "#32216"
 msgid "Auto-Share External Drives"
 msgstr ""
 
-#empty strings from id 32217 to 32299
+msgctxt "#32217"
+msgid "Minimum supported protocol"
+msgstr ""
+
+msgctxt "#32218"
+msgid "Maximum supported protocol"
+msgstr ""
 
 msgctxt "#32300"
 msgid "Welcome to @DISTRONAME@"
@@ -740,8 +688,6 @@ msgctxt "#32306"
 msgid "In order to access the Plex Media Server, @DISTRONAME@ needs to be connected the Network.[CR][CR]An Internet connection is also required for @DISTRONAME@ to automatically update itself."
 msgstr ""
 
-#empty string with id 32307
-
 msgctxt "#32308"
 msgid "Hostname:"
 msgstr ""
@@ -749,8 +695,6 @@ msgstr ""
 msgctxt "#32309"
 msgid "The following Networks are currently available:"
 msgstr ""
-
-#empty string with id 32310
 
 msgctxt "#32311"
 msgid "Sharing and Remote Access"
@@ -763,8 +707,6 @@ msgstr ""
 msgctxt "#32313"
 msgid "In order to share your files between your computers @DISTRONAME@ has incorporated a samba server. This samba server can be integrated into your local network by accessing it in a familiar way with Finder or Windows Explorer."
 msgstr ""
-
-#empty strings from id 32314 to 32315
 
 msgctxt "#32316"
 msgid "Configure Services:"
@@ -810,8 +752,6 @@ msgctxt "#32326"
 msgid "Are you sure?"
 msgstr ""
 
-#empty string with id 32327
-
 msgctxt "#32328"
 msgid "The system must reboot."
 msgstr ""
@@ -828,8 +768,6 @@ msgctxt "#32331"
 msgid "Bluetooth"
 msgstr ""
 
-#empty string with id 32332
-
 msgctxt "#32333"
 msgid "Connected: "
 msgstr ""
@@ -842,8 +780,6 @@ msgctxt "#32335"
 msgid "No"
 msgstr ""
 
-#empty strings from id 32336 to 32337
-
 msgctxt "#32338"
 msgid "No Bluetooth adapter found."
 msgstr ""
@@ -851,8 +787,6 @@ msgstr ""
 msgctxt "#32339"
 msgid "No Bluetooth device found. Please put your Bluetooth device into discovery mode[CR]and start the scan"
 msgstr ""
-
-#empty strings from id 32340 to 32342
 
 msgctxt "#32343"
 msgid "Enter the following Key on your Device."
@@ -862,42 +796,12 @@ msgctxt "#32344"
 msgid "Enable Bluetooth"
 msgstr ""
 
-#empty string with id 32345
-
 msgctxt "#32346"
 msgid "Bluetooth is disabled"
 msgstr ""
 
-#empty strings from id 32347 to 32357
-
 msgctxt "#32358"
 msgid "Trust and Connect"
-msgstr ""
-
-#empty strings from id 32359 to 32361
-
-msgctxt "#32362"
-msgid "Check for updates now:"
-msgstr ""
-
-msgctxt "#32363"
-msgid "@DISTRONAME@"
-msgstr ""
-
-msgctxt "#32364"
-msgid "Update available"
-msgstr ""
-
-msgctxt "#32365"
-msgid "Show Update Notifications"
-msgstr ""
-
-msgctxt "#32366"
-msgid "Update Download Completed"
-msgstr ""
-
-msgctxt "#32367"
-msgid "Update Extract Complete"
 msgstr ""
 
 msgctxt "#32368"
@@ -923,8 +827,6 @@ msgstr ""
 msgctxt "#32373"
 msgid "Restore Backup"
 msgstr ""
-
-#empty string with id 32374
 
 msgctxt "#32375"
 msgid "Backup Progress"
@@ -1024,10 +926,6 @@ msgstr ""
 
 msgctxt "#32399"
 msgid "Set to ON to enable Hyperion support"
-msgstr ""
-
-msgctxt "#32400"
-msgid "Lirc"
 msgstr ""
 
 msgctxt "#32400"

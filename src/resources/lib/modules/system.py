@@ -536,8 +536,8 @@ class system:
             if bckDir and os.path.exists(bckDir): 
                 # free space check
                 try:
-                    folder_stat = os.statvfs("/storage")
-                    free_space = folder_stat.f_bsize * folder_stat.f_bavail
+                    folder_stat = os.statvfs(bckDir)
+                    free_space = folder_stat.f_frsize * folder_stat.f_bavail
                     if self.total_backup_size > free_space:
                         txt = self.oe.split_dialog_text(self.oe._(32379).encode('utf-8'))
                         xbmcDialog = xbmcgui.Dialog()
@@ -585,7 +585,7 @@ class system:
                 os.makedirs(self.RESTORE_DIR)
             folder_stat = os.statvfs(self.RESTORE_DIR)
             file_size = os.path.getsize(restore_file_path)
-            free_space = folder_stat.f_bsize * folder_stat.f_bavail
+            free_space = folder_stat.f_frsize * folder_stat.f_bavail
             if free_space > file_size * 2:
                 if os.path.exists(self.RESTORE_DIR + restore_file_name):
                     os.remove(self.RESTORE_DIR + restore_file_name)
@@ -675,7 +675,9 @@ class system:
     def get_folder_size(self, folder):
         for item in os.listdir(folder):
             itempath = os.path.join(folder, item)
-            if os.path.isfile(itempath):
+            if os.path.islink(itempath):
+                continue
+            elif os.path.isfile(itempath):
                 self.total_backup_size += os.path.getsize(itempath)
             elif os.path.ismount(itempath):
                 continue

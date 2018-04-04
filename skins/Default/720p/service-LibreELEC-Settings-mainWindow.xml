@@ -641,12 +641,22 @@
                         <control type="image">
                             <posx>710</posx>
                             <posy>50</posy>
-                            <width>20</width>
+                            <width>32</width>
                             <height>20</height>
                             <aspectratio>keep</aspectratio>
-                            <visible>IntegerGreaterThan(ListItem.Property(Security), 0)</visible> 
+                            <visible>Integer.IsEqual(ListItem.Property(Security), 1)</visible>
                             <texture>icons/Key.png</texture>
-                        </control>		
+                        </control>
+                        <!-- Insecure Symbol (bottom right) -->
+                        <control type="image">
+                            <posx>710</posx>
+                            <posy>50</posy>
+                            <width>32</width>
+                            <height>20</height>
+                            <aspectratio>keep</aspectratio>
+                            <visible>Integer.IsEqual(ListItem.Property(Security), 0)</visible>
+                            <texture>icons/Unlock.png</texture>
+                        </control>
                     </itemlayout>
                     <focusedlayout height="100">
                         <posx>0</posx>
@@ -790,12 +800,22 @@
                         <control type="image">
                             <posx>710</posx>
                             <posy>50</posy>
-                            <width>20</width>
+                            <width>32</width>
                             <height>20</height>
                             <aspectratio>keep</aspectratio>
-                            <visible>IntegerGreaterThan(ListItem.Property(Security), 0)</visible> 
+                            <visible>Integer.IsEqual(ListItem.Property(Security), 1)</visible>
                             <texture>icons/Key.png</texture>
-                        </control>		
+                        </control>
+                        <!-- Insecure Symbol (bottom right) -->
+                        <control type="image">
+                            <posx>710</posx>
+                            <posy>50</posy>
+                            <width>32</width>
+                            <height>20</height>
+                            <aspectratio>keep</aspectratio>
+                            <visible>Integer.IsEqual(ListItem.Property(Security), 0)</visible>
+                            <texture>icons/Unlock.png</texture>
+                        </control>
                     </focusedlayout> 
                 </control>
                 <!-- Bluetooth Menu Content -->

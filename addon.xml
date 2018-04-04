@@ -2,7 +2,7 @@
 <addon id="service.libreelec.settings"
        name="@DISTRONAME@ Configuration"
        version="@ADDONVERSION@"
-       provider-name="LibreELEC">
+       provider-name="libreelec.tv">
    <requires>
    	<import addon="xbmc.python" version="2.1.0"/>
   </requires>

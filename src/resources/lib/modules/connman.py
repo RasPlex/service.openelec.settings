@@ -362,7 +362,7 @@ class connmanService(object):
     def menu_loader(self, menuItem):
         try:
             self.oe.dbg_log('connmanService::menu_loader', 'enter_function', 0)
-            self.winOeCon.showButton(3, 32140, 'connmanNetworkConfig', 'save_network')
+            self.winOeCon.showButton(1, 32140, 'connmanNetworkConfig', 'save_network')
             self.winOeCon.showButton(2, 32212, 'connmanNetworkConfig', 'cancel')
             if self.servicePath not in ['new_vpn']:
                 if self.service_properties['Type'] in ['wifi']:
